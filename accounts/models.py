@@ -9,7 +9,7 @@ class UserProfile(models.Model):
     last_name =     models.CharField(max_length=128, null=False)
     username =      models.CharField(unique=True, max_length=128, null=False)
     email =         models.EmailField(unique=True, null=False)
-    country =       CountryField(max_length=255, null=False, blank=False
+    country =       CountryField(max_length=255, null=False, blank=False)
     phone_number =  PhoneNumberField(unique=True, null=False)
     date_joined =   models.DateTimeField(auto_now_add=True)
     last_login =    models.DateTimeField(auto_now=True)

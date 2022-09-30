@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'phonenumber_field',
+    'phonenumbers',
     'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -86,8 +87,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'Shrine Web App DB',
         'USER': 'postgres',
-        'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD'),
-        'HOST': 'localhost',
+        # 'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD'),
+        # 'HOST': 'localhost',
     }
 }
 
