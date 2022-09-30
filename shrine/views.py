@@ -6,3 +6,6 @@ def home(request):
 
 def event(request):
     return render(request, 'events/events.html')
+
+def sermon(request):
+    return render(request, 'sermons/sermons.html')
