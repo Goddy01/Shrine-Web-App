@@ -9,3 +9,6 @@ def event(request):
 
 def sermon(request):
     return render(request, 'sermons/sermons.html')
+
+def donation(request):
+    return render(request, 'donations/donations.html')
