@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -8,11 +9,11 @@
 		<title>True Church</title>
 
 		<!-- Loading third party fonts -->
-		<link href="fonts/novecento-font/novecento-font.css" rel="stylesheet" type="text/css">
-		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="{% static 'fonts/novecento-font/novecento-font.css' %}" rel="stylesheet" type="text/css">
+		<link href="{% static 'fonts/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 
 		<!-- Loading main css file -->
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="{% static 'style.css' %}">
 		
 		<!--[if lt IE 9]>
 		<script src="js/ie-support/html5.js"></script>
@@ -34,12 +35,10 @@
 					<div class="main-navigation">
 						<button class="menu-toggle"><i class="fa fa-bars"></i> Menu</button>
 						<ul class="menu">
-							<li class="menu-item current-menu-item"><a href="index.html">Homepage <small>Lorem ipsum</small></a></li>
-							<li class="menu-item"><a href="#">Pastors <small>Cupidatat non proident</small></a></li>
-							<li class="menu-item"><a href="seremons.html">Seremons <small>Laboris nisi aliquip</small></a></li>
-							<li class="menu-item"><a href="events.html">Events <small>Sunt in culpa</small></a></li>
-							<li class="menu-item"><a href="families.html">Families <small>Aute irure</small></a></li>
-							<li class="menu-item"><a href="#">Contact <small>lorem ipsum</small></a></li>
+							<li class="menu-item current-menu-item"><a href="{% url 'home' %}">Home <small>Lorem ipsum</small></a></li>
+							<li class="menu-item"><a href="{% url 'events' %}">Events <small>Cupidatat non proident</small></a></li>
+							<li class="menu-item"><a href="{% url 'sermons' %}">Sermons <small>Laboris nisi aliquip</small></a></li>
+							<li class="menu-item"><a href="{% url 'donations' %}">Donations <small>Laboris nisi aliquip</small></a></li>
 						</ul>
 					</div>
 
