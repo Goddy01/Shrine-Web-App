@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('', views.event, name='event'),
     path('', views.sermon, name='sermon'),
+    path('', views.donation, name='donation'),
 ]
