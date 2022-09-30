@@ -20,7 +20,7 @@ from shrine import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('', views.event, name='event'),
-    path('', views.sermon, name='sermon'),
-    path('', views.donation, name='donation'),
+    path('events/', views.event, name='event'),
+    path('sermons/', views.sermon, name='sermon'),
+    path('donations/', views.donation, name='donation'),
 ]
