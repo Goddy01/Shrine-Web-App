@@ -88,7 +88,9 @@ DATABASES = {
         'NAME': 'Shrine Web App DB',
         'USER': 'postgres',
         # 'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD'),
-        # 'HOST': 'localhost',
+        'PASSWORD': 'Qwerty121@',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
