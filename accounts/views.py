@@ -11,7 +11,7 @@ def user_reg_view(request):
         if reg_form.is_valid():
             reg_form.save()
             login(request, reg_form)
-            return redirect()
+            return redirect('home')
         else:
             messages.error(request, 'Registration Failed')
     else:
