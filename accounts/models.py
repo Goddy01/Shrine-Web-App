@@ -31,10 +31,10 @@ class AccountManager(BaseUserManager):
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
+        user.is_worshipper = True
         user.save(using=self._db)
 
 class UserProfile(AbstractBaseUser):
-    user =          models.OneToOneField(User, on_delete=models.CASCADE)
     first_name =    models.CharField(max_length=128, null=False)
     last_name =     models.CharField(max_length=128, null=False)
     username =      models.CharField(unique=True, max_length=128, null=False)
