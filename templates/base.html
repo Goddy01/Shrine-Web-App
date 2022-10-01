@@ -44,13 +44,15 @@
 					</a>
 
 					<div class="main-navigation">
+                        {% with request.resolver_match.url_name as url_name %}
 						<button class="menu-toggle"><i class="fa fa-bars"></i> Menu</button>
 						<ul class="menu">
-							<li class="menu-item current-menu-item"><a href="{% url 'home' %}">Home <small>Lorem ipsum</small></a></li>
-							<li class="menu-item"><a href="{% url 'event' %}">Events <small>Cupidatat non proident</small></a></li>
-							<li class="menu-item"><a href="{% url 'sermon' %}">Sermons <small>Laboris nisi aliquip</small></a></li>
-							<li class="menu-item"><a href="{% url 'donation' %}">Donations <small>Laboris nisi aliquip</small></a></li>
+							<li class="menu-item {% if url_name == 'home' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'home' %}">Home <small>Lorem ipsum</small></a></li>
+							<li class="menu-item {% if url_name == 'event' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'event' %}">Events <small>Cupidatat non proident</small></a></li>
+							<li class="menu-item {% if url_name == 'sermon' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'sermon' %}">Sermons <small>Laboris nisi aliquip</small></a></li>
+							<li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'donation' %}">Donations <small>Laboris nisi aliquip</small></a></li>
 						</ul>
+                        {% endwith  %}
 					</div>
 
 					<div class="mobile-navigation"></div>
