@@ -55,7 +55,7 @@
 							<li class="menu-item {% if url_name == 'event' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'event' %}">Events<small class="font-weight-bold">Events Page</small></a></li>
 							<li class="menu-item {% if url_name == 'sermon' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'sermon' %}">Sermons<small class="font-weight-bold">Sermons Page</small></a></li>
 							<li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'donation' %}">Donations<small class="font-weight-bold">Donations Page</small></a></li>
-                            <li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'donation' %}">Sign-Up<small class="font-weight-bold">Sign-Up as a Worshipper</small></a></li>
+                            <li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'accounts:reg' %}">Sign-Up<small class="font-weight-bold">Sign-Up as a Worshipper</small></a></li>
 						</ul>
                         {% endwith  %}
 					</div>
