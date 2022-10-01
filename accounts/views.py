@@ -16,4 +16,4 @@ def user_reg_view(request):
             messages.error(request, 'Registration Failed')
     else:
         reg_form = forms.UserRegForm()
-    return render(request, 'accounts/register.html')
+    return render(request, 'accounts/register.html', {'reg_form': reg_form})

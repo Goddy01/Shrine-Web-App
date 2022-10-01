@@ -6,51 +6,57 @@
     <style>
         .form-group {
             margin: .3rem;
+            margin-bottom: 1rem;
+        }
+        form select {
+            padding: 6px;
+            padding-right: 20px;
         }
     </style>
     
     <div class="content text-dark p-3"> 
-        <h1 style="text-align: center;color: #caa97e;">Register</h1>
+        <h3 style="text-align: center;color: #caa97e;">Register</h3>
+        <form action="{% url 'accounts:reg' %}" method="post">
             {% csrf_token %}
                 <div class="form-group">
-                  <label for="fullname">Fullname</label>
-                  <input type="text" class="form-control" id="fullname" aria-describedby="fullname" placeholder="Enter your fullname" name="fullname" >
+                  <label for="id_firstname">Firstname</label>
+                  <input type="text" class="form-control" id="id_firstname" aria-describedby="firstname" placeholder="Enter your firstname" name="firstname" >
                 </div>
                 <div class="form-group">
-                  <label for="username">Username: </label>
-                  <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" >
+                  <label for="id_lastname">Lastname</label>
+                  <input type="text" class="form-control" id="id_lastname" aria-describedby="lastname" placeholder="Enter your lastname" name="lastname" >
                 </div>
                 <div class="form-group">
-                    <label for="address">Address: </label>
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" >
+                  <label for="id_username">Username: </label>
+                  <input type="text" class="form-control" id="id_username" name="username" placeholder="Enter your username" >
                 </div>
                 <div class="form-group">
-                    <label for="first_phone_num">Phone No: </label>
-                    <input type="tel" class="form-control" id="first_phone_num" name="first_phone_num" placeholder="Enter your first phone number" >
-                </div>
-                <!-- <div class="form-group">
-                    <label for="second_phone_num">Phone No 2: </label>
-                    <input type="tel" class="form-control" id="second_phone_num" name="second_phone_num" placeholder="Enter your second phone number" >
-                </div> -->
-                <div class="form-group">
-                    <label for="email">Email: </label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" >
+                    <label for="id_phone_number">Phone No: </label>
+                    <input type="tel" class="form-control" id="id_phone_number" name="phone_number" placeholder="Enter your phone number" >
                 </div>
                 <div class="form-group">
-                    <label for="password1">Password 1: </label>
-                    <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter your password" >
+                    <label>Country</label>
+                    <p class="p-2">{{ reg_form.country }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="password2">Password 2: </label>
-                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Repeat your password" >
+                    <label for="id_email">Email: </label>
+                    <input type="email" class="form-control" id="id_email" name="email" placeholder="Enter your email" >
+                </div>
+                <div class="form-group">
+                    <label for="id_password1">Password 1: </label>
+                    <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Enter your password" >
+                </div>
+                <div class="form-group">
+                    <label for="id_password2">Password 2: </label>
+                    <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Repeat your password" >
                 </div>
 
 
-            <button class="mt-4 px-5 py-2" style="background-color: #caa97e;margin-left: .3rem;" type="submit">
+            <button class="mt-2 px-5 py-2" style="background-color: #caa97e;margin-left: .3rem;" type="submit">
                 Submit
             </button>
         </form>
-        <p style="margin-left: .3rem;">
+        <p style="margin-left: .3rem;" class="mt-2">
 
         <a href="" class="text-dark">
                 Already have an account? <span style="color: blue;">Login</span>
