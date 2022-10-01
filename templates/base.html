@@ -31,8 +31,9 @@
 		<script src="js/ie-support/respond.js"></script>
 		<![endif]-->
             <style>
-                .main-navigation {
-                    font-weight: 30px;
+                .main-navigation a{
+                    color: #caa97e;
+                    font-weight: bold;
                 }
             </style>
 	</head>
@@ -51,11 +52,11 @@
                         {% with request.resolver_match.url_name as url_name %}
 						<button class="menu-toggle"><i class="fa fa-bars"></i> Menu</button>
 						<ul class="menu">
-							<li class="menu-item {% if url_name == 'home' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'home' %}">Home<small class="font-weight-bold">Home Page</small></a></li>
-							<li class="menu-item {% if url_name == 'event' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'event' %}">Events<small class="font-weight-bold">Events Page</small></a></li>
-							<li class="menu-item {% if url_name == 'sermon' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'sermon' %}">Sermons<small class="font-weight-bold">Sermons Page</small></a></li>
-							<li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'donation' %}">Donations<small class="font-weight-bold">Donations Page</small></a></li>
-                            <li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none" href="{% url 'accounts:reg' %}">Sign-Up<small class="font-weight-bold">Sign-Up as a Worshipper</small></a></li>
+							<li class="menu-item {% if url_name == 'home' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'home' %}">Home<small class="font-weight-bold">Home Page</small></a></li>
+							<li class="menu-item {% if url_name == 'event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'event' %}">Events<small class="font-weight-bold">Events Page</small></a></li>
+							<li class="menu-item {% if url_name == 'sermon' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'sermon' %}">Sermons<small class="font-weight-bold">Sermons Page</small></a></li>
+							<li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'donation' %}">Donations<small class="font-weight-bold">Donations Page</small></a></li>
+                            <li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'accounts:reg' %}">Sign-Up<small class="font-weight-bold">Sign-Up as a Worshipper</small></a></li>
 						</ul>
                         {% endwith  %}
 					</div>
