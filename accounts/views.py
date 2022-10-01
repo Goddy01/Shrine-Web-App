@@ -9,8 +9,8 @@ def user_reg_view(request):
     if request.method == 'POST':
         reg_form = UserRegForm(request.POST)
         if reg_form.is_valid():
-            reg_form.save()
-            login(request, reg_form)
+            user = reg_form.save()
+            login(request, user)
             return redirect('home')
         else:
             messages.error(request, 'Registration Failed')
