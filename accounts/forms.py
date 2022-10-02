@@ -1,6 +1,7 @@
 from django import forms
 from .models import UserProfile
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
 
 class UserRegForm(UserCreationForm):
     '''Form for users registrtion'''
@@ -14,4 +15,13 @@ class UserLoginForm(forms.ModelForm):
     '''Form for users login'''
     class Meta:
         model = UserProfile
-        fields = ('email', 'password')
+        fields = ['email', 'password']
+
+    def clean(self):
+        if self.is_valid():
+            email = self.cleaned_data.get('email')
+            password = self.cleaned_data.get('password')
+            user = authenticate(email=email, password=password)
+
+            if not user:
+                raise forms.ValidationError("User does not exist.")

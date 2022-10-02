@@ -21,7 +21,7 @@ def user_reg_view(request):
 
 def user_login_view(request):
     '''The view that handles users login'''
-    if request.mrthod == 'POST':
+    if request.method == 'POST':
         login_form = UserLoginForm(request.POST)
         if login_form.is_valid():
             email = request.POST.get('email')

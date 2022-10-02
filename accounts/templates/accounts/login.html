@@ -24,8 +24,8 @@
         {% endif %}
     </div>
     <div class="content text-dark p-3 mx-auto">
-        <h1 style="text-align: center;">Login</h1>
-            <form action="{% url 'account:login' %}" class="mb-4" method="POST">
+        <h3 style="text-align: center;">Login</h3>
+            <form action="{% url 'accounts:login' %}" class="mb-4" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label for="email">Email: </label>
@@ -41,7 +41,7 @@
             </button>
         </form>
         <p class="" style="margin-left: .3rem;">
-            <a href="{% url 'account:reg' %}" class="text-dark">
+            <a href="{% url 'accounts:reg' %}" class="text-dark">
                 Don't have an account? <span style="color: blue;">Register</span>
             </a>
             
