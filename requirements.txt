@@ -1,6 +1,8 @@
 aiosmtplib==1.1.7
 alembic==1.8.1
 anyio==3.6.1
+argon2-cffi==21.3.0
+argon2-cffi-bindings==21.2.0
 asgiref==3.5.2
 Authlib==0.15.5
 azure-common==1.1.28
