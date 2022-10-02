@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}User Login{% endblock title %}
+
+{% block content %}
+<style>
+    .form-group{
+        margin: .3rem;
+    }
+</style>
+    <div class="errors mb-2" style="margin-left: 2rem;">
+        {% for field in login_form %}
+            {% for error in field.errors %}
+                <p style="color: rgb(175, 23, 23);">
+                    {{error}}
+                </p>
+            {% endfor %}
+        {% endfor %}
+
+        {% if login_form.non_field_errors %}
+            <div style="color: rgb(175, 23, 23);">
+                {{login_form.non_field_errors}}
+            </div>
+        {% endif %}
+    </div>
+    <div class="content text-dark p-3 mx-auto">
+        <h1 style="text-align: center;">Login</h1>
+            <form action="{% url 'account:login' %}" class="mb-4" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button class="px-5 py-2 text-light font-weight-semi-bold" style="background-color: #caa97e;margin-left: .3rem;">
+                Login
+            </button>
+        </form>
+        <p class="" style="margin-left: .3rem;">
+            <a href="{% url 'account:reg' %}" class="text-dark">
+                Don't have an account? <span style="color: blue;">Register</span>
+            </a>
+            
+            <a href="" class="d-block mt-2" style="color: blue;">
+                Forgot Password?
+            </a>
+        </p>
+    </div>
+{% endblock content %}
