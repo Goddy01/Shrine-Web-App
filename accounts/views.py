@@ -24,8 +24,8 @@ def user_login_view(request):
     if request.method == 'POST':
         login_form = UserLoginForm(request.POST)
         if login_form.is_valid():
-            email = request.POST.get('email')
-            password = request.POST.get('password')
+            email = request.POST['email'].lower()
+            password = request.POST['password']
             user = authenticate(email=email, password=password)
             
             if user is not None:

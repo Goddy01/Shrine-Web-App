@@ -18,13 +18,13 @@
         {% for field in reg_form %}
             <p>
             {% for error in field.errors %}
-            <div class="alert alert-danger" role="alert">{{field.label_tag}} {{error}}</div>
+            <div class="alert alert-danger p-0 pt-2 px-2 mr-4" role="alert">{{field.label_tag}} {{error}}</div>
             {% endfor %}
             </p>
         {% endfor %}
 
         {% if reg_form.non_field_errors %}
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger p-0 pt-2 px-2 mr-4" role="alert">
             {{reg_form.non_field_errors}}
         </div>
         {% endif %}
