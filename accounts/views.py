@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import UserRegForm
+from .forms import UserRegForm, UserLoginForm
 
 # Create your views here.
 
 def user_reg_view(request):
-    '''The view to register users'''
+    '''The view that handles users registration'''
     if request.method == 'POST':
         reg_form = UserRegForm(request.POST)
         if reg_form.is_valid():
@@ -19,3 +19,21 @@ def user_reg_view(request):
         reg_form = UserRegForm()
     return render(request, 'accounts/register.html', {'reg_form': reg_form})
 
+def user_login_view(request):
+    '''The view that handles users login'''
+    if request.mrthod == 'POST':
+        login_form = UserLoginForm(request.POST)
+        if login_form.is_valid():
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            user = authenticate(email=email, password=password)
+            
+            if user is not None:
+                login(request, user)
+            else:
+                messages.error(request, 'User does not exist.')
+        else:
+            messages.error(request, 'Login Failed.')
+    else:
+        login_form = UserLoginForm()
+    return render(request, 'accounts/login.html', {'login_form': login_form})
