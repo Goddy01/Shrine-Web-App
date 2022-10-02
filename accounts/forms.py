@@ -18,6 +18,7 @@ class UserLoginForm(forms.ModelForm):
         fields = ['email', 'password']
 
     def clean(self):
+        '''Customized the clean function to throw an error for invalid login details'''
         if self.is_valid():
             email = self.cleaned_data.get('email')
             password = self.cleaned_data.get('password')
@@ -25,3 +26,4 @@ class UserLoginForm(forms.ModelForm):
 
             if not user:
                 raise forms.ValidationError("User does not exist.")
+                
