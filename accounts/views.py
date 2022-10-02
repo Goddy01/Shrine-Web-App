@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import UserRegForm, UserLoginForm
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def user_reg_view(request):
@@ -38,3 +38,9 @@ def user_login_view(request):
     else:
         login_form = UserLoginForm()
     return render(request, 'accounts/login.html', {'login_form': login_form})
+
+@login_required
+def logout_view(request):
+    '''The view that handles the loggin out of users'''
+    logout(request)
+    return redirect('home')

@@ -25,5 +25,5 @@ class UserLoginForm(forms.ModelForm):
             user = authenticate(email=email, password=password)
 
             if not user:
+                # Throws a ValidationError in the form
                 raise forms.ValidationError("User does not exist.")
-                
