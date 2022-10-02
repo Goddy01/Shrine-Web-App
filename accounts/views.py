@@ -30,6 +30,7 @@ def user_login_view(request):
             
             if user is not None:
                 login(request, user)
+                return redirect('event')
             else:
                 messages.error(request, 'User does not exist.')
         else:
