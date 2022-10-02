@@ -18,15 +18,15 @@
         {% for field in reg_form %}
             <p>
             {% for error in field.errors %}
-                <p style="color: rgb(175, 23, 23);">{{field.label_tag}} {{error}}</p>
+            <div class="alert alert-danger" role="alert">{{field.label_tag}} {{error}}</div>
             {% endfor %}
             </p>
         {% endfor %}
 
         {% if reg_form.non_field_errors %}
-            <div style="color: rgb(175, 23, 23);">
-                {{reg_form.non_field_errors}}
-            </div>
+        <div class="alert alert-danger" role="alert">
+            {{reg_form.non_field_errors}}
+        </div>
         {% endif %}
     </div>
 
