@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from .forms import EventForm
 # Create your views here.
 
+def event(request):
+    return render(request, 'events/events.html')
+
 def add_event(request):
     print(request.user.is_worshipper)
     if request.user.is_worshipper:
@@ -16,4 +19,4 @@ def add_event(request):
             event_form = EventForm()
     else:
         return HttpResponse('You are not authorized to view this page.')
-    return render(request, 'events/events.html', {'event_form': event_form})
+    return render(request, 'events/event_form.html', {'event_form': event_form})
