@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import EventForm
+import datetime
 # Create your views here.
 
 def event(request):
@@ -13,9 +14,14 @@ def add_event(request):
         if request.method == 'POST':
             event_form = EventForm(request.POST)
             if event_form.is_valid():
-                event_form = event_form.save()
-                # messages.success(request, 'The event has been added successfully.')
-                return redirect('events:event')
+                if event_form.cleaned_data['event_date'] < datetime.datetime.now().date():
+                    messages.error(request, 'The event date cannot be in the past.')
+                elif event_form.cleaned_data['event_date'] == datetime.datetime.now().date():
+                    messages.error(request, 'The event date cannot be today. The event must be posted atleast a day before the event date.')
+                else:
+                    event_form = event_form.save()
+                    # messages.success(request, 'The event has been added successfully.')
+                    return redirect('events:event')
             else:
                 event_form = EventForm()
                 messages.error(request, 'The event could not be added.')
