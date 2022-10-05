@@ -1,11 +1,11 @@
-from datetime import timezone
+import datetime
 from django.core.exceptions import ValidationError
 from django.db import models
 import uuid
 
 # Create your models here.
 def validate_date(date):
-    if date < timezone.now().date():
+    if date < datetime.datetime.now().date():
         raise ValidationError("Date cannot be in the past")
 class Event(models.Model):
     event_id =          models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
