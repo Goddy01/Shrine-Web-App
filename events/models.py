@@ -8,7 +8,7 @@ class Event(models.Model):
     event_date =        models.CharField(max_length=128, null=False, blank=False)
     event_time =        models.CharField(max_length=128, null=False, blank=False)
     event_location =    models.CharField(max_length=128, null=False, blank=False)
-    event_url =         models.URLField(max_length=256)
+    event_url =         models.URLField(max_length=256, null=True, blank=True)
     event_description = models.TextField(max_length=10000, blank=False, null=False)
 
     def __str__(self):

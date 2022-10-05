@@ -21,7 +21,6 @@ def add_event(request):
                 messages.error(request, 'The event could not be added.')
         else:
             event_form = EventForm()
-            messages.error(request, 'The event could not be added.')
     else:
         return HttpResponse('You are not authorized to view this page.')
     return render(request, 'events/event_form.html', {'event_form': event_form})
