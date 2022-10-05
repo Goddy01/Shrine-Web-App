@@ -17,7 +17,7 @@
                         <ul class="event-list large">
                             {% for event in events %}
                             <li>
-                                <h3 class="event-title"><a href="#">{{event.event_name}}</a></h3>
+                                <h3 class="event-title"><a href="{% url 'events:event_detail' event.event_id %}">{{event.event_name}}</a></h3>
                                 <span class="event-meta" style="text-transform: capitalize;">
                                     <span><i class="fa fa-calendar"></i>{{event.event_date}}</span>
                                     <span><i class="fa fa-map-marker"></i>{{event.event_location}}</span>
