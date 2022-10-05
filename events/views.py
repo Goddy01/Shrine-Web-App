@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .forms import EventForm
 # Create your views here.
 
-def create_event(request):
+def add_event(request):
     print(request.user.is_worshipper)
     if request.user.is_worshipper:
         if request.method == 'POST':
