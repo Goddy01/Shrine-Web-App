@@ -16,40 +16,39 @@
         </div>
     {% endif %}
 </div>
-<link rel="stylesheet" href="{% static 'css/jupyter-pattern.css' %}">
 <div class="w-100 mx-auto bg-white" style="padding: 2rem 1rem;margin-bottom: 5rem;color: black;">
-    <h2 style="text-align: center; margin-bottom: 4rem">Add a New Event.</h2>
+    <p class="h3" style="text-align: center; margin-bottom: 4rem">Add a New Event</p>
     <form method="post" action="{% url 'events:add_event' %}">
         {% csrf_token %}
 
-        <div style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
             <!-- NAME -->
             <label for="event_name">Product name</label>
-            <input type="text" name="event_name" id="event_name" placeholder="Enter the event's name">
+            <input class="form-control" type="text" name="event_name" id="event_name" placeholder="Enter the event's name">
         </div>
 
-        <div style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <!-- DATE -->
             <label for="event_date">Price</label>
-            <input type="date" name="event_date" id="event_date" placeholder="Enter the date the event will hold.">
+            <input class="form-control" type="date" name="event_date" id="event_date" placeholder="Enter the date the event will hold.">
         </div>
-        <div style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <!-- TIME -->
             <label for="event_time">Price</label>
-            <input type="time" name="event_time" id="event_time" placeholder="Enter the time the event will hold and its time zone.">
+            <input class="form-control" type="time" name="event_time" id="event_time" placeholder="Enter the time the event will hold and its time zone.">
         </div>
-        <div style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <!-- LOCATION -->
             <label for="event_location">Price</label>
-            <input type="text" name="event_location" id="event_location" placeholder="Enter the location where the event will take place.">
+            <input class="form-control" type="text" name="event_location" id="event_location" placeholder="Enter the location where the event will take place.">
         </div>
-        <div style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <!-- URL -->
             <label for="event_url">Price</label>
-            <input type="url" name="event_url" id="event_url" placeholder="Enter the url for online streaming.">
+            <input class="form-control" type="url" name="event_url" id="event_url" placeholder="Enter the url for online streaming.">
         </div>
 
-        <textarea placeholder="Description" name="event_description" id="event_description" style="width: 100%;" rows="10" cols="5"></textarea>
+        <textarea class="form-control" placeholder="Description" name="event_description" id="event_description" style="width: 100%;" rows="10" cols="5"></textarea>
 
         <button class="btn btn-primary" style="display: flex; margin: auto; margin-top: .5rem;width: 50%;" type="submit">
             <span style="margin: 0 auto;font-weight: bold;">Add Event</span>
