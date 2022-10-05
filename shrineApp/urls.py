@@ -23,7 +23,7 @@ urlpatterns = [
     # path('', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls', 'accounts')),
     path('', views.home, name='home'),
-    path('events/', views.event, name='event'),
+    # path('events/', views.event, name='event'),
     path('sermons/', views.sermon, name='sermon'),
     path('donations/', views.donation, name='donation'),
 
