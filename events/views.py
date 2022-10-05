@@ -3,10 +3,12 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import EventForm
 import datetime
+from .models import Event
 # Create your views here.
 
 def event(request):
-    return render(request, 'events/events.html')
+    events = Event.objects.all().order_by('event_date')
+    return render(request, 'events/events.html', {'events': events})
 
 def add_event(request):
     print(request.user.is_worshipper)
@@ -19,6 +21,8 @@ def add_event(request):
                 elif event_form.cleaned_data['event_date'] == datetime.datetime.now().date():
                     messages.error(request, 'The event date cannot be today. The event must be posted atleast a day before the event date.')
                 else:
+                    event_form = event_form.save(commit=False)
+                    event_form.event_location = event_form.event_location.title()
                     event_form = event_form.save()
                     # messages.success(request, 'The event has been added successfully.')
                     return redirect('events:event')
