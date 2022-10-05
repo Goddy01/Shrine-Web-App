@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib import messages
 from .forms import EventForm
 # Create your views here.
 
@@ -13,6 +14,7 @@ def add_event(request):
             event_form = EventForm(request.POST)
             if event_form.is_valid():
                 event_form = event_form.save()
+                messages.success(request, 'The event has been added successfully.')
             else:
                 event_form = EventForm()
         else:
