@@ -53,7 +53,7 @@
 						<button class="menu-toggle"><i class="fa fa-bars"></i> Menu</button>
 						<ul class="menu">
 							<li class="menu-item {% if url_name == 'home' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'home' %}" style="color: #caa97e;">Home<small class="font-weight-bold">Home Page</small></a></li>
-							<li class="menu-item {% if url_name == 'event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'event' %}" style="color: #caa97e;">Events<small class="font-weight-bold">Events Page</small></a></li>
+							<li class="menu-item {% if url_name == 'event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'events:event' %}" style="color: #caa97e;">Events<small class="font-weight-bold">Events Page</small></a></li>
 							<li class="menu-item {% if url_name == 'sermon' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'sermon' %}" style="color: #caa97e;">Sermons<small class="font-weight-bold">Sermons Page</small></a></li>
 							<li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'donation' %}" style="color: #caa97e;">Donations<small class="font-weight-bold">Donations Page</small></a></li>
                             {% if request.user.is_authenticated %}
@@ -61,6 +61,9 @@
                             {% else %}
                             <li class="menu-item {% if url_name == 'reg' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'accounts:reg' %}" style="color: #caa97e;">Sign-Up<small class="font-weight-bold">Sign-Up as a Worshipper</small></a></li>
                             <li class="menu-item {% if url_name == 'login' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'accounts:login' %}" style="color: #caa97e;">Sign-In<small class="font-weight-bold">Sign-In as a Worshipper</small></a></li>
+                            {% endif %}
+                            {% if request.user.is_staff %}
+                            <li class="menu-item {% if url_name == 'add_event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'events:add_event' %}" style="color: #caa97e;">Add-Event<small class="font-weight-bold">Add a new event.</small></a></li>
                             {% endif %}
 						</ul>
                         {% endwith  %}

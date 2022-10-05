@@ -8,7 +8,7 @@ def event(request):
 
 def add_event(request):
     print(request.user.is_worshipper)
-    if request.user.is_worshipper:
+    if request.user.is_staff:
         if request.method == 'POST':
             event_form = EventForm(request.POST)
             if event_form.is_valid():
