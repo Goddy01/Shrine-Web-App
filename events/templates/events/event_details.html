@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="parent" style="margin-top: 10rem;margin-bottom: 20rem;">
+    <div class="container">
+        <div class="row">
+            <div class="card card-page py-3 mt-2 col-lg-9">
+                <div class="card-body">
+                  <h1 class="card-title">{{event.event_name}}</h1>
+                  <h4 class="card-title">{{event.event_location}}</h4>
+                  <h4 class="card-title">{{event.event_date}}</h4>
+                  <h4 class="card-title">{{event.event_time}}</h4>
+                  <h4 class="card-title">{{event.event_url}}</h4>
+                  <p class="card-text">{{event.event_description|safe}}</p>
+                    {% if request.user.is_staff %}
+                    <a href="" class="update btn btn-primary">Update Blog Post</a>
+                    <a href="" class="delete btn" style="background-color: red;color: #fff;border: none;">Delete Blog Post</a>
+                    {% endif %}
+                </div>
+              </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
