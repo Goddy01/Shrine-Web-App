@@ -34,3 +34,7 @@ def add_event(request):
     else:
         return HttpResponse('You are not authorized to view this page.')
     return render(request, 'events/event_form.html', {'event_form': event_form})
+
+def event_detail(request, event):
+    event = Event.objects.get(event_id=event.event_id)
+    return render(request, 'events/event_details.html', {'event': event})
