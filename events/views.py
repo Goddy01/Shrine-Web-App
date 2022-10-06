@@ -20,8 +20,6 @@ def event_error_checker(request,event_form):
         event_form = event_form.save(commit=False)
         event_form.event_location = event_form.event_location.title()
         event_form = event_form.save()
-        # messages.success(request, 'The event has been added successfully.')
-        return redirect('events:event')
 
 def add_event(request):
     """The view that facilitates the adding of events"""
@@ -31,6 +29,8 @@ def add_event(request):
             event_form = EventForm(request.POST)
             if event_form.is_valid():
                 event_error_checker(request, event_form)
+                if event_form.cleaned_data['event_date'] > datetime.datetime.now().date():
+                    return redirect('events:event')
             else:
                 event_form = EventForm()
                 messages.error(request, 'The event could not be added.')
@@ -53,6 +53,8 @@ def update_event(request, event_id):
             update_event_form = UpdateEventForm(request.POST, instance=event)
             if update_event_form.is_valid():
                 event_error_checker(request, update_event_form)
+                if update_event_form.cleaned_data['event_date'] > datetime.datetime.now().date():
+                    return redirect('events:event')
             else:
                 update_event_form = UpdateEventForm()
                 messages.error(request, 'The event could not be updated.')
