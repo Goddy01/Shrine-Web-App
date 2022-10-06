@@ -48,7 +48,7 @@
                 </h4>
                     {% if request.user.is_staff %}
                     <div>
-                        <a href="" class="update btn" style="background-color: #CBAA80;">Update Blog Post</a>
+                        <a href="{% url 'events:update_event' event.event_id %}" class="update btn" style="background-color: #CBAA80;">Update Blog Post</a>
                         <a href="" class="delete btn" style="background-color: red;color: #fff;border: none;float: right;">Delete Blog Post</a>
                     </div>
                     {% endif %}
