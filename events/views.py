@@ -11,6 +11,7 @@ def event(request):
     return render(request, 'events/events.html', {'events': events})
 
 def event_error_checker(event_form):
+    """A view that checks for errors in event forms. Will be called when needed to abide by DRY"""
     if event_form.cleaned_data['event_date'] < datetime.datetime.now().date():
         messages.error(request, 'The event date cannot be in the past.')
     elif event_form.cleaned_data['event_date'] == datetime.datetime.now().date():
@@ -41,3 +42,18 @@ def add_event(request):
 def event_detail(request, event_id):
     event = Event.objects.get(event_id=event_id)
     return render(request, 'events/event_details.html', {'event': event})
+
+def update_event(request, event_id):
+    event = Event.objects.get(event_id=event_id)
+    if request.method == 'POST':
+        update_event_form = UpdateEventForm(request.POST, instance=event)
+        if update_event_form.is_valid():
+            event_error_checker(update_event_form)
+        else:
+            update_event_form = UpdateEventForm()
+            messages.error(request, 'The event could not be updated.')
+        else:
+            event_form = UpdateEventForm()
+    else:
+        return HttpResponse('You are not authorized to view this page.')
+    return HttpResponse('Updated.')
