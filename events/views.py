@@ -10,7 +10,7 @@ def event(request):
     events = Event.objects.all().order_by('event_date')
     return render(request, 'events/events.html', {'events': events})
 
-def event_error_checker(event_form):
+def event_error_checker(request,event_form):
     """A view that checks for errors in event forms. Will be called when needed to abide by DRY"""
     if event_form.cleaned_data['event_date'] < datetime.datetime.now().date():
         messages.error(request, 'The event date cannot be in the past.')
@@ -29,7 +29,7 @@ def add_event(request):
         if request.method == 'POST':
             event_form = EventForm(request.POST)
             if event_form.is_valid():
-                event_error_checker(event_form)
+                event_error_checker(request, event_form)
             else:
                 event_form = EventForm()
                 messages.error(request, 'The event could not be added.')
@@ -44,16 +44,18 @@ def event_detail(request, event_id):
     return render(request, 'events/event_details.html', {'event': event})
 
 def update_event(request, event_id):
+    """The view to modify/update previously posted events."""
     event = Event.objects.get(event_id=event_id)
-    if request.method == 'POST':
-        update_event_form = UpdateEventForm(request.POST, instance=event)
-        if update_event_form.is_valid():
-            event_error_checker(update_event_form)
+    if request.user.is_staff:
+        if request.method == 'POST':
+            update_event_form = UpdateEventForm(request.POST, instance=event)
+            if update_event_form.is_valid():
+                event_error_checker(request, update_event_form)
+            else:
+                update_event_form = UpdateEventForm()
+                messages.error(request, 'The event could not be updated.')
         else:
-            update_event_form = UpdateEventForm()
-            messages.error(request, 'The event could not be updated.')
-        else:
-            event_form = UpdateEventForm()
+        event_form = UpdateEventForm()
     else:
         return HttpResponse('You are not authorized to view this page.')
     return HttpResponse('Updated.')
