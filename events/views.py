@@ -58,4 +58,4 @@ def update_event(request, event_id):
             update_event_form = UpdateEventForm()
     else:
         return HttpResponse('You are not authorized to view this page.')
-    return render(request, 'events/update_event.html', {'update_event_form': update_event_form})
+    return render(request, 'events/update_event.html', {'update_event_form': update_event_form, 'event': event,})

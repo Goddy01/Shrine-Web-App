@@ -11,61 +11,50 @@
     {% endif %}
 </div>
 <div class="w-100 mx-auto bg-white" style="padding: 2rem 1rem;margin-bottom: 5rem;color: black;">
-    <p class="h3" style="text-align: center; margin-bottom: 4rem">Add a New Event</p>
-    <form method="post" action="{% url 'events:add_event' %}">
+    <p class="h3" style="text-align: center; margin-bottom: 4rem">Update Event Details</p>
+    <form method="post" action="{% url 'events:update_event' event.event_id %}">
         {% csrf_token %}
 
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
             <!-- NAME -->
             <label for="event_name">Event Name</label>
-            <input required class="form-control" type="text" name="event_name" id="event_name" placeholder="Enter the event's name">
+            <input required class="form-control" type="text" name="event_name" id="event_name" value="{{event.event_name}}">
         </div>
 
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <!-- DATE -->
             <label for="event_date">Event Date</label>
-            <input required class="form-control" type="date" name="event_date" id="event_date" placeholder="Enter the date the event will hold.">
+            <input required class="form-control" type="date" name="event_date" id="event_date">
+            <small class="ml-2">Current event date: {{event.event_date}}</small>
         </div>
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <!-- TIME -->
             <label for="event_time">Event Time</label>
-            <input required class="form-control" type="text" name="event_time" id="event_time" placeholder="Enter the time the event will hold and its time zone.">
+            <input required class="form-control" type="text" name="event_time" id="event_time" value="{{event.event_time}}">
         </div>
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <!-- LOCATION -->
             <label for="event_location">Event Location</label>
-            <input required class="form-control" type="text" name="event_location" id="event_location" placeholder="Enter the location where the event will take place.">
+            <input required class="form-control" type="text" name="event_location" id="event_location" value="{{event.event_location}}">
         </div>
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <!-- URL -->
             <label for="event_url">Event Url (<small>for online streaming</small>)</label>
-            <input class="form-control" type="url" name="event_url" id="event_url" placeholder="Enter the url for online streaming.">
+            <input class="form-control" type="url" name="event_url" id="event_url" 
+            {% if event.event_url is not None %}
+            value="{{event.event_url}}."
+            {% endif %}
+            >
         </div>
 
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <label for="event_description">Event Details</label>
-            <textarea class="form-control" placeholder="Description" name="event_description" id="event_description" style="width: 100%;" rows="10" cols="5"></textarea>
+            <textarea class="form-control" name="event_description" id="event_description" style="width: 100%;" rows="10" cols="5">{{event.event_description}}
+            </textarea>
         </div>
         <button class="btn btn-primary" style="display: flex; margin: auto; margin-top: .5rem;width: 50%;" type="submit">
-            <span style="margin: 0 auto;font-weight: bold;">Add Event</span>
+            <span style="margin: 0 auto;font-weight: bold;">Update Event Details</span>
         </button>
     </form>
 
-    <script>
-        $(document).on('click', '#wishlist', function () {
-            let _pId = $(this).attr('data-product');
-            // Ajax
-            if ($(this).hasClass("fas")) {
-            $.ajax ({
-                url: "{% url 'add_to_wishlist' product.product_id %}",
-                data: {
-                    product: _pId
-                },
-                dataType: 'json',
-                success: function(res) {
-                    console.log('Added')
-                }
-            })
-        }
-    </script>
 {% endblock content %}

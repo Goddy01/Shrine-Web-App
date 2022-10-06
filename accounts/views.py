@@ -13,8 +13,8 @@ def user_reg_view(request):
             user = reg_form.save()
             login(request, user) #Login users in after registration
             return redirect('home')
-        else:
-            messages.error(request, 'Registration Failed')
+        # else:
+        #     messages.error(request, 'Registration Failed')
     else:
         reg_form = UserRegForm()
     return render(request, 'accounts/register.html', {'reg_form': reg_form})
@@ -30,11 +30,11 @@ def user_login_view(request):
             
             if user is not None:
                 login(request, user)
-                return redirect('event')
+                return redirect('events:event')
             else:
                 messages.error(request, 'User does not exist.')
-        else:
-            messages.error(request, 'Login Failed.')
+        # else:
+        #     messages.error(request, 'Login Failed.')
     else:
         login_form = UserLoginForm()
     return render(request, 'accounts/login.html', {'login_form': login_form})
