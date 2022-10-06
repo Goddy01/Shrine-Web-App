@@ -24,6 +24,7 @@ def event_error_checker(request,event_form):
         return redirect('events:event')
 
 def add_event(request):
+    """The view that facilitates the adding of events"""
     print(request.user.is_worshipper)
     if request.user.is_staff:
         if request.method == 'POST':
@@ -40,6 +41,7 @@ def add_event(request):
     return render(request, 'events/event_form.html', {'event_form': event_form})
 
 def event_detail(request, event_id):
+    """The view that facilitates the display of event details"""
     event = Event.objects.get(event_id=event_id)
     return render(request, 'events/event_details.html', {'event': event})
 
@@ -59,3 +61,10 @@ def update_event(request, event_id):
     else:
         return HttpResponse('You are not authorized to view this page.')
     return render(request, 'events/update_event.html', {'update_event_form': update_event_form, 'event': event,})
+
+def del_event(request, event_id):
+    """The view that facilitates the deletion of events"""
+    if request.user.is_staff:
+        event = Event.objects.get(event_id=event_id)
+        event.delete()
+        return redireect('home')
