@@ -1,5 +1,5 @@
 from django import forms
-from .models import Event
+from .models import Event, Question, Answer
 
 class EventForm(forms.ModelForm):
     class Meta:
@@ -10,3 +10,8 @@ class UpdateEventForm(forms.ModelForm):
     class Meta:
         model = Event
         exclude = ('event_id', )
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ('question', )
