@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import EventForm, UpdateEventForm, QuestionForm, AnswerForm
 import datetime
-from .models import Event
+from .models import Event, Question, Answer
 from accounts.models import UserProfile
 # Create your views here.
 
@@ -44,7 +44,9 @@ def add_event(request):
 def event_detail(request, event_id):
     """The view that facilitates the display of event details"""
     event = Event.objects.get(event_id=event_id)
-    return render(request, 'events/event_details.html', {'event': event})
+    questions = Question.objects.filter(event=event)
+    answers = Answer.objects.filter(event=event)
+    return render(request, 'events/event_details.html', {'event': event, 'questions': questions, 'answers': answers})
 
 def update_event(request, event_id):
     """The view to modify/update previously posted events."""
@@ -90,6 +92,7 @@ def ask_question(request, event_id):
                 question_form.user = UserProfile.objects.get(username=request.user.username)
                 question_form.save()
                 context['event'] = event
+                return redirect('events:event_detail', event_id)
             else:
                 question_form = QuestionForm()
         question_form = QuestionForm()
