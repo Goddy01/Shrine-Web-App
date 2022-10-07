@@ -73,6 +73,9 @@ def del_event(request, event_id):
         return redirect('events:event')
     return render(request, 'events/event_details.html')
 
+def ask_question_temp(request):
+    return render(request, 'ask_question.html')
+
 def ask_question(request, event_id):
     """The view that facilitates asking questions about events"""
     context = {}
