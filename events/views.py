@@ -100,3 +100,26 @@ def ask_question(request, event_id):
         return HttpResponse('You are not authorized to ask question. You need to be logged in.')
     context['question_form'] = question_form
     return render(request, 'events/ask_question.html', context)
+
+def ans_question(request, qtn_id):
+    """The view that facilitates asking questions about events"""
+    context = {}
+    if request.user.is_staff:
+        if request.method == 'POST':
+            ans_form = AnswerForm(request.POST)
+            if ans_form.is_valid():
+                qtn = Question.objects.get(qtn_id=qtn_id)
+                ans_form = ans_form.save(commit=False)
+                ans_form.question = qtn
+                ans_form.event = ans_form.question.event
+                ans_form.user = UserProfile.objects.get(username=request.user.username)
+                ans_form.save()
+                context['qtn'] = qtn
+                return redirect('events:event_detail', qtn_id)
+            else:
+                ans_form = AnswerForm()
+        ans_form = AnswerForm()
+    else:
+        return HttpResponse('You are not authorized to ask question. You need to be logged in.')
+    context['ans_form'] = ans_form
+    return render(request, 'events/ans_question.html', context)
