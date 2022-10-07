@@ -54,8 +54,51 @@
                     {% endif %}
                 </div>
               </div>
+            <div class="col-md-6 mx-3">
+                <div class="" style="display: block;">
+                    <div class="">
+                        <div class="justify-content-center border-secondary mt-5 mb-3">
+                            <h4 class="font-weight-bold">Questions({{ questions.length }})</h4>
+                        </div>
+                        <div class="mb-5 ml-3">
+                            {% for q in questions %}
+                            <div class="mb-5">
+                                <p class="h5">{{q.question}}</p>
+                                <small>{{ q.user.first_name }} {{ q.user.last_name }}<small> - <i>{{ q.date_asked }}</i></small></small>
+                                <p id="ansLink">View Answer</p>
+                                <p id="ans" style="display: no;">
+                                    {% for ans in answers %}
+                                    
+                                    {% if ans.answer %}
+                                    <p>{{ ans.answer }}</p>
+                                    {% else %}
+                                    <p>This question has not been answered.</p>
+                                    {% endif %}
+                                    
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
     
 </div>
+<script>
+    let ansLink = document.getElementById('ansLink');
+    ansLink.addEventListener('click', function (){displayAnsFunc()}, false);
+    function displayAnsFunc() {
+        let ans = document.getElementById('ans');
+        if (ans.classList.contains('first')) {
+            ans.style.display = 'block';
+        }
+        else {
+            ans.style.display = 'none';
+        }
+    }
+</script>
 {% endblock %}
