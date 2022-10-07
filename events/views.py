@@ -73,15 +73,15 @@ def del_event(request, event_id):
         return redirect('events:event')
     return render(request, 'events/event_details.html')
 
-def ask_question_temp(request):
-    return render(request, 'ask_question.html')
+def ask_question_temp(request, event_id):
+    event = Event.objects.get(event_id=event_id)
+    return render(request, 'events/ask_question.html', {'event': event})
 
 def ask_question(request, event_id):
     """The view that facilitates asking questions about events"""
     context = {}
     if request.user.is_authenticated:
         if request.method == 'POST':
-            return redirect('home')
             question_form = QuestionForm(request.POST)
             if question_form.is_valid():
                 event = Event.objects.get(event_id=event_id)

@@ -24,7 +24,7 @@
                                 </span>
                                 <p>{{event.event_description}}</p>
                                 <!-- <a href="#" class="button">Join to this event</a> -->
-                                <a href="{% url 'events:ask_qtn' event.event_id %}" class="btn-info p-2 text-decoration-none text-dark" style="border-radius: 7%;background-color:#D6BA96;">Ask a question</a>
+                                <a href="{% url 'events:ask_qtn_temp' event.event_id %}" class="btn-info p-2 text-decoration-none text-dark" style="border-radius: 7%;background-color:#D6BA96;">Ask a question</a>
                             </li>
                             {% endfor %}
                             <li>
