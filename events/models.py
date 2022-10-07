@@ -24,3 +24,13 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question_id
+
+class Answer(models.Model):
+    question =      models.ForeignKey(Question, on_delete=models.CASCADE)
+    event =         models.ForeignKey(Event, on_delete=models.CASCADE)
+    user =          models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    answer_id =     models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
+    answer =        models.TextField(max_length=5000, blank=False, null=False)
+
+    def __str__(self):
+        return self.answer_id
