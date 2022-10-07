@@ -74,6 +74,7 @@ def del_event(request, event_id):
     return render(request, 'events/event_details.html')
 
 def ask_question(request, event_id):
+    """The view that facilitates asking questions about events"""
     if request.user.is_authenticated:
         if request.method == 'POST':
             question_form = QuestionForm(request.POST)

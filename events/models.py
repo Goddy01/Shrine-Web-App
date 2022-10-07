@@ -21,7 +21,7 @@ class Question(models.Model):
     user =          models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     question_id =   models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
     question =      models.TextField(max_length=5000, blank=False, null=False)
-    date_asked =    models.DateTimeField(auto_now_add=True)
+    date_asked =    models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.question_id
@@ -32,6 +32,6 @@ class Answer(models.Model):
     user =          models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     answer_id =     models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
     answer =        models.TextField(max_length=5000, blank=False, null=False)
-    date_answered = models.DateTimeField(auto_now_add=True)
+    date_answered = models.DateTimeField(auto_now_add=True, null=True)
     def __str__(self):
         return self.answer_id
