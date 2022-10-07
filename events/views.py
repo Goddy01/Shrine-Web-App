@@ -101,6 +101,10 @@ def ask_question(request, event_id):
     context['question_form'] = question_form
     return render(request, 'events/ask_question.html', context)
 
+def ans_question_temp(request, qtn_id):
+    qtn = Question.objects.get(question_id=qtn_id)
+    return render(request, 'events/ans_question.html', {'qtn': qtn})
+
 def ans_question(request, qtn_id):
     """The view that facilitates asking questions about events"""
     context = {}
@@ -115,15 +119,11 @@ def ans_question(request, qtn_id):
                 ans_form.user = UserProfile.objects.get(username=request.user.username)
                 ans_form.save()
                 context['qtn'] = qtn
-                return redirect('events:event_detail', qtn_id)
+                return redirect('events:event_detail', qtn.event.event_id)
             else:
                 ans_form = AnswerForm()
         ans_form = AnswerForm()
     else:
-        return HttpResponse('You are not authorized to ask question. You need to be logged in.')
+        return HttpResponse('You are not authorized to answer this question.')
     context['ans_form'] = ans_form
     return render(request, 'events/ans_question.html', context)
-
-def ans_question_temp(request, qtn_id):
-    qtn = Question.objects.get(question_id=qtn_id)
-    return render(request, 'events/ans_question.html', {'qtn': qtn})

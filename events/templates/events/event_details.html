@@ -78,7 +78,7 @@
                                     {% endfor %}
                                 </p>
                                 {% if request.user.is_staff %}
-                                <a href="">Answer Question</a>
+                                <a href="{% url 'events:ans_qtn_temp' q.question_id %}">Answer Question</a>
                                 {% endif %}
                             </div>
                             {% endfor %}
