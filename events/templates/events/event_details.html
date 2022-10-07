@@ -54,28 +54,41 @@
                     {% endif %}
                 </div>
               </div>
-            <div class="col-md-6 mx-3">
+            <div class="col-md-6">
                 <div class="" style="display: block;">
                     <div class="">
                         <div class="justify-content-center border-secondary mt-5 mb-3">
                             <h4 class="font-weight-bold">Questions({{ questions.length }})</h4>
                         </div>
-                        <div class="mb-5 ml-3">
+                        <div class="mb-5 ml-1">
                             {% for q in questions %}
-                            <div class="mb-5">
-                                <p class="h5">{{q.question}}</p>
-                                <small>{{ q.user.first_name }} {{ q.user.last_name }}<small> - <i>{{ q.date_asked }}</i></small></small>
-                                <p id="ansLink">View Answer</p>
-                                <p id="ans" style="display: no;">
+                            <div class="mb-5 p-2" style="border: 1px solid #CBAA80;border-radius: 10px;">
+                                <span class="font-weight-semi-bold">Question: {{q.question}}</span>
+                                <span style="display:block;" class="ml-3">
+                                    <!-- <small> -->
+                                        Asked by: 
+                                        {{ q.user.first_name }} {{ q.user.last_name }} - 
+                                        <i>
+                                            {{ q.date_asked }}
+                                        </i>
+                                    <!-- </small> -->
+                                </span>
+                                <p style="margin-top: -7px;">
                                     {% for ans in answers %}
-                                    
                                     {% if ans.answer %}
-                                    <p>{{ ans.answer }}</p>
+                                        {% if ans.question.question_id == q.question_id %}
+                                            <p class="h5">
+                                                Answer:
+                                                {{ ans.answer }}
+                                            </p>
+                                        {% endif %}
                                     {% else %}
                                     <p>This question has not been answered.</p>
                                     {% endif %}
-                                    
                                     {% endfor %}
+                                    {% if not q.answer_set.all %}
+                                    <p>This question has not been answered.</p>
+                                    {% endif %}
                                 </p>
                                 {% if request.user.is_staff %}
                                 <a href="{% url 'events:ans_qtn_temp' q.question_id %}">Answer Question</a>
@@ -91,7 +104,7 @@
     </div>
     
 </div>
-<script>
+<!-- <script>
     let ansLink = document.getElementById('ansLink');
     ansLink.addEventListener('click', function (){displayAnsFunc()}, false);
     function displayAnsFunc() {
@@ -103,5 +116,5 @@
             ans.style.display = 'none';
         }
     }
-</script>
+</script> -->
 {% endblock %}
