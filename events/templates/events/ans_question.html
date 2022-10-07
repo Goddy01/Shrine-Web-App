@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Answer Question{% endblock title %}
+
+{% block content %}
+<style>
+    .form-group{
+        margin: .3rem;
+    }
+</style>
+    <div class="content text-dark p-3 mx-auto">
+        <h3 style="text-align: center;color: black;">Answer Question asked by {{qtn.user.first_name}} {{qtn.user.last_name}}.</h3>
+            <form action="{% url 'events:ans_qtn' qtn.question_id %}" class="mb-4" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="answer" class="font-weight-bold" style="color: #caa97e;">Answer: </label>
+                <textarea class="form-control" name="answer" id="answer" style="width: 100%;" rows="4" cols="5"></textarea>
+            </div>
+            <button class="px-5 py-2 text-light font-weight-semi-bold" style="background-color: #caa97e;">
+                Ask Question
+            </button>
+        </form>
+    </div>
+{% endblock content %}
