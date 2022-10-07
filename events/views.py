@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import EventForm, UpdateEventForm
+from .forms import EventForm, UpdateEventForm, QuestionForm, AnswerForm
 import datetime
 from .models import Event
+from accounts.models import UserProfile
 # Create your views here.
 
 def event(request):
@@ -71,3 +72,19 @@ def del_event(request, event_id):
         event.delete()
         return redirect('events:event')
     return render(request, 'events/event_details.html')
+
+def ask_question(request, event_id):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            question_form = QuestionForm(request.POST)
+            if question_form.is_valid():
+                question_form = question_form.save(commit=False)
+                question_form.event = Event.objects.get(event_id=event_id)
+                question_form.user = UserProfile.objects.get(username=request.user.username)
+                question_form.save()
+            else:
+                question_form = QuestionForm()
+        question_form = QuestionForm()
+    else:
+        return HttpResponse('You are not authorized to ask question. You need to be logged in.')
+    return render(request, 'events/event_details', {'question_form': question_form})
