@@ -108,7 +108,7 @@ def ans_question(request, qtn_id):
         if request.method == 'POST':
             ans_form = AnswerForm(request.POST)
             if ans_form.is_valid():
-                qtn = Question.objects.get(qtn_id=qtn_id)
+                qtn = Question.objects.get(question_id=qtn_id)
                 ans_form = ans_form.save(commit=False)
                 ans_form.question = qtn
                 ans_form.event = ans_form.question.event
@@ -123,3 +123,7 @@ def ans_question(request, qtn_id):
         return HttpResponse('You are not authorized to ask question. You need to be logged in.')
     context['ans_form'] = ans_form
     return render(request, 'events/ans_question.html', context)
+
+def ans_question_temp(request, qtn_id):
+    qtn = Question.objects.get(question_id=qtn_id)
+    return render(request, 'events/ans_question.html', {'qtn': qtn})
