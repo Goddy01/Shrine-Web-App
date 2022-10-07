@@ -49,7 +49,7 @@
                     {% if request.user.is_staff %}
                     <div>
                         <a href="{% url 'events:update_event' event.event_id %}" class="update btn" style="background-color: #CBAA80;">Update Event</a>
-                        <a href="{% url 'events:del_event' event.event_id %}" class="delete btn" style="background-color: red;color: #fff;border: none;float: right;">Delete Event</a>
+                        <a href="{% url 'events:del_event' event.event_id %}" class="delete btn" style="background-color: red;color: #fff;border: none;float: right;" onclick="return confirm('Are you sure you want to delete this event?')">Delete Event</a>
                     </div>
                     {% endif %}
                 </div>

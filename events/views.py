@@ -69,5 +69,5 @@ def del_event(request, event_id):
     if request.user.is_staff:
         event = Event.objects.get(event_id=event_id)
         event.delete()
-        return redirect('home')
+        return redirect('events:event')
     return render(request, 'events/event_details.html')
