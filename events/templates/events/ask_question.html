@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}User Login{% endblock title %}
+
+{% block content %}
+<style>
+    .form-group{
+        margin: .3rem;
+    }
+</style>
+    <div class="content text-dark p-3 mx-auto">
+        <h3 style="text-align: center;color: #caa97e;">Ask Question</h3>
+            <form action="{% url 'events:ask_qtn' event.event_id %}" class="mb-4" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="question">Question: </label>
+                <input type="text" class="form-control" id="question" name="question" placeholder="Enter your question" required rows="10" cols="5">
+            </div>
+            <button class="px-5 py-2 text-light font-weight-semi-bold" style="background-color: #caa97e;margin-left: .3rem;">
+                Ask Question
+            </button>
+        </form>
+    </div>
+{% endblock content %}

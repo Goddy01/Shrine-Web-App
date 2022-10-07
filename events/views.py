@@ -75,17 +75,22 @@ def del_event(request, event_id):
 
 def ask_question(request, event_id):
     """The view that facilitates asking questions about events"""
+    context = {}
     if request.user.is_authenticated:
         if request.method == 'POST':
+            return redirect('home')
             question_form = QuestionForm(request.POST)
             if question_form.is_valid():
+                event = Event.objects.get(event_id=event_id)
                 question_form = question_form.save(commit=False)
-                question_form.event = Event.objects.get(event_id=event_id)
+                question_form.event = event
                 question_form.user = UserProfile.objects.get(username=request.user.username)
                 question_form.save()
+                context['event'] = event
             else:
                 question_form = QuestionForm()
         question_form = QuestionForm()
     else:
         return HttpResponse('You are not authorized to ask question. You need to be logged in.')
-    return render(request, 'events/event_details', {'question_form': question_form})
+    context['question_form'] = question_form
+    return render(request, 'events/ask_question.html', context)
