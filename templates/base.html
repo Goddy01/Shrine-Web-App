@@ -43,14 +43,16 @@
 		<div class="site-content">
 			<header class="site-header">
 				<div class="container">
-					<a href="{% url 'home' %}" class="branding text-decoration-none">
+					<a href="{% url 'home' %}" class="branding text-decoration-none" style="font-size: 13px;">
 						<img src="{% static 'images/logo.png' %}" alt="" class="logo">
 						<h1 class="site-title font-weight-bold">True Church</h1>
 					</a>
 
 					<div class="main-navigation">
                         {% with request.resolver_match.url_name as url_name %}
-						<button class="menu-toggle"><i class="fa fa-bars"></i> Menu</button>
+						<button class="menu-toggle"><i class="fa fa-bars"></i> 
+                            <span>Menu</span>
+                        </button>
 						<ul class="menu">
 							<li class="menu-item {% if url_name == 'home' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'home' %}" style="color: #caa97e;">Home<small class="font-weight-bold">Home Page</small></a></li>
 							<li class="menu-item {% if url_name == 'event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'events:event' %}" style="color: #caa97e;">Events<small class="font-weight-bold">Events Page</small></a></li>
@@ -68,7 +70,6 @@
 						</ul>
                         {% endwith  %}
 					</div>
-
 					<div class="mobile-navigation"></div>
 				</div>
 			</header> <!-- .site-header -->

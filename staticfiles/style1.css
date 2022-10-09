@@ -1134,12 +1134,11 @@ form input[type="submit"], form button, form input[type="reset"] {
   position: relative;
   z-index: 999;
   background: white;
-  text-align: left;
+  /*! text-align: center; */
   padding: 50px 0 30px; }
 
 .branding {
-  text-align: center; 
-}
+  text-align: center; }
   .branding .logo {
     margin-bottom: 10px; }
   .branding .site-title {

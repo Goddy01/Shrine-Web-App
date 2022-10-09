@@ -220,9 +220,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 20px;
   font-family: "Novecento Sans", "Raleway", "Noto Sans" "Open Sans", sans-serif;
   font-weight: 500;
-  text-transform: uppercase;
   line-height: normal; }
 
+h1 {
+    text-transform: uppercase;
+}
 hr {
   border: none;
   border-bottom: 1px solid #777; }
@@ -1132,11 +1134,12 @@ form input[type="submit"], form button, form input[type="reset"] {
   position: relative;
   z-index: 999;
   background: white;
-  text-align: center;
+  text-align: left;
   padding: 50px 0 30px; }
 
 .branding {
-  text-align: center; }
+  text-align: center; 
+}
   .branding .logo {
     margin-bottom: 10px; }
   .branding .site-title {
