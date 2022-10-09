@@ -94,13 +94,26 @@
                     </div>
                     <div class="sidebar col-md-3 col-md-offset-1">
                         <div class="widget">
-                            <h3 class="widget-title">Past Events</h3>
+                            <h3 class="widget-title font-weight-bold">Past Events</h3>
                             <ul class="list-group">
-                                {% for e in events %}
-                                {% if e.is_past_due %}
-                                <li class="list-group-item">
-                                    <a href="" class="h5 text-primary text-uppercase">{{ e.event_name }}</a>
-                                    <p> {{ e.event_location }} </p>
+                                {% for event in events %}
+                                {% if event.is_past_due %}
+                                <li class="list-group-item mb-5" style="border: 1px solid #cbaa80;font-size: 14px;">
+                                    <a href="{% url 'events:event_detail' event.event_id %}" class="h6 text-primary text-capitalize font-weight-bold">{{ event.event_name }}</a>
+                                    <div class="ml-3 mt-2">
+                                        <p>
+                                            <i class="fa fa-calendar"></i>
+                                            {{event.event_date}}
+                                        </p>
+                                        <p class="text-uppercase">
+                                            <i class="fa">&#xf017;</i>
+                                            {{ event.event_time }}
+                                        </p>
+                                        <p>
+                                            <i class="fa fa-map-marker"></i>
+                                            {{event.event_location}}
+                                        </p>
+                                    </div>
                                 </li>
                                 {% endif %}
                                 {% endfor %}
