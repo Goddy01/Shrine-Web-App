@@ -17,12 +17,23 @@
                         <ul class="event-list large">
                             {% for event in events %}
                             {% if not event.is_past_due %}
+                            <!-- Makes events dynamically display upcoming event and not events in the past -->
                                 <li>
-                                    <h4 class="event-title"><a class="h4 text-decoration-none" href="{% url 'events:event_detail' event.event_id %}" style="text-transform: capitalize;">{{event.event_name}}</a></h4>
-                                    <span class="event-meta" style="text-transform: capitalize;">
-                                        <span><i class="fa fa-calendar"></i>{{event.event_date}}</span>
-                                        <span><i class="fa fa-map-marker"></i>{{event.event_location}}</span>
-                                    </span>
+                                    <h4 class="event-title"><a class="h4 text-primary text-decoration-none text-uppercase" href="{% url 'events:event_detail' event.event_id %}">{{event.event_name}}</a></h4>
+                                    <p class="event-meta" style="text-transform: capitalize;">
+                                        <p>
+                                            <i class="fa fa-calendar" style="font-size: 16px;"></i>
+                                            {{event.event_date}}
+                                        </p>
+                                        <p class="text-uppercase">
+                                            <i class="fa" style="font-size: 16px;">&#xf017;</i>
+                                            {{ event.event_time }}
+                                        </p>
+                                        <p>
+                                            <i class="fa fa-map-marker" style="font-size: 16px;"></i>
+                                            {{event.event_location}}
+                                        </p>
+                                    </p>
                                     <p>{{event.event_description}}</p>
                                     <!-- <a href="#" class="button">Join to this event</a> -->
                                     <a href="{% url 'events:ask_qtn_temp' event.event_id %}" class="button text-decoration-none text-dark">Ask a question</a>
@@ -83,13 +94,16 @@
                     </div>
                     <div class="sidebar col-md-3 col-md-offset-1">
                         <div class="widget">
-                            <h3 class="widget-title">Categories</h3>
-                            <ul class="arrow">
-                                <li><a href="#">Perspiciatis unde</a></li>
-                                <li><a href="#">Omnis iste natus</a></li>
-                                <li><a href="#">Voluptatem accusantium</a></li>
-                                <li><a href="#">Doloremque eaque</a></li>
-                                <li><a href="#">Totam rem aperiam</a></li>
+                            <h3 class="widget-title">Past Events</h3>
+                            <ul class="list-group">
+                                {% for e in events %}
+                                {% if e.is_past_due %}
+                                <li class="list-group-item">
+                                    <a href="" class="h5 text-primary text-uppercase">{{ e.event_name }}</a>
+                                    <p> {{ e.event_location }} </p>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
                             </ul>
                         </div>
 
