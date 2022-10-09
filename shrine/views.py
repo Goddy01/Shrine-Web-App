@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from events import models
+from datetime import date
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    events = models.Event.objects.filter(event_time__gte=date.today())
+    return render(request, 'home.html', {'events': events})
 
 def sermon(request):
     return render(request, 'sermons/sermons.html')
