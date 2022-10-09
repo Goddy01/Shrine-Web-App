@@ -4,7 +4,7 @@ from datetime import date
 
 # Create your views here.
 def home(request):
-    events = models.Event.objects.filter(event_time__gte=date.today())
+    events = models.Event.objects.all()
     return render(request, 'home.html', {'events': events})
 
 def sermon(request):
