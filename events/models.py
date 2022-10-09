@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from accounts.models import UserProfile
+from datetime import date
 import uuid
 
 # Create your models here.
@@ -15,6 +16,11 @@ class Event(models.Model):
 
     def __str__(self):
         return self.event_id
+    
+    @property
+    def is_past_due(self):
+        """To check if an event has occurred."""
+        return date.today() > self.date
 
 class Question(models.Model):
     event =         models.ForeignKey(Event, on_delete=models.CASCADE)

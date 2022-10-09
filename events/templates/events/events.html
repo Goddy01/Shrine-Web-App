@@ -4,7 +4,7 @@
 
     <div class="page-head" data-bg-image="{% static 'images/page-head-1.jpg' %}">
         <div class="container">
-            <h2 class="page-title">Seremons</h2>
+            <h2 class="page-title">Events</h2>
         </div>
     </div>
 
@@ -17,14 +17,14 @@
                         <ul class="event-list large">
                             {% for event in events %}
                             <li>
-                                <h3 class="event-title"><a class="h2 text-decoration-none" href="{% url 'events:event_detail' event.event_id %}" style="text-transform: capitalize;">{{event.event_name}}</a></h3>
+                                <h4 class="event-title"><a class="h4 text-decoration-none" href="{% url 'events:event_detail' event.event_id %}" style="text-transform: capitalize;">{{event.event_name}}</a></h4>
                                 <span class="event-meta" style="text-transform: capitalize;">
                                     <span><i class="fa fa-calendar"></i>{{event.event_date}}</span>
                                     <span><i class="fa fa-map-marker"></i>{{event.event_location}}</span>
                                 </span>
                                 <p>{{event.event_description}}</p>
                                 <!-- <a href="#" class="button">Join to this event</a> -->
-                                <a href="{% url 'events:ask_qtn_temp' event.event_id %}" class="btn-info p-2 text-decoration-none text-dark" style="border-radius: 7%;background-color:#D6BA96;">Ask a question</a>
+                                <a href="{% url 'events:ask_qtn_temp' event.event_id %}" class="button text-decoration-none text-dark">Ask a question</a>
                             </li>
                             {% endfor %}
                             <li>
