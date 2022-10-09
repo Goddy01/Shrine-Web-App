@@ -65,8 +65,10 @@
                             <p>No questions have been asked about this event.</p>
                             {% endif %}
                             {% for q in questions %}
-                            <div class="mb-5 p-2" style="border: 1px solid #CBAA80;border-radius: 10px;">
-                                <span class="font-weight-semi-bold">Question: {{q.question}}</span>
+                            <div class="mb-5 p-2 h5" style="border: 1px solid #CBAA80;border-radius: 10px;">
+                                <span>
+                                    <span class="font-weight-bold">Question:</span>
+                                     {{q.question}}</span>
                                 <span style="display:block;" class="ml-3">
                                     <!-- <small> -->
                                         Asked by: 
@@ -81,10 +83,10 @@
                                     {% if ans.answer %}
                                         {% if ans.question.question_id == q.question_id %}
                                             <p class="h5">
-                                                Answer:
+                                                <span class="font-weight-bold">Answer:</span>
                                                 {{ ans.answer }}
                                             </p>
-                                            <span style="display:block;margin-top: -7px;" class="ml-3">
+                                            <span style="display:block;margin-top: -7px;" class="ml-3 mb-3">
                                                 <!-- <small> -->
                                                     Answered by the Admin: 
                                                      - 
@@ -97,7 +99,9 @@
                                     {% endif %}
                                     {% endfor %}
                                     {% if not q.answer_set.all %}
-                                    <p class="h5">Answer: This question has not been answered.</p>
+                                    <p class="h5">
+                                        <span class="font-weight-bold">Answer:</span>
+                                         This question has not been answered.</p>
                                     {% endif %}
                                 </p>
                                 {% if request.user.is_staff %}
