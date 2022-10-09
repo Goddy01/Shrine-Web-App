@@ -46,7 +46,7 @@ def event_detail(request, event_id):
     event = Event.objects.get(event_id=event_id)
     questions = Question.objects.filter(event=event)
     answers = Answer.objects.filter(event=event)
-    return render(request, 'events/event_details.html', {'event': event, 'questions': questions, 'answers': answers})
+    return render(request, 'events/event_details.html', {'event': event, 'questions': questions, 'answers': answers, 'qtns_counter': questions.count()})
 
 def update_event(request, event_id):
     """The view to modify/update previously posted events."""

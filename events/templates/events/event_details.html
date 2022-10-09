@@ -58,9 +58,12 @@
                 <div class="" style="display: block;">
                     <div class="">
                         <div class="justify-content-center border-secondary mt-5 mb-3">
-                            <h4 class="font-weight-bold">Questions({{ questions.length }})</h4>
+                            <h4 class="font-weight-bold">Questions({{ qtns_counter }})</h4>
                         </div>
                         <div class="mb-5 ml-1">
+                            {% if questions.count == 0 %}
+                            <p>No questions have been asked about this event.</p>
+                            {% endif %}
                             {% for q in questions %}
                             <div class="mb-5 p-2" style="border: 1px solid #CBAA80;border-radius: 10px;">
                                 <span class="font-weight-semi-bold">Question: {{q.question}}</span>
@@ -73,7 +76,7 @@
                                         </i>
                                     <!-- </small> -->
                                 </span>
-                                <p style="margin-top: -7px;">
+                                <p style="margin-top: -2px;">
                                     {% for ans in answers %}
                                     {% if ans.answer %}
                                         {% if ans.question.question_id == q.question_id %}
@@ -81,13 +84,20 @@
                                                 Answer:
                                                 {{ ans.answer }}
                                             </p>
+                                            <span style="display:block;margin-top: -7px;" class="ml-3">
+                                                <!-- <small> -->
+                                                    Answered by the Admin: 
+                                                     - 
+                                                    <i>
+                                                        {{ ans.date_answered }}
+                                                    </i>
+                                                <!-- </small> -->
+                                            </span>
                                         {% endif %}
-                                    {% else %}
-                                    <p>This question has not been answered.</p>
                                     {% endif %}
                                     {% endfor %}
                                     {% if not q.answer_set.all %}
-                                    <p>This question has not been answered.</p>
+                                    <p class="h5">Answer: This question has not been answered.</p>
                                     {% endif %}
                                 </p>
                                 {% if request.user.is_staff %}
