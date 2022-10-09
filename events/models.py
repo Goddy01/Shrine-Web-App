@@ -20,7 +20,7 @@ class Event(models.Model):
     @property
     def is_past_due(self):
         """To check if an event has occurred."""
-        return date.today() > self.date
+        return date.today() > self.event_date
 
 class Question(models.Model):
     event =         models.ForeignKey(Event, on_delete=models.CASCADE)
