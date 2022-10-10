@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'shrine',
     'phonenumber_field',
     'phonenumbers',
-    'ckeditor'
+    'ckeditor',
     'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
