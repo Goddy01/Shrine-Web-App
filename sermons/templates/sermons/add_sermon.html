@@ -2,5 +2,64 @@
 {% load static %}
 {% block content %}
 {% include 'messages.html' %}
+<div class="errors" style="margin-left: 2rem;">
+    {% for field in add_sermon_form %}
+        <p>
+        {% for error in field.errors %}
+        <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
+            {{field.label_tag}} {{error}}
+        </div>
+        {% endfor %}
+        </p>
+    {% endfor %}
+    {% if event_form.non_field_errors %}
+    <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
+            {{add_sermon_form.non_field_errors}}
+        </div>
+    {% endif %}
+</div>
+<div class="w-100 mx-auto bg-white" style="padding: 2rem 1rem;margin-bottom: 5rem;color: black;">
+    <p class="h3" style="text-align: center; margin-bottom: 4rem">Add a Sermon</p>
+    <form method="post" action="{% url 'sermons:add_sermon' %}">
+        {% csrf_token %}
 
+        <!-- SERMON TITLE -->
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
+            <label for="sermon_title">Sermon Name</label>
+            <input required class="form-control" type="text" name="sermon_title" id="sermon_title" placeholder="Enter the sermon title">
+        </div>
+
+        <!-- SERMON PRIEST NAME -->
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
+            <label for="sermon_title">Priest's Name</label>
+            <input required class="form-control" type="text" name="sermon_priest_name" id="sermon_priest_name" placeholder="Enter the name of the Priest that will take the name.">
+        </div>
+
+        <!-- SERMON DATE -->
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+            <label for="sermon_date">Sermon Date</label>
+            <input required class="form-control" type="date" name="sermon_date" id="sermon_date" placeholder="Enter the date the sermon will hold.">
+        </div>
+
+        <!-- SERMON IMAGE -->
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+            <label for="sermon_image">Sermon Image</label>
+            <input type="file" name="sermon_image" accept="image/png, image/gif, image/jpeg" id="sermon_image" required>
+        </div>
+
+        <!-- SERMON DESC -->
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+            <label for="sermon_desc">Sermon Description</label>
+            <textarea class="form-control" placeholder="Sermon Description" name="sermon_desc" id="sermon_desc" style="width: 100%;" rows="10" cols="5" required></textarea>
+        </div>
+
+        <!-- SERMON BODY -->
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+            <label for="sermon_body">Sermon Body</label>
+            <textarea class="form-control" placeholder="Sermon Body" name="sermon_body" id="sermon_body" style="width: 100%;" rows="10" cols="5"></textarea>
+        </div>
+        <button class="btn btn-primary" style="display: flex; margin: auto; margin-top: .5rem;width: 50%;" type="submit">
+            <span style="margin: 0 auto;font-weight: bold;">Add Sermon</span>
+        </button>
+    </form>
 {% endblock content %}

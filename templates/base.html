@@ -66,6 +66,7 @@
                             {% endif %}
                             {% if request.user.is_staff %}
                             <li class="menu-item {% if url_name == 'add_event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'events:add_event' %}" style="color: #caa97e;">Add-Event<small class="font-weight-bold">Add a new event.</small></a></li>
+                            <li class="menu-item {% if url_name == 'add_sermon' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'sermons:add_sermon' %}" style="color: #caa97e;">Add-Sermon<small class="font-weight-bold">Add a new sermon.</small></a></li>
                             {% endif %}
 						</ul>
                         {% endwith  %}
