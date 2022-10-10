@@ -3,6 +3,10 @@ from django.db import models
 import uuid
 from ckeditor.fields import RichTextField
 from datetime import date
+from django.db.models.signals import pre_save, post_delete
+from django.dispatch import receiver
+
+
 # Create your models here.
 def upload_location(instance, filename):
     return f'sermons/{str(instance.sermon_id)}-{filename}'
@@ -20,3 +24,8 @@ class Sermon(models.Model):
     def is_past_due(self):
         """To confirm if a sermon has taken place"""
         return date.today() > self.sermon_date
+
+@receiver(post_delete, sender=Sermon)
+def submission_delete(sender, instance, **kwargs):
+    """Deletes the image of a sermon when the correlating Sermon is deleted"""
+    instance.image.delete(False)
