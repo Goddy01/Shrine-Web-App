@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shrine',
     'phonenumber_field',
     'phonenumbers',
+    'ckeditor'
     'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -172,3 +173,12 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bloggie.blogapp@gmail.com'
 EMAIL_HOST_PASSWORD = 'cmfayhzugbmkutxr'
 DEFAULT_FROM_EMAIL = 'Oduduwa Shrine Team <noreply@oduduwa.com>'
+
+# CKEDITOR CONFIGURATIONS
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 'auto',
+    },
+}
