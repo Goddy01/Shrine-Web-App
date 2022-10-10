@@ -2,6 +2,12 @@
 {% load static %}
 {% block content %}
 {% include 'messages.html' %}
+<style>
+    .django-ckeditor-widget{
+        /* width: 10px; */
+        /* border: 2px solid red; */
+}
+</style>
 <div class="errors" style="margin-left: 2rem;">
     {% for field in add_sermon_form %}
         <p>
@@ -56,8 +62,9 @@
         <!-- SERMON BODY -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <label for="sermon_body">Sermon Body</label>
-            <textarea class="form-control" placeholder="Sermon Body" name="sermon_body" id="sermon_body" style="width: 100%;" rows="10" cols="5"></textarea>
+            <div class="form-control">{{ add_sermon_form.sermon_body }}</div>
         </div>
+
         <button class="btn btn-primary" style="display: flex; margin: auto; margin-top: .5rem;width: 50%;" type="submit">
             <span style="margin: 0 auto;font-weight: bold;">Add Sermon</span>
         </button>

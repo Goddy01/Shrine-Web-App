@@ -165,6 +165,31 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# CKEDITOR CONFIGURATIONS
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'full',
+#         'height': 300,
+#         'width': 'full',
+#     },
+# }
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Undo', 'Redo',
+             '-', 'Bold', 'Italic', 'Underline',
+             '-', 'Link', 'Unlink', 'Anchor',
+             '-', 'Format',
+             
+             '-', 'Maximize',
+             
+            ],
+        ],  
+        'height': 300,
+        'width': 'auto',
+        'toolbarCanCollapse': True,
+    },
+}
 # Sending mails
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -173,12 +198,3 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bloggie.blogapp@gmail.com'
 EMAIL_HOST_PASSWORD = 'cmfayhzugbmkutxr'
 DEFAULT_FROM_EMAIL = 'Oduduwa Shrine Team <noreply@oduduwa.com>'
-
-# CKEDITOR CONFIGURATIONS
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': 'auto',
-    },
-}
