@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 from datetime import date
 from django.db.models.signals import pre_save, post_delete
 from django.dispatch import receiver
-
+from django.utils.text import slugify
 
 # Create your models here.
 def upload_location(instance, filename):
@@ -19,6 +19,7 @@ class Sermon(models.Model):
     sermon_image =          models.ImageField(upload_to=upload_location, null=False, blank=False)
     sermon_desc =           models.TextField(max_length=1000, null=False, blank=False)
     sermon_body =           RichTextField(max_length=20000, blank=True, null=True)
+    slug =                  models.SlugField(blank=True, unique=True, max_length=255)
 
     @property
     def is_past_due(self):
@@ -29,3 +30,9 @@ class Sermon(models.Model):
 def submission_delete(sender, instance, **kwargs):
     """Deletes the image of a sermon when the correlating Sermon is deleted"""
     instance.image.delete(False)
+
+def pre_save_sermon_receiver(sender, instance, **kwargs):
+    """Checks if a sermon has a slug, if not it creates one. This executes before each sermon is commited to the database"""
+    if not instance.slug:
+        instance.slug = slugify(instance.sermon_id + "-" + instance.sermon_title)
+pre_save.connect(pre_save_sermon_receiver, sender=Sermon)
