@@ -21,10 +21,9 @@ def add_sermon(request):
         if request.method == 'POST':
             add_sermon_form = AddSermonForm(request.POST or None, request.FILES or None)
             if add_sermon_form.is_valid():
-                add_sermon_form = add_sermon_form.save(commit=False)
-                
-                add_sermon_form.save()
-                return redirect('home')
+                sermon_error_checker(request, add_sermon_form)
+                if add_sermon_form.cleaned_data['sermon_date'] > datetime.datetime.now().date():
+                    return redirect('sermons:sermon')
             else:
                 add_sermon_form = AddSermonForm()
                 messages.error(request, 'The sermon could not be added.')
