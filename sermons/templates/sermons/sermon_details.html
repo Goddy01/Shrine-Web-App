@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .card {
+        max-width: 900px;
+        min-width: 200px;
+        /* margin: 0 auto; */
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .delete {
+        position: absolute;
+        right: 10px;
+        padding: 7px 10px;
+    }
+
+    .card-page {
+        width: 50vw;
+    }
+
+    @media (max-width: 396px) {
+        .update {
+            margin-bottom: 20px;
+        }
+
+        .delete {
+            display: block;
+            margin-top: -15px;
+            margin-bottom: 10px;
+            left: 30px;
+            width: fit-content;
+        }
+    }
+
+    @media (max-width: 991px) {
+    .card-page {
+        width: 90vw;
+        margin: 0 auto;
+        /* background-color: red; */
+    }
+    }
+</style>
+
+<div class="parent" style="margin-bottom: 15rem;">
+    <div class="container">
+        <div class="row">
+            <div class="card card-page py-3 mt-2 col-lg-9">
+                <img src="{{sermon.sermon_image.url}}" class="card-img-top">
+                <p class="text-muted px-3 pt-3">
+                    Sermon by {{sermon.sermon_priest_name}}, on {{sermon.sermon_date}}.
+                </p>
+                <div class="card-body">
+                  <h4 class="card-title text-capitalize">{{sermon.sermon_title}}</h4>
+                  {% if not sermon.is_past_due %}
+                  <p class="card-text">{{ sermon.sermon_desc }}</p>
+                  {% else %}
+                  <p class="card-text">{{sermon.sermon_body|safe}}</p>
+                  {% endif %}
+                    {% if request.user.is_staff %}
+                    <a href="" class="update btn" style="background-color: #cbaa80;">Update Sermon</a>
+                    <a href="" class="delete btn" style="background-color: red;color: #fff;border: none;" onclick="return confirm('Are you sure you want to delete this event?')">Delete Sermon</a>
+                    {% endif %}
+                </div>
+              </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock content %}

@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
 
-    <div class="page-head" data-bg-image="images/page-head-1.jpg">
+    <div class="page-head" data-bg-image="{% static 'images/page-head-1.jpg' %}">
         <div class="container">
-            <h2 class="page-title">Seremons</h2>
+            <h2 class="page-title">Sermons</h2>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
                             <li class="list-group-item mb-3 border">
                                 <img class="ml-5" src="{{ sermon.sermon_image.url }}" alt="" style="width: 80px;height: 65px;">
                                 <div class="seremon-detail">
-                                    <h3 class="seremon-title text-uppercase"><a href="#">{{ sermon.sermon_title }}</a></h3>
+                                    <h3 class="seremon-title text-uppercase"><a href="{% url 'sermons:sermon_details' sermon.sermon_id %}">{{ sermon.sermon_title }}</a></h3>
                                     <div class="seremon-meta mb-2">
                                         <div class="pastor text-capitalize d-block"><i class="fa fa-user"></i>{{ sermon.sermon_priest_name }}</div>
                                         <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>{{ sermon.sermon_date }}</div>
