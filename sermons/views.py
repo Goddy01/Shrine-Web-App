@@ -2,7 +2,19 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import AddSermonForm, UpdateSermonForm
 from django.contrib import messages
+import datetime
 # Create your views here.
+
+def sermon_error_checker(request,sermon_form):
+    """A view that checks for errors in sermon forms. Will be called when needed to abide by DRY"""
+    if sermon_form.cleaned_data['sermon_date'] < datetime.datetime.now().date():
+        messages.error(request, 'The sermon date cannot be in the past.')
+    elif sermon_form.cleaned_data['sermon_date'] == datetime.datetime.now().date():
+        messages.error(request, 'The sermon date cannot be today. The sermon must be posted atleast a day before the sermon date.')
+    else:
+        sermon_form = sermon_form.save(commit=False)
+        sermon_form.sermon_location = sermon_form.sermon_location.title()
+        sermon_form = sermon_form.save()
 
 def add_sermon(request):
     if request.user.is_staff:
@@ -10,8 +22,7 @@ def add_sermon(request):
             add_sermon_form = AddSermonForm(request.POST or None, request.FILES or None)
             if add_sermon_form.is_valid():
                 add_sermon_form = add_sermon_form.save(commit=False)
-                if add_sermon_form.is_past_due():
-                    messages.error(request, 'The date of the sermon cannot be in the past.')
+                
                 add_sermon_form.save()
                 return redirect('home')
             else:
