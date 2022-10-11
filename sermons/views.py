@@ -7,6 +7,7 @@ import datetime
 # Create your views here.
 
 def sermons(request):
+    """The view for rendering all the sermons on the sermon page"""
     sermons = Sermon.objects.all().order_by('sermon_date')
     return render(request, 'sermons/sermons.html', {'sermons':sermons})
 
@@ -22,6 +23,7 @@ def sermon_error_checker(request,sermon_form):
         sermon_form = sermon_form.save()
 
 def add_sermon(request):
+    """The view for adding sermons"""
     if request.user.is_staff:
         if request.method == 'POST':
             add_sermon_form = AddSermonForm(request.POST or None, request.FILES or None)
@@ -37,3 +39,7 @@ def add_sermon(request):
     else:
         return HttpResponse('You are not authorized to add sermons.')
     return render(request, 'sermons/add_Sermon.html', {'add_sermon_form': add_sermon_form})
+
+def sermon_details(request, sermon_id):
+    sermon = Sermon.objects.get(sermon_id=sermon_id)
+    return render(request, 'sermons/sermon_details.html', {'sermon':sermon})

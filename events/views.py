@@ -8,6 +8,7 @@ from accounts.models import UserProfile
 # Create your views here.
 
 def event(request):
+    """The view for rendering events on the event page"""
     events = Event.objects.all().order_by('event_date')
     return render(request, 'events/events.html', {'events': events})
 
