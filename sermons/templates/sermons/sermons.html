@@ -16,6 +16,7 @@
                         <h2 class="section-title mb-3">Upcoming seremons</h2>
                         <ul class="seremon-list large list-group p-2">
                             {% for sermon in sermons %}
+                            {% if not sermon.is_past_due %}
                             <li class="list-group-item mb-3 border">
                                 <img class="ml-5" src="{{ sermon.sermon_image.url }}" alt="" style="width: 80px;height: 65px;">
                                 <div class="seremon-detail">
@@ -27,6 +28,7 @@
                                     <p>{{ sermon.sermon_desc }}</p>
                                 </div>
                             </li>
+                            {% endif %}
                             {% endfor %}
                         </ul>
                     </div>
@@ -34,16 +36,21 @@
                         <div class="widget">
                             <h3 class="widget-title">Latest Sermons</h3>
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="widget-detail">
-                                        <img src="{% static 'images/small-thumb-1.jpg' %}" alt="">
-                                        <span class="seremon-title text-nowrap"><a href="#">I believe in god with all my heart</a></span>
+                                {% for sermon in sermons %}
+                                {% if sermon.is_past_due %}
+                                <li class="list-group-item border mb-2">
+                                    <img src="{{ sermon.sermon_image.url }}" alt="" style="width: 70px;height: 65px;">
+                                    <div class="seremon-detail">
+                                        <h5 class="seremon-title mt-2"><a href="#">{{ sermon.sermon_title }}</a></h5>
                                         <div class="seremon-meta">
-                                            <div class="pastor"><i class="fa fa-user"></i> Alan Ray</div>
-                                            <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
+                                            <div class="pastor"><i class="fa fa-user mr-2"></i>{{ sermon.sermon_priest_name }}</div>
+                                            <div class="date"><i class="fa fa-calendar mr-2"></i>{{ sermon.sermon_date }}</div>
                                         </div>
+                                        <p>{{ sermon.sermon_desc }}</p>
                                     </div>
                                 </li>
+                                {% endif %}
+                                {% endfor %}
                             </ul>
                         </div>
 
