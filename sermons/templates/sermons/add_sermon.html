@@ -4,7 +4,7 @@
 {% include 'messages.html' %}
 <style>
     .django-ckeditor-widget{
-        /* width: 10px; */
+        width: 100%;
         /* border: 2px solid red; */
 }
 </style>
@@ -25,44 +25,45 @@
     {% endif %}
 </div>
 <div class="w-100 mx-auto bg-white" style="padding: 2rem 1rem;margin-bottom: 5rem;color: black;">
-    <p class="h3" style="text-align: center; margin-bottom: 4rem">Add a Sermon</p>
-    <form method="post" action="{% url 'sermons:add_sermon' %}">
+    <p class="h3 font-weight-bold" style="text-align: center; margin-bottom: 4rem">Add a Sermon</p>
+    <form method="post" action="{% url 'sermons:add_sermon' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
         <!-- SERMON TITLE -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
-            <label for="sermon_title">Sermon Name</label>
+            <label class="font-weight-bold" for="sermon_title">Sermon Name</label>
             <input required class="form-control" type="text" name="sermon_title" id="sermon_title" placeholder="Enter the sermon title">
         </div>
 
         <!-- SERMON PRIEST NAME -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
-            <label for="sermon_title">Priest's Name</label>
+            <label class="font-weight-bold" for="sermon_title">Priest's Name</label>
             <input required class="form-control" type="text" name="sermon_priest_name" id="sermon_priest_name" placeholder="Enter the name of the Priest that will take the name.">
         </div>
 
         <!-- SERMON DATE -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
-            <label for="sermon_date">Sermon Date</label>
+            <label class="font-weight-bold" for="sermon_date">Sermon Date</label>
             <input required class="form-control" type="date" name="sermon_date" id="sermon_date" placeholder="Enter the date the sermon will hold.">
         </div>
 
         <!-- SERMON IMAGE -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
-            <label for="sermon_image">Sermon Image</label>
+            <label class="font-weight-bold" for="sermon_image">Sermon Image</label>
             <input type="file" name="sermon_image" accept="image/png, image/gif, image/jpeg" id="sermon_image" required>
         </div>
 
         <!-- SERMON DESC -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
-            <label for="sermon_desc">Sermon Description</label>
+            <label class="font-weight-bold" for="sermon_desc">Sermon Description</label>
             <textarea class="form-control" placeholder="Sermon Description" name="sermon_desc" id="sermon_desc" style="width: 100%;" rows="10" cols="5" required></textarea>
         </div>
 
         <!-- SERMON BODY -->
-        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
-            <label for="sermon_body">Sermon Body</label>
-            <div class="form-control">{{ add_sermon_form.sermon_body }}</div>
+        <div class="" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+            <label class="font-weight-bold" for="sermon_body">Sermon Body</label>
+            {{ add_sermon_form.media }} <!-- Necessary for ckeditor to work -->
+            <div class="">{{ add_sermon_form.sermon_body }}</div>
         </div>
 
         <button class="btn btn-primary" style="display: flex; margin: auto; margin-top: .5rem;width: 50%;" type="submit">

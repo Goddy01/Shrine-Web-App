@@ -166,30 +166,30 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CKEDITOR CONFIGURATIONS
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'full',
-#         'height': 300,
-#         'width': 'full',
-#     },
-# }
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': [
-            ['Undo', 'Redo',
-             '-', 'Bold', 'Italic', 'Underline',
-             '-', 'Link', 'Unlink', 'Anchor',
-             '-', 'Format',
-             
-             '-', 'Maximize',
-             
-            ],
-        ],  
+        'toolbar': 'full',
         'height': 300,
-        'width': 'auto',
-        'toolbarCanCollapse': True,
+        'width': 'full',
     },
 }
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': [
+#             ['Undo', 'Redo',
+#              '-', 'Bold', 'Italic', 'Underline',
+#              '-', 'Link', 'Unlink', 'Anchor',
+#              '-', 'Format',
+             
+#              '-', 'Maximize',
+             
+#             ],
+#         ],  
+#         'height': 300,
+#         'width': 'auto',
+#         'toolbarCanCollapse': True,
+#     },
+# }
 # Sending mails
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
