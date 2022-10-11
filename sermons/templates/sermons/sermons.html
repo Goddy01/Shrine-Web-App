@@ -13,16 +13,16 @@
             <div class="container">
                 <div class="row">
                     <div class="content col-md-8">
-                        <h2 class="section-title">Upcoming seremons</h2>
-                        <ul class="seremon-list large list-group">
+                        <h2 class="section-title mb-3">Upcoming seremons</h2>
+                        <ul class="seremon-list large list-group p-2">
                             {% for sermon in sermons %}
-                            <li class="list-group-item">
-                                <img src="{{ sermon.sermon_image.url }}" alt="">
+                            <li class="list-group-item mb-3 border">
+                                <img class="ml-5" src="{{ sermon.sermon_image.url }}" alt="" style="width: 80px;height: 65px;">
                                 <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">{{ sermon.sermon_title }}</a></h3>
-                                    <div class="seremon-meta">
-                                        <div class="pastor text-capitalize"><i class="fa fa-user"></i>{{ sermon.sermon_priest_name }}</div>
-                                        <div class="date text-capitalize"><i class="fa fa-calendar"></i>{{ sermon.sermon_date }}</div>
+                                    <h3 class="seremon-title text-uppercase"><a href="#">{{ sermon.sermon_title }}</a></h3>
+                                    <div class="seremon-meta mb-2">
+                                        <div class="pastor text-capitalize d-block"><i class="fa fa-user"></i>{{ sermon.sermon_priest_name }}</div>
+                                        <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>{{ sermon.sermon_date }}</div>
                                     </div>
                                     <p>{{ sermon.sermon_desc }}</p>
                                 </div>
