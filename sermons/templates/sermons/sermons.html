@@ -14,96 +14,36 @@
                 <div class="row">
                     <div class="content col-md-8">
                         <h2 class="section-title">Upcoming seremons</h2>
-                        <ul class="seremon-list large">
-                            <li>
-                                <img src="{% static 'images/thumb-1-120.png' %}" alt="">
+                        <ul class="seremon-list large list-group">
+                            {% for sermon in sermons %}
+                            <li class="list-group-item">
+                                <img src="{{ sermon.sermon_image.url }}" alt="">
                                 <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">I believe in god with all my heart</a></h3>
+                                    <h3 class="seremon-title"><a href="#">{{ sermon.sermon_title }}</a></h3>
                                     <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> Alan Ray</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
+                                        <div class="pastor text-capitalize"><i class="fa fa-user"></i>{{ sermon.sermon_priest_name }}</div>
+                                        <div class="date text-capitalize"><i class="fa fa-calendar"></i>{{ sermon.sermon_date }}</div>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam molestiae doloribus deserunt minus a dicta labore beatae maiores assumenda. Laudantium nihil, maxime molestiae soluta doloribus magnam eum. Nesciunt, ea, sint.</p>
+                                    <p>{{ sermon.sermon_desc }}</p>
                                 </div>
                             </li>
-                            <li>
-                                <img src="{% static 'images/thumb-2-120.jpg' %}" alt="">
-                                <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">Trusting in jesus and god</a></h3>
-                                    <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> David Clark</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam dignissimos corporis quidem at nobis impedit perspiciatis, accusantium qui natus amet sapiente voluptate doloribus laboriosam officia deserunt possimus cumque inventore. Ipsum.</p>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="{% static 'images/thumb-3-120.jpg' %}" alt="">
-                                <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">Love your kids</a></h3>
-                                    <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> anthony roberts</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis nisi rem est amet, ducimus, aut, atque error accusantium facilis ab adipisci! Cumque, corrupti sapiente dolores saepe adipisci dignissimos quod unde.</p>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="{% static 'images/thumb-2-120.jpg' %}" alt="">
-                                <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">Trusting in jesus and god</a></h3>
-                                    <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> David Clark</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam dignissimos corporis quidem at nobis impedit perspiciatis, accusantium qui natus amet sapiente voluptate doloribus laboriosam officia deserunt possimus cumque inventore. Ipsum.</p>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <h2 class="section-title">Latest seremons</h2>
-                        <ul class="seremon-list">
-                            <li>
-                                <img src="{% static 'images/small-thumb-1.jpg' %}" alt="">
-                                <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">I believe in god with all my heart</a></h3>
-                                    <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> Alan Ray</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="{% static 'images/small-thumb-2.jpg' %}" alt="">
-                                <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">Trusting in jesus and god</a></h3>
-                                    <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> David Clark</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="{% static 'images/small-thumb-3.jpg' %}" alt="">
-                                <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">Love your kids</a></h3>
-                                    <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> anthony roberts</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
-                                    </div>
-                                </div>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="sidebar col-md-3 col-md-offset-1">
                         <div class="widget">
-                            <h3 class="widget-title">Categories</h3>
-                            <ul class="arrow">
-                                <li><a href="#">Perspiciatis unde</a></li>
-                                <li><a href="#">Omnis iste natus</a></li>
-                                <li><a href="#">Voluptatem accusantium</a></li>
-                                <li><a href="#">Doloremque eaque</a></li>
-                                <li><a href="#">Totam rem aperiam</a></li>
+                            <h3 class="widget-title">Latest Sermons</h3>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="widget-detail">
+                                        <img src="{% static 'images/small-thumb-1.jpg' %}" alt="">
+                                        <span class="seremon-title text-nowrap"><a href="#">I believe in god with all my heart</a></span>
+                                        <div class="seremon-meta">
+                                            <div class="pastor"><i class="fa fa-user"></i> Alan Ray</div>
+                                            <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
 
