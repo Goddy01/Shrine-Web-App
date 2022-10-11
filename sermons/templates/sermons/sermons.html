@@ -36,7 +36,7 @@
                         <div class="widget">
                             <h3 class="widget-title">Latest Sermons</h3>
                             <ul class="list-group">
-                                {% for sermon in sermons %}
+                                {% for sermon in latest_sermons %}
                                 {% if sermon.is_past_due %}
                                 <li class="list-group-item border mb-2">
                                     <img src="{{ sermon.sermon_image.url }}" alt="" style="width: 70px;height: 65px;">
