@@ -34,5 +34,5 @@ def submission_delete(sender, instance, **kwargs):
 def pre_save_sermon_receiver(sender, instance, **kwargs):
     """Checks if a sermon has a slug, if not it creates one. This executes before each sermon is commited to the database"""
     if not instance.slug:
-        instance.slug = slugify(instance.sermon_id + "-" + instance.sermon_title)
+        instance.slug = slugify(instance.sermon_id)
 pre_save.connect(pre_save_sermon_receiver, sender=Sermon)
