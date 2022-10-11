@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import AddSermonForm, UpdateSermonForm
+from .models import Sermon
 from django.contrib import messages
 import datetime
 # Create your views here.
+
+def sermons(request):
+    sermons = Sermon.objects.all().order_by('sermon_date')
+    return render(request, 'sermons/sermons.html', {'sermons':sermons})
 
 def sermon_error_checker(request,sermon_form):
     """A view that checks for errors in sermon forms. Will be called when needed to abide by DRY"""
