@@ -10,7 +10,8 @@ from accounts.models import UserProfile
 def event(request):
     """The view for rendering events on the event page"""
     events = Event.objects.all().order_by('event_date')
-    return render(request, 'events/events.html', {'events': events})
+    past_events = Event.objects.all().order_by('-event_date')
+    return render(request, 'events/events.html', {'events': events, 'past_events': past_events})
 
 def event_error_checker(request,event_form):
     """A view that checks for errors in event forms. Will be called when needed to abide by DRY"""

@@ -96,9 +96,9 @@
                         <div class="widget">
                             <h3 class="widget-title font-weight-bold">Past Events</h3>
                             <ul class="list-group">
-                                {% for event in events %}
+                                {% for event in past_events %}
                                 {% if event.is_past_due %}
-                                <li class="list-group-item mb-5" style="border: 1px solid #cbaa80;font-size: 14px;">
+                                <li class="list-group-item mb-2 border" style="font-size: 14px;">
                                     <a href="{% url 'events:event_detail' event.event_id %}" class="h6 text-primary text-capitalize font-weight-bold">{{ event.event_name }}</a>
                                     <div class="ml-3 mt-2">
                                         <p>
