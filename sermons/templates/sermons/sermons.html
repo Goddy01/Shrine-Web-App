@@ -41,12 +41,14 @@
                                 <li class="list-group-item border mb-2">
                                     <img src="{{ sermon.sermon_image.url }}" alt="" style="width: 70px;height: 65px;">
                                     <div class="seremon-detail">
-                                        <h5 class="seremon-title mt-2"><a href="#">{{ sermon.sermon_title }}</a></h5>
+                                        <h5 class="seremon-title mt-2"><a href="{% url 'sermons:sermon_details' sermon.sermon_id %}">{{ sermon.sermon_title }}</a></h5>
                                         <div class="seremon-meta">
                                             <div class="pastor"><i class="fa fa-user mr-2"></i>{{ sermon.sermon_priest_name }}</div>
                                             <div class="date"><i class="fa fa-calendar mr-2"></i>{{ sermon.sermon_date }}</div>
                                         </div>
-                                        <p>{{ sermon.sermon_desc }}</p>
+                                        <p class="text-capitalize">
+                                            <span style="font-weight: 700;">Desc: </span>
+                                            {{ sermon.sermon_desc }}</p>
                                     </div>
                                 </li>
                                 {% endif %}
