@@ -18,7 +18,7 @@ def sermon_error_checker(request,sermon_form):
         messages.error(request, 'The sermon date cannot be today. The sermon must be posted atleast a day before the sermon date.')
     else:
         sermon_form = sermon_form.save(commit=False)
-        sermon_form.sermon_location = sermon_form.sermon_location.title()
+        sermon_form.sermon_priest_name = sermon_form.sermon_priest_name.title()
         sermon_form = sermon_form.save()
 
 def add_sermon(request):
@@ -28,7 +28,7 @@ def add_sermon(request):
             if add_sermon_form.is_valid():
                 sermon_error_checker(request, add_sermon_form)
                 if add_sermon_form.cleaned_data['sermon_date'] > datetime.datetime.now().date():
-                    return redirect('sermons:sermon')
+                    return redirect('sermons:sermons')
             else:
                 add_sermon_form = AddSermonForm()
                 messages.error(request, 'The sermon could not be added.')
