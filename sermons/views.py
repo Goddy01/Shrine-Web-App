@@ -42,5 +42,24 @@ def add_sermon(request):
     return render(request, 'sermons/add_Sermon.html', {'add_sermon_form': add_sermon_form})
 
 def sermon_details(request, sermon_id):
+    """The view that facilitates the display of ermon details"""
     sermon = Sermon.objects.get(sermon_id=sermon_id)
     return render(request, 'sermons/sermon_details.html', {'sermon':sermon})
+
+def update_sermon(request, sermon_id):
+    sermon = Sermon.objects.get(sermon_id=sermon_id)
+    if request.user.is_staff:
+        if request.method == 'POST':
+            update_sermon_form = UpdateSermonForm(request.POST or None, request.FILES or None, instance=sermon)
+            if update_sermon_form.is_valid():
+                sermon_error_checker(request, update_sermon_form)
+                if update_sermon_form.cleaned_data['sermon_date'] > datetime.datetime.now().date():
+                    return redirect('sermons:sermons')
+            else:
+                update_sermon_form = UpdateSermonForm()
+                messages.error(request, 'The sermon could not be updated.')
+        else:
+            update_sermon_form = UpdateSermonForm()
+    else:
+        return HttpResponse('Sorry. You are not authenticated to update the sermon.')
+    return render(request, 'sermons/update_sermon.html', {'sermon': sermon, 'update_sermon_form': update_sermon_form})
