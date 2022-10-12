@@ -54,6 +54,9 @@
             <div class="form-group mb-3 mt-1 image-group" id="id_image_group">
                 <img class="img-fluid image" src="{{sermon.sermon_image.url}}" id="sermon_image">
             </div>
+            <div class="middle">
+                <div class="text" style="font-weight: 600;">Update image</div>
+            </div>
             <p>{{ update_sermon_form.sermon_image }}</p>
         </div>
 
@@ -71,7 +74,7 @@
         </div>
 
         <button class="btn btn-primary" style="display: flex; margin: auto; margin-top: .5rem;width: 50%;" type="submit">
-            <span style="margin: 0 auto;font-weight: bold;">Add Sermon</span>
+            <span style="margin: 0 auto;font-weight: bold;">Update Sermon</span>
         </button>
     </form>
 {% endblock content %}

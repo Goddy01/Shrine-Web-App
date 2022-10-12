@@ -62,4 +62,13 @@ def update_sermon(request, sermon_id):
             update_sermon_form = UpdateSermonForm()
     else:
         return HttpResponse('Sorry. You are not authenticated to update the sermon.')
+    update_sermon_form = UpdateSermonForm(instance=request.user, initial = {
+                "sermon_title": sermon.sermon_title,
+                "sermon_priest_name": sermon.sermon_priest_name,
+                "sermon_date": sermon.sermon_date,
+                "sermon_image": sermon.sermon_image,
+                "sermon_desc": sermon.sermon_desc,
+                "sermon_body": sermon.sermon_body,
+
+        })
     return render(request, 'sermons/update_sermon.html', {'sermon': sermon, 'update_sermon_form': update_sermon_form})

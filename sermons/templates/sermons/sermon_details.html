@@ -56,7 +56,7 @@
                 </p>
                 <div class="card-body">
                   <h4 class="card-title text-capitalize">{{sermon.sermon_title}}</h4>
-                  {% if not sermon.is_past_due %}
+                  {% if not sermon.sermon_body %}
                   <p class="card-text">{{ sermon.sermon_desc }}</p>
                   {% else %}
                   <p class="card-text">{{sermon.sermon_body|safe}}</p>
