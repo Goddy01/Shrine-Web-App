@@ -77,5 +77,5 @@ def delete_sermon(request, sermon_id):
     if request.user.is_staff:
         sermon = Sermon.objects.get(sermon_id=sermon_id)
         sermon.delete()
-        return redirect('sermons':sermons)
+        return redirect('sermons:sermons')
     return render(request, 'sermons/sermon_details.html')
