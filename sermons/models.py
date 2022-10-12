@@ -29,7 +29,7 @@ class Sermon(models.Model):
 @receiver(post_delete, sender=Sermon)
 def submission_delete(sender, instance, **kwargs):
     """Deletes the image of a sermon when the correlating Sermon is deleted"""
-    instance.image.delete(False)
+    instance.sermon_image.delete(False)
 
 def pre_save_sermon_receiver(sender, instance, **kwargs):
     """Checks if a sermon has a slug, if not it creates one. This executes before each sermon is commited to the database"""
