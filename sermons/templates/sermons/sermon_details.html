@@ -62,7 +62,7 @@
                   <p class="card-text">{{sermon.sermon_body|safe}}</p>
                   {% endif %}
                     {% if request.user.is_staff %}
-                    <a href="" class="update btn" style="background-color: #cbaa80;">Update Sermon</a>
+                    <a href="{% url 'sermons:update_sermon' sermon.sermon_id %}" class="update btn" style="background-color: #cbaa80;">Update Sermon</a>
                     <a href="" class="delete btn" style="background-color: red;color: #fff;border: none;" onclick="return confirm('Are you sure you want to delete this event?')">Delete Sermon</a>
                     {% endif %}
                 </div>

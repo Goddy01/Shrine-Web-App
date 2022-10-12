@@ -18,42 +18,43 @@
         {% endfor %}
         </p>
     {% endfor %}
-    {% if event_form.non_field_errors %}
+    {% if sermon_form.non_field_errors %}
     <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
             {{update_sermon_form.non_field_errors}}
         </div>
     {% endif %}
 </div>
 <div class="w-100 mx-auto bg-white" style="padding: 2rem 1rem;margin-bottom: 5rem;color: black;">
-    <p class="h3 font-weight-bold" style="text-align: center; margin-bottom: 4rem">Add a Sermon</p>
+    <p class="h3 font-weight-bold" style="text-align: center; margin-bottom: 4rem">Update Sermon</p>
     <form method="post" action="{% url 'sermons:add_sermon' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
         <!-- SERMON TITLE -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
             <label class="font-weight-bold" for="sermon_title">Sermon Name</label>
-            <input required class="form-control" type="text" name="sermon_title" id="sermon_title" placeholder="{{ sermon.sermon_name }}">
+            <input required class="form-control" type="text" name="sermon_title" id="sermon_title" value="{{ sermon.sermon_title }}">
         </div>
 
         <!-- SERMON PRIEST NAME -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
             <label class="font-weight-bold" for="sermon_title">Priest's Name</label>
-            <input required class="form-control" type="text" name="sermon_priest_name" id="sermon_priest_name" placeholder="{{ sermon.sermon_priest_name }}">
+            <input required class="form-control" type="text" name="sermon_priest_name" id="sermon_priest_name" value="{{ sermon.sermon_priest_name }}">
         </div>
 
         <!-- SERMON DATE -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <label class="font-weight-bold" for="sermon_date">Sermon Date</label>
-            <input required class="form-control" type="date" name="sermon_date" id="sermon_date" placeholder="{{ sermon.sermon_date }}">
+            <small class="ml-2">Current sermon date: {{sermon.sermon_date}}</small>
+            <input required class="form-control" type="date" name="sermon_date" id="sermon_date" value="{{ sermon.sermon_date }}">
         </div>
 
         <!-- SERMON IMAGE -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <label class="font-weight-bold" for="sermon_image">Sermon Image</label>
             <div class="form-group mb-3 mt-1 image-group" id="id_image_group">
-                <img class="img-fluid image" src="{{sermon.sermon_image.url}}" id="id_image_display">
+                <img class="img-fluid image" src="{{sermon.sermon_image.url}}" id="sermon_image">
             </div>
-            <p>{{ update_sermon_image.sermon_image }}</p>
+            <p>{{ update_sermon_form.sermon_image }}</p>
         </div>
 
         <!-- SERMON DESC -->
