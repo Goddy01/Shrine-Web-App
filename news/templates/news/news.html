@@ -18,7 +18,7 @@
                             {% for n in news %}
                             <li class="list-group-item mb-3 border">
                                 <div class="seremon-detail">
-                                    <h3 class="seremon-title text-uppercase"><a href="">{{ n.news_headline }}</a></h3>
+                                    <h3 class="seremon-title text-uppercase"><a href="{% url 'news:news_details' n.news_id %}">{{ n.news_headline }}</a></h3>
                                     <p>{{ n.news_body|safe }}</p>
                                     <div class="seremon-meta mb-2">
                                         <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ n.date_posted }}</div>
