@@ -16,6 +16,7 @@ def add_news(request):
             add_news_form = AddNewsForm(request.POST)
             if add_news_form.is_valid:
                 add_news_form.save()
+                return render('news:news')
             else:
                 add_news_form = AddNewsForm()
                 messages.error(request, 'Sorry the news could not be posted.')
