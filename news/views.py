@@ -31,4 +31,4 @@ def add_news(request):
 def news_details(request, news_id):
     """The view that facilitates the display of news details"""
     news = News.objects.get(news_id=news_id)
-    return render(request, 'news/news_details.htl', {'news': news})
+    return render(request, 'news/news_details.html', {'news': news})
