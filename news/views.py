@@ -2,7 +2,13 @@ from http.client import HTTPResponse
 from django.shortcuts import render
 from django.contrib import messages
 from .forms import AddNewsForm
+from .models import News
 # Create your views here.
+
+def news(request):
+    news = News.objects.all().order_by('date_posted')
+    latest_news = News.objects.all().order_by('-date_posted')
+    return render(request, 'news/news.html', {'news': news, 'latest_news': latest_news})
 
 def add_news(request):
     if request.user.is_staff:
