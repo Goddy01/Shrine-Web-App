@@ -3,6 +3,6 @@ from . import views
 
 app_name = 'news'
 
-urlspatterns = [
+urlpatterns = [
     path('add-news/', views.add_news, name='add_news'),
 ]
