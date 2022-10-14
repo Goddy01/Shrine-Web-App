@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="page-head" data-bg-image="{% static 'images/page-head-1.jpg' %}">
+        <div class="container">
+            <h2 class="page-title">News</h2>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="fullwidth-block">
+            <div class="container">
+                <div class="row">
+                    <div class="content col-md-8">
+                        <h2 class="section-title mb-3">News</h2>
+                        <ul class="seremon-list large list-group p-2">
+                            {% for n in news %}
+                            <li class="list-group-item mb-3 border">
+                                <div class="seremon-detail">
+                                    <h3 class="seremon-title text-uppercase"><a href="">{{ n.news_headline }}</a></h3>
+                                    <p>{{ n.news_body|safe }}</p>
+                                    <div class="seremon-meta mb-2">
+                                        <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ n.date_posted }}</div>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="sidebar col-md-3 col-md-offset-1">
+                        <div class="widget">
+                            <h3 class="widget-title">Donations</h3>
+                            <p>Distinctio unde consequuntur delectus, repudiandae, impedit atque earum adipisci, explicabo perferendis.</p>
+                            <a href="#" class="button">Make a donation</a>
+                        </div>
+
+                        <div class="widget">
+                            <h3 class="widget-title">Gallery updates</h3>
+
+                            <div class="galery-thumb">
+                                <a href="#"><img src="{% static 'images/gallery-thumb-1.jpg' %}" alt=""></a>
+                                <a href="#"><img src="{% static 'images/gallery-thumb-2.jpg' %}" alt=""></a>
+                                <a href="#"><img src="{% static 'images/gallery-thumb-3.jpg' %}" alt=""></a>
+                                <a href="#"><img src="{% static 'images/gallery-thumb-4.jpg' %}" alt=""></a>
+                                <a href="#"><img src="{% static 'images/gallery-thumb-5.jpg' %}" alt=""></a>
+                                <a href="#"><img src="{% static 'images/gallery-thumb-6.jpg' %}" alt=""></a>
+                            </div>
+                        </div>
+
+                        <div class="widget">
+                            <h3 class="widget-title">Text widget </h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum aliquam obcaecati velit, atque necessitatibus molestias ullam tempore itaque quidem sequi ea sed consectetur, eligendi cupiditate saepe! Hic veniam maiores explicabo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> <!-- .main-content -->
+{% endblock content %}
