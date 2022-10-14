@@ -17,4 +17,4 @@ def add_news(request):
             add_news_form = AddNewsForm()
     else:
         return HTTPResponse('Sorry. You are not authorized to post news.')
-    return render(request, 'news/add_news.html')
+    return render(request, 'news/add_news.html', {'add_news_form': add_news_form})
