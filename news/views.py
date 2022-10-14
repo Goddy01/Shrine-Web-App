@@ -32,3 +32,26 @@ def news_details(request, news_id):
     """The view that facilitates the display of news details"""
     news = News.objects.get(news_id=news_id)
     return render(request, 'news/news_details.html', {'news': news})
+
+def update_news(request, news_id):
+    """The view that facilitates the updating of new details"""
+    news = News.objects.get(news_id=news_id)
+    if request.user.is_staff:
+        if request.method == 'POST':
+            update_news_form = UpdateNewsForm(request.POST, instance=news)
+            if update_news_form.is_valid:
+                update_news_form.save()
+                return redirect('news:news')
+            else:
+                update_news_form = UpdateNewsForm()
+                messages.error(request, 'Sorry the news could not be updated.')
+        else:
+            update_news_form = UpdateNewsForm()
+    else:
+        return HTTPResponse('Sorry. You are not authorized to post news.')
+    update_news_form = UpdateNewsForm(instance=request.user, initial = {
+                            "news_headline": news.news_headline,
+                            "news_body": news.news_body,
+    }
+    )
+    return render(request, 'news/update_news.html', {'update_news_form': update_news_form, 'news': news})

@@ -54,7 +54,7 @@
                     News posted by the Admin on {{news.date_posted}}.
                 </p>
                 <div class="card-body">
-                  <h4 class="card-title text-capitalize">{{news.news_headline}}</h4>
+                  <h3 class="card-title text-capitalize">{{news.news_headline}}</h3>
                   <p class="card-text">{{news.news_body|safe}}</p>
                 {% if request.user.is_staff %}
                 <a href="" class="update btn" style="background-color: #cbaa80;">Update News</a>
