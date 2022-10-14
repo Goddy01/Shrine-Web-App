@@ -1,7 +1,7 @@
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import AddNewsForm
+from .forms import AddNewsForm, UpdateNewsForm
 from .models import News
 # Create your views here.
 
