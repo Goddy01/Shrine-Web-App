@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'events',
     'sermons',
     'shrine',
+    'news',
     'phonenumber_field',
     'phonenumbers',
     'ckeditor',
