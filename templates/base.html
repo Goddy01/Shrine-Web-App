@@ -58,7 +58,7 @@
 							<li class="menu-item {% if url_name == 'news' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'news:news' %}" style="color: #caa97e;">News<small class="font-weight-bold">News</small></a></li>
 							<li class="menu-item {% if url_name == 'event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'events:event' %}" style="color: #caa97e;">Events<small class="font-weight-bold">Events Page</small></a></li>
 							<li class="menu-item {% if url_name == 'sermons' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'sermons:sermons' %}" style="color: #caa97e;">Sermons<small class="font-weight-bold">Sermons Page</small></a></li>
-							<li class="menu-item {% if url_name == 'donation' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'donation' %}" style="color: #caa97e;">Donations<small class="font-weight-bold">Donations Page</small></a></li>
+							<li class="menu-item {% if url_name == 'donations' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'donations:donations' %}" style="color: #caa97e;">Donations<small class="font-weight-bold">Donations Page</small></a></li>
                             {% if request.user.is_authenticated %}
                             <li class="menu-item {% if url_name == 'logout' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'accounts:logout' %}" style="color: #caa97e;">Sign-Out<small class="font-weight-bold">Sign-Out of your account.</small></a></li>
                             {% else %}

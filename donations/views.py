@@ -5,7 +5,7 @@ from .forms import AddDonationForm
 
 # Create your views here.
 def donations(request):
-    return render(request, 'donations/donation.html')
+    return render(request, 'donations/donations.html')
 
 def add_donation(request):
     if request.user.is_staff:
