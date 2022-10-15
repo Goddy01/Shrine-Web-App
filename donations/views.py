@@ -28,3 +28,7 @@ def add_donation(request):
 def donation_details(request, donation_id):
     donation = Donation.objects.get(donation_id=donation_id)
     return render(request, 'donations/donation_details.html', {'donation': donation})
+
+def donate_temp(request, donation_id):
+    donation = Donation.objects.get(donation_id=donation_id)
+    return render(request, 'donations/donate.html', {'donation': donation})
