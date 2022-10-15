@@ -2,10 +2,12 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import AddDonationForm
+from .models import Donation
 
 # Create your views here.
 def donations(request):
-    return render(request, 'donations/donations.html')
+    donations = Donation.objects.all().order_by('-date_posted')
+    return render(request, 'donations/donations.html', {'donations': donations})
 
 def add_donation(request):
     if request.user.is_staff:

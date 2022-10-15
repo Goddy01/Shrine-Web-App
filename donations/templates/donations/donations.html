@@ -4,7 +4,7 @@
 
     <div class="page-head" data-bg-image="{% static 'images/page-head-1.jpg' %}">
         <div class="container">
-            <h2 class="page-title">News</h2>
+            <h2 class="page-title">Donations</h2>
         </div>
     </div>
 
@@ -20,9 +20,18 @@
                                 <div class="seremon-detail">
                                     <h3 class="seremon-title text-uppercase"><a href="">{{ donation.donation_name }}</a></h3>
                                     <p>{{ donation.donation_desc }}</p>
+                                    <p>
+                                        <span class="font-weight-bold">Amount Raised: </span>
+                                        <i>$0</i>
+                                    </p>
+                                    <p>
+                                        <span class="font-weight-bold">Amount Needed: </span>
+                                        <i>${{ donation.amount_needed }}</i>
+                                    </p>
                                     <div class="seremon-meta mb-2">
                                         <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ donation.date_posted }}</div>
                                     </div>
+                                    <a href="" class="mt-4 button text-decoration-none text-dark">Make Donation</a>
                                 </div>
                             </li>
                             {% endfor %}
