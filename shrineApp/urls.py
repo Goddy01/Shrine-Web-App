@@ -16,10 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, reverse_lazy
 from django.contrib.auth import views as auth_views
-from shrine import views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from shrine.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include('django.contrib.auth.urls')),
@@ -27,9 +26,7 @@ urlpatterns = [
     path('events/', include('events.urls', 'events')),
     path('sermons/', include('sermons.urls', 'sermons')),
     path('news/', include('news.urls', 'news')),
-    path('', views.home, name='home'),
-    path('sermons/', views.sermon, name='sermon'),
-    path('donations/', views.donation, name='donation'),
+    path('', home, name='home'),
 
 
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name="password/password_change_done.html"), name="password_change_done"),
