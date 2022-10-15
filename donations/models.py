@@ -9,6 +9,7 @@ class Donation(models.Model):
     donation_name =         models.CharField(max_length=256, null=False, blank=False)
     donation_desc =         models.TextField(max_length=5000, blank=False, null=False)
     amount_needed =         models.IntegerField(null=False, blank=False)
+    amount_raised =         models.IntegerField(null=True)
     date_posted =           models.DateTimeField(auto_now=True, null=True)
     
 
