@@ -59,7 +59,7 @@ def update_news(request, news_id):
 def delete_news(request, news_id):
     """The view that facilitates the deletion of news"""
     if request.user.is_staff:
-        news = News.objects.get(news_id=news_id)
+        news = News.objects.get(news_id=news_id)    
         news.delete()
         return redirect('news:news')
     return render(request, 'news/news_details.html')

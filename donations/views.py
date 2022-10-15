@@ -16,6 +16,7 @@ def add_donation(request):
                 return redirect('donations:donations')
             else:
                 add_donation_form = AddDonationForm()
+                print(add_donation_form.errors)
                 messages.error(request, 'The donation could not be added.')
         else:
             add_donation_form = AddDonationForm()
