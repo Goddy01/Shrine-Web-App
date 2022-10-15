@@ -6,7 +6,7 @@ from .forms import AddDonationForm
 # Create your views here.
 def add_donation(request):
     if request.user.is_staff:
-        if request,method == 'POST':
+        if request.method == 'POST':
             add_donation_form = AddDonationForm(request.POST)
             if add_donation_form.is_valid():
                 add_donation_form.save()
