@@ -26,6 +26,7 @@ urlpatterns = [
     path('events/', include('events.urls', 'events')),
     path('sermons/', include('sermons.urls', 'sermons')),
     path('news/', include('news.urls', 'news')),
+    path('donations/', include('donations.urls', 'donations')),
     path('', home, name='home'),
 
 
