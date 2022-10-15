@@ -18,7 +18,7 @@
                             {% for donation in donations %}
                             <li class="list-group-item mb-3 border p-5">
                                 <div class="seremon-detail">
-                                    <h3 class="seremon-title text-uppercase"><a href="">{{ donation.donation_name }}</a></h3>
+                                    <h3 class="seremon-title text-uppercase"><a href="{% url 'donations:donation_details' donation.donation_id %}">{{ donation.donation_name }}</a></h3>
                                     <p>{{ donation.donation_desc }}</p>
                                     <p>
                                         <span class="font-weight-bold">Amount Raised: </span>
