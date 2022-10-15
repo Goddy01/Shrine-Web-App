@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render
+from .forms import AddDonationForm
 
 # Create your views here.
 def add_donation(request):
@@ -15,5 +16,5 @@ def add_donation(request):
         else:
             add_donation_form = AddDonationForm()
     else:
-        return HTTPResponse('Sorry. You are not authenticated to add donations.')
+        return HttpResponse('Sorry. You are not authenticated to add donations.')
     return render(request, 'donations/add_donation.html', {'add_donation_form': add_donation_form})
