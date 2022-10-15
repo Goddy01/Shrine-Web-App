@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import AddDonationForm
 
 # Create your views here.
@@ -13,6 +13,7 @@ def add_donation(request):
             add_donation_form = AddDonationForm(request.POST)
             if add_donation_form.is_valid():
                 add_donation_form.save()
+                return redirect('donations:donations')
             else:
                 add_donation_form = AddDonationForm()
                 messages.error(request, 'The donation could not be added.')

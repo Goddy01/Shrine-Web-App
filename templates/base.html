@@ -69,7 +69,7 @@
                             <li class="menu-item {% if url_name == 'add_event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'events:add_event' %}" style="color: #caa97e;">Add-Event<small class="font-weight-bold">Add a new event.</small></a></li>
                             <li class="menu-item {% if url_name == 'add_sermon' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'sermons:add_sermon' %}" style="color: #caa97e;">Add-Sermon<small class="font-weight-bold">Add a new sermon.</small></a></li>
                             <li class="menu-item {% if url_name == 'add_news' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'news:add_news' %}" style="color: #caa97e;">Add-News<small class="font-weight-bold">Add news.</small></a></li>
-                            <li class="menu-item {% if url_name == 'add_donation' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'donations:add_donation' %}" style="color: #caa97e;">Add-Donation<small class="font-weight-bold">Add news.</small></a></li>
+                            <li class="menu-item {% if url_name == 'add_donation' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'donations:add_donation' %}" style="color: #caa97e;">Add-Donation<small class="font-weight-bold">Add donation.</small></a></li>
                             {% endif %}
 						</ul>
                         {% endwith  %}
