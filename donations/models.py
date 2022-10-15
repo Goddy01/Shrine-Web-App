@@ -1,7 +1,7 @@
 from email.policy import default
 from enum import auto
 from django.db import models
-from accounts.user import UserProfile
+from accounts.models import UserProfile
 import uuid
 # Create your models here.
 class Donation(models.Model):
