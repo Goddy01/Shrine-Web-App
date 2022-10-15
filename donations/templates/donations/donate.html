@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Answer Question{% endblock title %}
+
+{% block content %}
+<style>
+    .form-group{
+        margin: .3rem;
+    }
+</style>
+<style>
+    .card {
+        max-width: 900px;
+        min-width: 200px;
+        /* margin: 0 auto; */
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .card-page {
+        width: 50vw;
+    }
+
+    @media (max-width: 991px) {
+    .card-page {
+        width: 90vw;
+        margin: 0 auto;
+        /* background-color: red; */
+    }
+    }
+</style>
+    
+</div>
+    <div class="content text-dark p-3 mx-auto">
+        <h3 class="mb-5 font-weight-bold text-center text-dark">Donate to {{donation.donation_name}}.</h3>
+            <form action="" class="mb-4" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <div class="h5">
+                    <label for="amount_to_donate">Amount to Donate:</label for="amount_to_donate">
+                    <input required class="form-control" type="number" name="amount_to_donate" id="amount_to_donate" placeholder="Enter the amount needed you want to donate.">
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="px-5 py-2 text-light font-weight-semi-bold" style="background-color: #caa97e;">
+                    Donate
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="parent" style="margin-bottom: 15rem;">
+        <div class="container">
+            <div class="row">
+                <div class="card card-page py-3 mt-2 col-lg-9">
+                    <p class="text-muted px-3 pt-3">
+                        Donation posted by the Admin on {{donation.date_posted}}.
+                    </p>
+                    <div class="card-body">
+                      <h3 class="card-title text-capitalize">{{donation.donation_name}}</h3>
+                      <p class="card-text">{{donation.donation_desc}}</p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+{% endblock content %}
