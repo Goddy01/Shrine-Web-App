@@ -4,6 +4,9 @@ from django.shortcuts import render
 from .forms import AddDonationForm
 
 # Create your views here.
+def donations(request):
+    return render(request, 'donations/donation.html')
+
 def add_donation(request):
     if request.user.is_staff:
         if request.method == 'POST':
