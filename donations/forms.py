@@ -9,4 +9,4 @@ class AddDonationForm(forms.ModelForm):
 class DonateForm(forms.ModelForm):
     class Meta:
         model = Donate
-        fields = ('user', 'amount_donated')
+        exclude = ('user', 'donated_id')

@@ -42,7 +42,7 @@ def make_payment(request, donation_id):
         if request.method == 'POST':
             print('POSTED')
             donate_form = DonateForm(request.POST)
-            print(donate_form)
+            # print(donate_form)
             if donate_form.is_valid():
                 print('SHIT IS VALID')
                 if donate_form.cleaned_data['bool'] != 'True':
