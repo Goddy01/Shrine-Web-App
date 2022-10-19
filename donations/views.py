@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from .forms import AddDonationForm
+from .forms import AddDonationForm, DonateForm
 from .models import Donation
 
 # Create your views here.
@@ -35,5 +35,19 @@ def donate_temp(request, donation_id):
 
 def make_payment(request):
     if request.user.is_authenticated:
-        pass
+        if request.method == 'POST':
+            donate_form = DonateForm(request.POST)
+            if donate_form.is_valid():
+                if donate_form.cleaned_data['bool'] != 'True':
+                    donate_form = donate_form.save(commit=False)
+                    donate_form.user = request.user
+                    donate_form.save()
+            else:
+                donate_form = DonateForm()
+                messages.error(request, 'Sorry. Your donation was not successful.')
+        else:
+            donate_form = DonateForm()
+    else:
+        return HttpResponse('Sorry, you need to be logged in before you can donate.')
+
     return render(request, 'donations/donate.html')
