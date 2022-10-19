@@ -83,11 +83,12 @@
         <script>
             document.getElementById('make-payment-btn').addEventListener('click', makePayment, false);
             function makePayment(e){
+                let amount = document.getElementById('amount_to_donate').value
             e.preventDefault();
             let handler = PaystackPop.setup({
                     key: 'pk_test_94c9c0292b58b03a1e0feaa5b1b1da81b04b0873', //public key from your paystack
-                    email: '{{ email }}',
-                    amount:'{{ total }}' * 100,
+                    email: '{{ request.user.email }}',
+                    amount:`${amount}` * 100,
                     currency:'NGN',
                     // ref: ''+Math.floor((Math.random() * 100000000) + 1),
                     // ref: ''+Math.floor((Math.random() * 1000000000) + 1),
