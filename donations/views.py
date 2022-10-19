@@ -45,7 +45,7 @@ def make_payment(request, donation_id):
             # print(donate_form)
             if donate_form.is_valid():
                 print('SHIT IS VALID')
-                if donate_form.cleaned_data['bool'] != 'True':
+                if request.POST.get('bool') == 'True':
                     donate_form = donate_form.save(commit=False)
                     donate_form.user = request.user
                     print('HERE: ', donate_form.user)
