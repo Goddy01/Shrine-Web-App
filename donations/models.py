@@ -19,7 +19,7 @@ class Donation(models.Model):
 
 class Donate(models.Model):
     donated_id =            models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
-    user =                  models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user =                  models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     amount_donated =        models.IntegerField(null=False, blank=False)
 
     def __str__(self):
