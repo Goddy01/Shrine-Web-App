@@ -37,7 +37,7 @@
                                     <div class="seremon-meta mb-2">
                                         <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ donation.date_posted }}</div>
                                     </div>
-                                    <a href="{% url 'donations:donate_temp' donation.donation_id %}" class="mt-4 button text-decoration-none text-dark">Make Donation</a>
+                                    <a href="{% url 'donations:make_donation' donation.donation_id %}" class="mt-4 button text-decoration-none text-dark">Make Donation</a>
                                 </div>
                             </li>
                             {% endfor %}

@@ -38,18 +38,24 @@ def make_payment(request, donation_id):
         context = {}
         donation = Donation.objects.get(donation_id=donation_id)
         context['donation'] = donation
+        print('BRUVVV')
         if request.method == 'POST':
+            print('POSTED')
             donate_form = DonateForm(request.POST)
+            print(donate_form)
             if donate_form.is_valid():
+                print('SHIT IS VALID')
                 if donate_form.cleaned_data['bool'] != 'True':
                     donate_form = donate_form.save(commit=False)
                     donate_form.user = request.user
+                    print('HERE: ', donate_form.user)
                     donate_form.save()
             else:
-                donate_form = DonateForm()
+                # donate_form = DonateForm()
                 messages.error(request, 'Sorry. Your donation was not successful.')
         else:
             donate_form = DonateForm()
+        context['dontae_form'] = donate_form
     else:
         return HttpResponse('Sorry, you need to be logged in before you can donate.')
 

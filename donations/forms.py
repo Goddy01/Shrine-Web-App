@@ -9,4 +9,4 @@ class AddDonationForm(forms.ModelForm):
 class DonateForm(forms.ModelForm):
     class Meta:
         model = Donate
-        fields = '__all__'
+        fields = ('user', 'amount_donated')

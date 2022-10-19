@@ -7,8 +7,7 @@
     .form-group{
         margin: .3rem;
     }
-</style>
-<style>
+
     .card {
         max-width: 900px;
         min-width: 200px;
@@ -32,10 +31,25 @@
     }
 </style>
     
+<div class="errors" style="margin-left: 2rem;">
+    {% for field in donate_form %}
+        <p>
+        {% for error in field.errors %}
+        <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
+            {{field.label_tag}} {{error}}
+        </div>
+        {% endfor %}
+        </p>
+    {% endfor %}
+    {% if donate_form.non_field_errors %}
+    <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
+            {{donate_form.non_field_errors}}
+        </div>
+    {% endif %}
 </div>
     <div class="content text-dark p-3 mx-auto">
         <h3 class="mb-5 font-weight-bold text-center text-dark">Donate to "{{donation.donation_name}}".</h3>
-            <form action="{% url 'make_payment' donation.donation_id %}" class="mb-4" method="post" id="payForm">
+            <form action="{% url 'donations:make_donation' donation.donation_id %}" class="mb-4" method="POST" id="payForm">
             <input type="text" id="hide" style="visibility: hidden;" value="false" name="bool">
             {% csrf_token %}
             <script src="https://js.paystack.co/v1/inline.js"></script>
