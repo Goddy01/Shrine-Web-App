@@ -32,15 +32,13 @@
 </style>
     
 <div class="errors" style="margin-left: 2rem;">
-    {% for field in donate_form %}
-        <p>
-        {% for error in field.errors %}
-        <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
-            {{field.label_tag}} {{error}}
-        </div>
-        {% endfor %}
-        </p>
+    <p>
+    {% for error in donate_form.errors %}
+    <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
+        {{field.label_tag}} {{error}}
+    </div>
     {% endfor %}
+    </p>
     {% if donate_form.non_field_errors %}
     <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
             {{donate_form.non_field_errors}}

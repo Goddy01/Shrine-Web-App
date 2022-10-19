@@ -50,6 +50,8 @@ def make_payment(request, donation_id):
                     donate_form.user = request.user
                     print('HERE: ', donate_form.user)
                     donate_form.save()
+                    # messages.success(request, 'BRO')
+                    return redirect('donations:donations')
             else:
                 # donate_form = DonateForm()
                 messages.error(request, 'Sorry. Your donation was not successful.')
