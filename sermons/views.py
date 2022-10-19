@@ -33,7 +33,6 @@ def add_sermon(request):
                 if add_sermon_form.cleaned_data['sermon_date'] > datetime.datetime.now().date():
                     return redirect('sermons:sermons')
             else:
-                add_sermon_form = AddSermonForm()
                 messages.error(request, 'The sermon could not be added.')
         else:
             add_sermon_form = AddSermonForm()
@@ -56,7 +55,6 @@ def update_sermon(request, sermon_id):
                 if update_sermon_form.cleaned_data['sermon_date'] > datetime.datetime.now().date():
                     return redirect('sermons:sermons')
             else:
-                update_sermon_form = UpdateSermonForm()
                 messages.error(request, 'The sermon could not be updated.')
         else:
             update_sermon_form = UpdateSermonForm()

@@ -20,7 +20,6 @@ def add_news(request):
                 add_news_form.save()
                 return redirect('news:news')
             else:
-                add_news_form = AddNewsForm()
                 messages.error(request, 'Sorry the news could not be posted.')
         else:
             add_news_form = AddNewsForm()
@@ -43,7 +42,6 @@ def update_news(request, news_id):
                 update_news_form.save()
                 return redirect('news:news')
             else:
-                update_news_form = UpdateNewsForm()
                 messages.error(request, 'Sorry the news could not be updated.')
         else:
             update_news_form = UpdateNewsForm()

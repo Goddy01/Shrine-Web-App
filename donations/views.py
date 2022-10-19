@@ -17,7 +17,7 @@ def add_donation(request):
                 add_donation_form.save()
                 return redirect('donations:donations')
             else:
-                add_donation_form = AddDonationForm()
+                # add_donation_form = AddDonationForm()
                 messages.error(request, 'The donation could not be added.')
         else:
             add_donation_form = AddDonationForm()
@@ -55,7 +55,7 @@ def make_payment(request, donation_id):
                 messages.error(request, 'Sorry. Your donation was not successful.')
         else:
             donate_form = DonateForm()
-        context['dontae_form'] = donate_form
+        context['donate_form'] = donate_form
     else:
         return HttpResponse('Sorry, you need to be logged in before you can donate.')
 

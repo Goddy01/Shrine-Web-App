@@ -35,7 +35,7 @@ def add_event(request):
                 if event_form.cleaned_data['event_date'] > datetime.datetime.now().date():
                     return redirect('events:event')
             else:
-                event_form = EventForm()
+                # event_form = EventForm()
                 messages.error(request, 'The event could not be added.')
         else:
             event_form = EventForm()
@@ -61,7 +61,7 @@ def update_event(request, event_id):
                 if update_event_form.cleaned_data['event_date'] > datetime.datetime.now().date():
                     return redirect('events:event')
             else:
-                update_event_form = UpdateEventForm()
+                # update_event_form = UpdateEventForm()
                 messages.error(request, 'The event could not be updated.')
         else:
             update_event_form = UpdateEventForm()
@@ -95,8 +95,6 @@ def ask_question(request, event_id):
                 question_form.save()
                 context['event'] = event
                 return redirect('events:event_detail', event_id)
-            else:
-                question_form = QuestionForm()
         question_form = QuestionForm()
     else:
         return HttpResponse('You are not authorized to ask question. You need to be logged in.')
@@ -122,8 +120,6 @@ def ans_question(request, qtn_id):
                 ans_form.save()
                 context['qtn'] = qtn
                 return redirect('events:event_detail', qtn.event.event_id)
-            else:
-                ans_form = AnswerForm()
         ans_form = AnswerForm()
     else:
         return HttpResponse('You are not authorized to answer this question.')
