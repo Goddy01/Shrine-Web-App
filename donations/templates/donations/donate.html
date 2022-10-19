@@ -36,6 +36,7 @@
     <div class="content text-dark p-3 mx-auto">
         <h3 class="mb-5 font-weight-bold text-center text-dark">Donate to "{{donation.donation_name}}".</h3>
             <form action="" class="mb-4" method="post" id="payForm">
+            <input type="text" id="hide" style="visibility: hidden;" value="false" name="bool">
             {% csrf_token %}
             <script src="https://js.paystack.co/v1/inline.js"></script>
             <div class="form-group mb-3">
@@ -93,7 +94,7 @@
                     // ref: ''+Math.floor((Math.random() * 100000000) + 1),
                     // ref: ''+Math.floor((Math.random() * 1000000000) + 1),
                     callback: function(response){
-                // document.getElementById('hide').value = 'True';
+                document.getElementById('hide').value = 'True';
                 // document.getElementById('hide').style.visibility = 'visible';
                 document.getElementById('payForm').submit();
                 alert('Success. Transaction ref is ' +response.reference);
