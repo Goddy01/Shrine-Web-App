@@ -33,8 +33,11 @@ def donate_temp(request, donation_id):
     donation = Donation.objects.get(donation_id=donation_id)
     return render(request, 'donations/donate.html', {'donation': donation})
 
-def make_payment(request):
+def make_payment(request, donation_id):
     if request.user.is_authenticated:
+        context = {}
+        donation = Donation.objects.get(donation_id=donation_id)
+        context['donation'] = donation
         if request.method == 'POST':
             donate_form = DonateForm(request.POST)
             if donate_form.is_valid():
@@ -50,4 +53,4 @@ def make_payment(request):
     else:
         return HttpResponse('Sorry, you need to be logged in before you can donate.')
 
-    return render(request, 'donations/donate.html')
+    return render(request, 'donations/donate.html', context)
