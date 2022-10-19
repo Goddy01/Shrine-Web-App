@@ -32,3 +32,8 @@ def donation_details(request, donation_id):
 def donate_temp(request, donation_id):
     donation = Donation.objects.get(donation_id=donation_id)
     return render(request, 'donations/donate.html', {'donation': donation})
+
+def make_payment(request):
+    if request.user.is_authenticated:
+        pass
+    return render(request, 'donations/donate.html')
