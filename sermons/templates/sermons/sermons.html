@@ -48,7 +48,8 @@
                                         </div>
                                         <p class="text-capitalize">
                                             <span style="font-weight: 700;">Desc: </span>
-                                            {{ sermon.sermon_desc }}</p>
+                                            {{ sermon.sermon_desc|slice:":100" }}.....
+                                        </p>
                                     </div>
                                 </li>
                                 {% endif %}
