@@ -45,9 +45,9 @@ def make_payment(request, donation_id):
                     donate_form = donate_form.save(commit=False)
                     donate_form.user = request.user
                     if donation.amount_raised is not None:
-                        donation.amount_raised += donation_form.amount_donated
+                        donation.amount_raised += donate_form.amount_donated
                     else:
-                        donation.amount_raised = donation_form.amount_donated
+                        donation.amount_raised = donate_form.amount_donated
                     donation.save()
                     donate_form.save()
                     messages.success(request, 'Thank you for your donation. (Arigato!)')
