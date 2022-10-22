@@ -29,7 +29,29 @@
                         </ul>
                     </div>
                     <div class="sidebar col-md-3 col-md-offset-1">
-                    {% include '../snippets/sidebar.html' %}
+                        <div class="widget">
+                            <h3 class="widget-title">Donations</h3>
+                            <ul class="list-group">
+                                {% for donation in donations %}
+                                <li class="list-group-item mb-2 border" style="font-size: 14px;">
+                                    <a href="{% url 'donations:donation_details' donation.donation_id %}" class="h6 text-primary text-capitalize font-weight-bold">{{ donation.donation_name }}</a>
+                                    <div class="ml-3 mt-2">
+                                        <p class="text-uppercase">
+                                            {{ donation.donation_desc|slice:":100" }}....
+                                        </p>
+                                        <p>
+                                            <strong>Amount Needed: </strong>
+                                            <i>${{donation.amount_needed}}</i>
+                                        </p>
+                                        <p>
+                                            <strong>Amount Raised: </strong>
+                                            <i>${{donation.amount_raised}}</i>
+                                        </p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
