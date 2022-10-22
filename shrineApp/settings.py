@@ -197,7 +197,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bloggie.blogapp@gmail.com'
-EMAIL_HOST_PASSWORD = 'cmfayhzugbmkutxr'
+EMAIL_HOST_PASSWORD = 'pktwaipegwuzmigr'
 DEFAULT_FROM_EMAIL = 'Oduduwa Shrine Team <noreply@oduduwa.com>'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
