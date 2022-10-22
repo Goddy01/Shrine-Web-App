@@ -48,6 +48,7 @@ def make_payment(request, donation_id):
                         donation.amount_raised += donate_form.amount_donated
                     else:
                         donation.amount_raised = donate_form.amount_donated
+                    donation.amount_needed -= donation.amount_raised
                     donation.save()
                     donate_form.save()
                     messages.success(request, 'Thank you for your donation. (Arigato!)')
