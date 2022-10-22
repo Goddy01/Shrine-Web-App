@@ -32,21 +32,19 @@
         <!-- DONATION TITLE -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
             <label class="font-weight-bold" for="donation_name">Donation Name</label>
-            <input required class="form-control" type="text" name="donation_name" id="donation_name" value="{{ update_donation_form.donation_name }}">
+            <input required class="form-control" type="text" name="donation_name" id="donation_name" value="{{ donation.donation_name }}">
         </div>
 
         <!-- DONATION DESCRIPTION -->
         <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
             <label class="font-weight-bold" for="donation_desc">Donation Description</label>
-            <textarea class="form-control" name="donation_desc" id="donation_desc" style="width: 100%;" rows="10" cols="5" required>
-                {{ update_donation_form.donation_desc }}
-            </textarea>
+            <textarea class="form-control" name="donation_desc" id="donation_desc" style="width: 100%;" rows="10" cols="5" required>{{ donation.donation_desc }}</textarea>
         </div>
 
         <!-- AMOUNT NEEDED -->
         <div class="" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
             <label class="font-weight-bold" for="amount_needed">Amount Needed in Naira(N)</label>
-            <input required class="form-control" type="number" name="amount_needed" id="amount_needed" value="{{ update_donation_form.amount_needed }}">
+            <input required class="form-control" type="number" name="amount_needed" id="amount_needed" value="{{ donation.amount_needed }}">
         </div>
 
         <button class="btn btn-primary" style="display: flex; margin: auto; margin-top: .5rem;width: 50%;" type="submit">

@@ -68,7 +68,7 @@ def update_donation(request, donation_id):
     donation = Donation.objects.get(donation_id=donation_id)
     if request.user.is_staff:
         if request.method == 'POST':
-            update_donation_form = UpdateDonationForm(request.POST)
+            update_donation_form = UpdateDonationForm(request.POST, instance=donation)
             if update_donation_form.is_valid():
                 update_donation_form.save()
                 return redirect('donations:donations')
@@ -78,9 +78,9 @@ def update_donation(request, donation_id):
             update_donation_form = UpdateDonationForm()
     else:
         return HttpResponse('You are not authenticated to update donations.')
-    update_donation_form = UpdateDonationForm(instance=request.user, initial = {
-        "donation_name": donation.donation_name,
-        "donation_desc": donation.donation_desc,
-        "amount_needed": donation.amount_needed,
-    })
+    # update_donation_form = UpdateDonationForm(instance=request.user, initial = {
+    #     "donation_name": donation.donation_name,
+    #     "donation_desc": donation.donation_desc,
+    #     "amount_needed": donation.amount_needed,
+    # })
     return render(request, 'donations/update_donation.html', {'update_donation_form': update_donation_form, 'donation': donation})
