@@ -3,6 +3,10 @@
     <div class="widget">
         <h3 class="widget-title">Donations</h3>
         <ul class="list-group">
+            {% with request.resolver_match.url_name as url_name %}
+            {% if url_name == 'news' %}
+            {% for donation in donations %}
+            {% endif %}
             <li class="list-group-item mb-2 border" style="font-size: 14px;">
                 <a href="{% url 'donations:donation_details' donation.donation_id %}" class="h6 text-primary text-capitalize font-weight-bold">{{ donation.donation_name }}</a>
                 <div class="ml-3 mt-2">
@@ -19,6 +23,10 @@
                     </p>
                 </div>
             </li>
+            {% if url_name == 'news' %}
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
         </ul>
     </div>
 

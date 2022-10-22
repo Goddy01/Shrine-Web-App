@@ -13,7 +13,7 @@ def news(request):
     latest_news = News.objects.all().order_by('-date_posted')
     donations = Donation.objects.filter(complete=False).values_list('id', flat=True)
     donations_list = list(donations)
-    random_donations_list = random.sample(donations, min(len(donations_list), 3))
+    random_donations_list = random.sample(donations_list, min(len(donations_list), 3))
     donations = Donation.objects.filter(id__in=random_donations_list)
     return render(request, 'news/news.html', {'news': news, 'latest_news': latest_news, 'donations': donations})
 
