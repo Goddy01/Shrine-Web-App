@@ -38,17 +38,17 @@ def make_payment(request, donation_id):
         context = {}
         donation = Donation.objects.get(donation_id=donation_id)
         context['donation'] = donation
-        print('BRUVVV')
         if request.method == 'POST':
-            print('POSTED')
             donate_form = DonateForm(request.POST)
-            # print(donate_form)
             if donate_form.is_valid():
-                print('SHIT IS VALID')
                 if request.POST.get('bool') == 'True':
                     donate_form = donate_form.save(commit=False)
                     donate_form.user = request.user
-                    print('HERE: ', donate_form.user)
+                    if donation.amount_raised is not None:
+                        donation.amount_raised += donation_form.amount_donated
+                    else:
+                        donation.amount_raised = donation_form.amount_donated
+                    donation.save()
                     donate_form.save()
                     messages.success(request, 'Thank you for your donation. (Arigato!)')
                     # return render(request, 'donations/donation_details.html')

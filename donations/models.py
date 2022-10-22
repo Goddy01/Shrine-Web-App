@@ -12,8 +12,6 @@ class Donation(models.Model):
     amount_raised =         models.IntegerField(null=True, default=0)
     date_posted =           models.DateTimeField(auto_now=True, null=True)
     
-
-
     def __str__(self):
         return self.donation_id
 
