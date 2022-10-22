@@ -4,7 +4,7 @@
         <h3 class="widget-title">Donations</h3>
         <ul class="list-group">
             {% for donation in donations %}
-            
+            {% if not donation.complete %}
             <li class="list-group-item mb-2 border" style="font-size: 14px;">
                 <a href="{% url 'donations:donation_details' donation.donation_id %}" class="h6 text-primary text-capitalize font-weight-bold">{{ donation.donation_name }}</a>
                 <div class="ml-3 mt-2">
@@ -21,7 +21,7 @@
                     </p>
                 </div>
             </li>
-            
+            {% endif %}
             {% endfor %}
         </ul>
     </div>

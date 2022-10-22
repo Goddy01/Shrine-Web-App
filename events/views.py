@@ -13,7 +13,7 @@ def event(request):
     """The view for rendering events on the event page"""
     events = Event.objects.all().order_by('event_date')
     past_events = Event.objects.all().order_by('-event_date')
-    donations = Donation.objects.all()
+    donations = Donation.objects.filter(complete=False)
     donations = list(donations)
     donationn = random.choice(donations)[0]
     return render(request, 'events/events.html', {'events': events, 'past_events': past_events, 'donationn': donationn})
