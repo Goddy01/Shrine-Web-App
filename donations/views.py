@@ -88,3 +88,10 @@ def update_donation(request, donation_id):
     #     "amount_needed": donation.amount_needed,
     # })
     return render(request, 'donations/update_donation.html', {'update_donation_form': update_donation_form, 'donation': donation})
+
+def delete_donation(request, donation_id):
+    if request.user.staff:
+        donation = Donation.objects.get(donation_id=donation_id)
+        donation.delete()
+        return redirect('donations:donations')
+    return render(request, 'donations/donation_details.html')
