@@ -48,8 +48,18 @@
                     <div class="sidebar col-md-3 col-md-offset-1">
                         <div class="widget">
                             <h3 class="widget-title">Completed Donations</h3>
-                            <p>Distinctio unde consequuntur delectus, repudiandae, impedit atque earum adipisci, explicabo perferendis.</p>
-                            <a href="#" class="button">Make a donation</a>
+                            <ul class="list-group">
+                                {% for donation in completed_donations %}
+                                <li class="list-group-item mb-2 border" style="font-size: 14px;">
+                                    <a href="{% url 'donations:donation_details' donation.donation_id %}" class="h6 text-primary text-capitalize font-weight-bold">{{ donation.donation_name }}</a>
+                                    <div class="ml-3 mt-2">
+                                        <p class="text-uppercase">
+                                            {{ donation.donation_desc|slice:":100" }}....
+                                        </p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
                 </div>

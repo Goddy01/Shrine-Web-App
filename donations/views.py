@@ -7,7 +7,8 @@ from .models import Donation
 # Create your views here.
 def donations(request):
     donations = Donation.objects.filter(complete=False).order_by('-date_posted')
-    return render(request, 'donations/donations.html', {'donations': donations})
+    completed_donations = Donation.objects.filter(complete=True).order_by('-date_posted')[:3]
+    return render(request, 'donations/donations.html', {'donations': donations, 'completed_donations': completed_donations})
 
 def add_donation(request):
     if request.user.is_staff:
