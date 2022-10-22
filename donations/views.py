@@ -6,7 +6,7 @@ from .models import Donation
 
 # Create your views here.
 def donations(request):
-    donations = Donation.objects.all().order_by('-date_posted')
+    donations = Donation.objects.filter(complete=False).order_by('-date_posted')
     return render(request, 'donations/donations.html', {'donations': donations})
 
 def add_donation(request):
