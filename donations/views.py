@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from .forms import AddDonationForm, DonateForm
+from .forms import AddDonationForm, DonateForm, UpdateDonationForm
 from .models import Donation
 
 # Create your views here.
@@ -63,3 +63,24 @@ def make_payment(request, donation_id):
         return HttpResponse('Sorry, you need to be logged in before you can donate.')
 
     return render(request, 'donations/donate.html', context)
+
+def update_donation(request, donation_id):
+    donation = Donation.objects.get(donation_id=donation_id)
+    if request.user.is_staff:
+        if request.method == 'POST':
+            update_donation_form = UpdateDonationForm(request.POST)
+            if update_donation_form.is_valid():
+                update_donation_form.save()
+                return redirect('donations:donations')
+            else:
+                messages.error(request, 'The donation could not be updated.')
+        else:
+            update_donation_form = UpdateDonationForm()
+    else:
+        return HttpResponse('You are not authenticated to update donations.')
+    update_donation_form = UpdateDonationForm(instance=request.user, initial = {
+        "donation_name": donation.donation_name,
+        "donation_desc": donation.donation_desc,
+        "amount_needed": donation.amount_needed,
+    })
+    return render(request, 'donations/update_donation.html', {'update_donation_form': update_donation_form})
