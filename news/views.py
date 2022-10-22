@@ -11,10 +11,11 @@ def news(request):
     """The view for rendering all news on the news page"""
     news = News.objects.all().order_by('-date_posted')
     latest_news = News.objects.all().order_by('-date_posted')
-    donations = Donation.objects.filter(complete=False)
-    donations = list(donations)
-    donation = random.choice(donations)
-    return render(request, 'news/news.html', {'news': news, 'latest_news': latest_news, 'donation': donation})
+    donations = Donation.objects.filter(complete=False).values_list('id', flat=True)
+    donations_list = list(donations)
+    random_donations_list = random.sample(donations, min(len(donations_list), 3))
+    donations = Donation.objects.filter(id__in=random_donations_list)
+    return render(request, 'news/news.html', {'news': news, 'latest_news': latest_news, 'donations': donations})
 
 def add_news(request):
     """The view that facilitates the adding of news"""
