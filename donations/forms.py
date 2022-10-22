@@ -10,3 +10,8 @@ class DonateForm(forms.ModelForm):
     class Meta:
         model = Donate
         exclude = ('user', 'donated_id')
+
+class UpdateDonationForm(forms.ModelForm):
+    class Meta:
+        model = Donation
+        exclude = ['donation_id', 'date_posted']
