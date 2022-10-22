@@ -1,9 +1,11 @@
+import random
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import EventForm, UpdateEventForm, QuestionForm, AnswerForm
 import datetime
 from .models import Event, Question, Answer
+from donations.models import Donation
 from accounts.models import UserProfile
 # Create your views here.
 
@@ -11,7 +13,10 @@ def event(request):
     """The view for rendering events on the event page"""
     events = Event.objects.all().order_by('event_date')
     past_events = Event.objects.all().order_by('-event_date')
-    return render(request, 'events/events.html', {'events': events, 'past_events': past_events})
+    donations = Donation.objects.all()
+    donations = list(donations)
+    donationn = random.choice(donations)[0]
+    return render(request, 'events/events.html', {'events': events, 'past_events': past_events, 'donationn': donationn})
 
 def event_error_checker(request,event_form):
     """A view that checks for errors in event forms. Will be called when needed to abide by DRY"""

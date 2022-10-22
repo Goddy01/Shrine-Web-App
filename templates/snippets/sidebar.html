@@ -4,29 +4,24 @@
         <h3 class="widget-title">Donations</h3>
         <ul class="list-group">
             {% for donation in donations %}
-            {% if not donation.complete %}
+            
             <li class="list-group-item mb-2 border" style="font-size: 14px;">
-                <a href="{% url 'donations:donation_detail' donation.donation_id %}" class="h6 text-primary text-capitalize font-weight-bold">{{ donation.donation_name }}</a>
+                <a href="{% url 'donations:donation_details' donation.donation_id %}" class="h6 text-primary text-capitalize font-weight-bold">{{ donation.donation_name }}</a>
                 <div class="ml-3 mt-2">
-                    <p>
-                        <!-- <i class="fa fa-calendar"></i> -->
-                        {{donation.donation_name}}
-                    </p>
                     <p class="text-uppercase">
-                        <!-- <i class="fa">&#xf017;</i> -->
                         {{ donation.donation_desc|slice:":100" }}....
                     </p>
                     <p>
-                        <!-- <i class="fa fa-map-marker"></i> -->
-                        {{donation.donation_amount_needed}}
+                        <strong>Amount Needed: </strong>
+                        <i>${{donation.amount_needed}}</i>
                     </p>
                     <p>
-                        <!-- <i class="fa fa-map-marker"></i> -->
-                        {{donation.donation_amount_raised}}
+                        <strong>Amount Raised: </strong>
+                        <i>${{donation.amount_raised}}</i>
                     </p>
                 </div>
             </li>
-            {% endif %}
+            
             {% endfor %}
         </ul>
     </div>
