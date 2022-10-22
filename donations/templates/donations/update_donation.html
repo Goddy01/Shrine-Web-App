@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'messages.html' %}
+<style>
+    .django-ckeditor-widget{
+        width: 100%;
+        /* border: 2px solid red; */
+}
+</style>
+<div class="errors" style="margin-left: 2rem;">
+    {% for field in update_donation_form %}
+        <p>
+        {% for error in field.errors %}
+        <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
+            {{field.label_tag}} {{error}}
+        </div>
+        {% endfor %}
+        </p>
+    {% endfor %}
+    {% if update_donation_form.non_field_errors %}
+    <div class="alert alert-danger p-0 px-2 py-2 mr-4" role="alert">
+            {{update_donation_form.non_field_errors}}
+        </div>
+    {% endif %}
+</div>
+<div class="w-100 mx-auto bg-white" style="padding: 2rem 1rem;margin-bottom: 5rem;color: black;">
+    <p class="h3 font-weight-bold" style="text-align: center; margin-bottom: 4rem">Update Donation</p>
+    <form method="post" action="{% url 'donations:update_donation' donation.donation_id %}">
+        {% csrf_token %}
+
+        <!-- DONATION TITLE -->
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
+            <label class="font-weight-bold" for="donation_name">Donation Name</label>
+            <input required class="form-control" type="text" name="donation_name" id="donation_name" value="{{ update_donation_form.donation_name }}">
+        </div>
+
+        <!-- DONATION DESCRIPTION -->
+        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1rem;margin-top: 1rem">
+            <label class="font-weight-bold" for="donation_desc">Donation Description</label>
+            <textarea class="form-control" name="donation_desc" id="donation_desc" style="width: 100%;" rows="10" cols="5" required>
+                {{ update_donation_form.donation_desc }}
+            </textarea>
+        </div>
+
+        <!-- AMOUNT NEEDED -->
+        <div class="" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+            <label class="font-weight-bold" for="amount_needed">Amount Needed in Naira(N)</label>
+            <input required class="form-control" type="number" name="amount_needed" id="amount_needed" value="{{ update_donation_form.amount_needed }}">
+        </div>
+
+        <button class="btn btn-primary" style="display: flex; margin: auto; margin-top: .5rem;width: 50%;" type="submit">
+            <span style="margin: 0 auto;font-weight: bold;">Update Donation</span>
+        </button>
+    </form>
+{% endblock content %}
