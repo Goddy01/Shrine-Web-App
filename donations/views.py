@@ -83,4 +83,4 @@ def update_donation(request, donation_id):
         "donation_desc": donation.donation_desc,
         "amount_needed": donation.amount_needed,
     })
-    return render(request, 'donations/update_donation.html', {'update_donation_form': update_donation_form})
+    return render(request, 'donations/update_donation.html', {'update_donation_form': update_donation_form, 'donation': donation})
