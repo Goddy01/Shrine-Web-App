@@ -4,7 +4,7 @@ from django import forms
 class AddDonationForm(forms.ModelForm):
     class Meta:
         model = Donation
-        exclude = ['donation_id', 'date_posted']
+        exclude = ['donation_id', 'date_posted', 'amount_raised']
 
 class DonateForm(forms.ModelForm):
     class Meta:
@@ -14,4 +14,4 @@ class DonateForm(forms.ModelForm):
 class UpdateDonationForm(forms.ModelForm):
     class Meta:
         model = Donation
-        exclude = ['donation_id', 'date_posted']
+        exclude = ['donation_id', 'date_posted', 'amount_raised']
