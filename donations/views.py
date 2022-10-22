@@ -44,13 +44,13 @@ def make_payment(request, donation_id):
                 if request.POST.get('bool') == 'True':
                     donate_form = donate_form.save(commit=False)
                     donate_form.user = request.user
+                    donate_form.save()
                     if donation.amount_raised is not None:
                         donation.amount_raised += donate_form.amount_donated
                     else:
                         donation.amount_raised = donate_form.amount_donated
-                    donation.amount_needed -= donation.amount_raised
+                    donation.amount_needed -= donate_form.amount_donated
                     donation.save()
-                    donate_form.save()
                     messages.success(request, 'Thank you for your donation. (Arigato!)')
                     # return render(request, 'donations/donation_details.html')
                     return redirect('/donations/donations/')
