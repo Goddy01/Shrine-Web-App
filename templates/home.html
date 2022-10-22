@@ -39,7 +39,9 @@
                             <h3 class="seremon-title text-uppercase"><a href="{% url 'news:news_details' n.news_id %}">{{ n.news_headline }}</a></h3>
                             <p>{{ n.news_body|safe|slice:":300" }}....</p>
                             <div class="seremon-meta mb-2">
-                                <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ n.date_posted }}</div>
+                                <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on 
+                                    <span class="text-uppercase">{{ n.date_posted }}</span>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -68,7 +70,11 @@
                                     <i>N{{ donation.amount_needed }}</i>
                                 </p>
                                 <div class="seremon-meta mb-2">
-                                    <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ donation.date_posted }}</div>
+                                    <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on 
+                                        <span class="text-uppercase">
+                                        {{ donation.date_posted }}
+                                        </span>
+                                        </div>
                                 </div>
                                 <a href="{% url 'donations:make_donation' donation.donation_id %}" class="mt-4 button text-decoration-none text-dark">Make Donation</a>
                             </div>
@@ -93,7 +99,7 @@
                                 <a href="{% url 'events:event_detail' event.event_id %}">
                                     <h3 class="event-title text-uppercase">{{event.event_name}}</h3>
                                     <span class="event-meta text-capitalize" style="margin-left: -180px;">
-                                        <span><i class="fa fa-calendar"></i>{{ event.event_date }}</span>
+                                        <span class="text-uppercase"><i class="fa fa-calendar"></i>{{ event.event_date }}</span>
                                         <span class="text-uppercase"><i class="fa">&#xf017;</i>{{ event.event_time }}</span>
                                         <span><i class="fa fa-map-marker"></i>{{ event.event_location }}</span>
 
@@ -117,7 +123,7 @@
                                     <h3 class="seremon-title"><a href="{% url 'sermons:sermon_details' sermon.sermon_id %}">{{ sermon.sermon_title }}</a></h3>
                                     <div class="seremon-meta">
                                         <div class="pastor"><i class="fa fa-user"></i>{{ sermon.sermon_priest_name }}</div>
-                                        <div class="date"><i class="fa fa-calendar"></i>{{ sermon.sermon_date }}</div>
+                                        <div class="date text-uppercase"><i class="fa fa-calendar"></i>{{ sermon.sermon_date }}</div>
                                     </div>
                             </li>
                             {% endfor %}
