@@ -11,10 +11,10 @@
             </ol>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="img-fluid d-block w-100 carousel-image" src="{% static 'images/moremi3.jpg' %}" alt="First slide">
+                <img class="img-fluid d-block h-50 w-100 carousel-image" src="{% static 'images/moremi3.jpg' %}" alt="First slide">
               </div>
               <div class="carousel-item">
-                <img class="img-fluid d-block w-100 carousel-image" src="{% static 'images/home-carousel2.jpg' %}" alt="Second slide">
+                <img class="img-fluid d-block h-50 w-100 carousel-image" src="{% static 'images/home-carousel2.jpg' %}" alt="Second slide">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -29,54 +29,70 @@
 
     <main class="main-content">
         <div class="fullwidth-block">
-            <div class="container">
+            <div class="container" style="margin-top:100px;">
                 <h2 class="section-title">Recent news</h2>
 
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="news">
-                            <image class="news-image" src="{% static 'images/news-thumb-1.jpg' %}"></image>
-                            <h3 class="news-title"><a href="#">laboris nisi ut aliquip</a></h3>
-                            <small class="date"><i class="fa fa-calendar"></i>24 mar 2014</small>
+                <ul class="seremon-list large list-group p-2">
+                    {% for n in news %}
+                    <li class="list-group-item mb-3 border p-5">
+                        <div class="seremon-detail">
+                            <h3 class="seremon-title text-uppercase"><a href="{% url 'news:news_details' n.news_id %}">{{ n.news_headline }}</a></h3>
+                            <p>{{ n.news_body|safe|slice:":300" }}....</p>
+                            <div class="seremon-meta mb-2">
+                                <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ n.date_posted }}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="news">
-                            <image class="news-image" src="{% static 'images/news-thumb-2.jpg' %}"></image>
-                            <h3 class="news-title"><a href="#">laboris nisi ut aliquip</a></h3>
-                            <small class="date"><i class="fa fa-calendar"></i>24 mar 2014</small>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="news">
-                            <image class="news-image" src="{% static 'images/news-thumb-3.jpg' %}"></image>
-                            <h3 class="news-title"><a href="#">laboris nisi ut aliquip</a></h3>
-                            <small class="date"><i class="fa fa-calendar"></i>24 mar 2014</small>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="news">
-                            <image class="news-image" src="{% static 'images/news-thumb-4.jpg' %}"></image>
-                            <h3 class="news-title"><a href="#">laboris nisi ut aliquip</a></h3>
-                            <small class="date"><i class="fa fa-calendar"></i>24 mar 2014</small>
-                        </div>
-                    </div>
-                </div> <!-- .row -->
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="" style="margin-top: 100px;">
+                    <h2 class="section-title mb-2">Donations</h2>
+                    <ul class="seremon-list large list-group p-2">
+                        {% for donation in donations %}
+                        <li class="list-group-item mb-3 border p-5">
+                            <div class="seremon-detail">
+                                <h3 class="seremon-title text-uppercase"><a href="{% url 'donations:donation_details' donation.donation_id %}">{{ donation.donation_name }}</a></h3>
+                                <p>{{ donation.donation_desc|slice:":300" }}....</p>
+                                <p>
+                                    <span class="font-weight-bold">Amount Raised: </span>
+                                    <i>
+                                        {% if donation.amount_raised == None %}
+                                        N0
+                                        {% else %}
+                                        N{{ donation.amount_raised }}
+                                        {% endif %}
+                                    </i>
+                                </p>
+                                <p>
+                                    <span class="font-weight-bold">Amount Needed: </span>
+                                    <i>N{{ donation.amount_needed }}</i>
+                                </p>
+                                <div class="seremon-meta mb-2">
+                                    <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ donation.date_posted }}</div>
+                                </div>
+                                <a href="{% url 'donations:make_donation' donation.donation_id %}" class="mt-4 button text-decoration-none text-dark">Make Donation</a>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div> <!-- .container -->
         </div> <!-- section -->
+
+        
 
         <div class="fullwidth-block">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <h2 class="section-title">Upcoming events</h2>
+                    <div class="col-md-6" style="margin-bottom: 100px;">
+                        <h2 class="section-title">Recent events</h2>
                         <ul class="event-list">
                             {% for event in events %}
-                            {% if not event.is_past_due %}
-                            <li class="p-5">
+                            
+                            <li class="py-5">
                                 <a href="#">
                                     <h3 class="event-title text-uppercase">{{event.event_name}}</h3>
-                                    <span class="event-meta text-capitalize" style="margin-left: -230px;">
+                                    <span class="event-meta text-capitalize" style="margin-left: -180px;">
                                         <span><i class="fa fa-calendar"></i>{{ event.event_date }}</span>
                                         <span class="text-uppercase"><i class="fa">&#xf017;</i>{{ event.event_time }}</span>
                                         <span><i class="fa fa-map-marker"></i>{{ event.event_location }}</span>
@@ -84,7 +100,7 @@
                                     </span>
                                 </a>
                             </li>
-                            {% endif %}
+                            
                             {% endfor %}
                         </ul>
 
@@ -92,39 +108,19 @@
                             <a href="{% url 'events:event' %}" class="button">See all events</a>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <h2 class="section-title">Latest seremons</h2>
+                    <div class="col-md-6 mb-5">
+                        <h2 class="section-title">Recent seremons</h2>
                         <ul class="seremon-list">
+                            {% for sermon in sermons %}
                             <li>
-                                <img src="{% static 'images/small-thumb-1.jpg' %}" alt="">
-                                <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">I believe in god with all my heart</a></h3>
+                                <img src="{{ sermon.sermon_image.url }}" alt="" style="width: 70px;height: 65px;">
+                                    <h3 class="seremon-title"><a href="{% url 'sermons:sermon_details' sermon.sermon_id %}">{{ sermon.sermon_title }}</a></h3>
                                     <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> Alan Ray</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
+                                        <div class="pastor"><i class="fa fa-user"></i>{{ sermon.sermon_priest_name }}</div>
+                                        <div class="date"><i class="fa fa-calendar"></i>{{ sermon.sermon_date }}</div>
                                     </div>
-                                </div>
                             </li>
-                            <li>
-                                <img src="{% static 'images/small-thumb-2.jpg' %}" alt="">
-                                <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">Trusting in jesus and god</a></h3>
-                                    <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> David Clark</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="{% static 'images/small-thumb-3.jpg' %}" alt="">
-                                <div class="seremon-detail">
-                                    <h3 class="seremon-title"><a href="#">Love your kids</a></h3>
-                                    <div class="seremon-meta">
-                                        <div class="pastor"><i class="fa fa-user"></i> anthony roberts</div>
-                                        <div class="date"><i class="fa fa-calendar"></i> 18 mar 2014</div>
-                                    </div>
-                                </div>
-                            </li>
+                            {% endfor %}
                         </ul>
 
                         <div class="text-center">
