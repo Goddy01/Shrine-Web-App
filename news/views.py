@@ -3,13 +3,18 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import AddNewsForm, UpdateNewsForm
 from .models import News
+from donations.models import Donation
+import random
 # Create your views here.
 
 def news(request):
     """The view for rendering all news on the news page"""
     news = News.objects.all().order_by('-date_posted')
     latest_news = News.objects.all().order_by('-date_posted')
-    return render(request, 'news/news.html', {'news': news, 'latest_news': latest_news})
+    donations = Donation.objects.filter(complete=False)
+    donations = list(donations)
+    donation = random.choice(donations)
+    return render(request, 'news/news.html', {'news': news, 'latest_news': latest_news, 'donation': donation})
 
 def add_news(request):
     """The view that facilitates the adding of news"""

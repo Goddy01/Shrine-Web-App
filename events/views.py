@@ -15,8 +15,8 @@ def event(request):
     past_events = Event.objects.all().order_by('-event_date')
     donations = Donation.objects.filter(complete=False)
     donations = list(donations)
-    donationn = random.choice(donations)
-    return render(request, 'events/events.html', {'events': events, 'past_events': past_events, 'donationn': donationn})
+    donation = random.choice(donations)
+    return render(request, 'events/events.html', {'events': events, 'past_events': past_events, 'donation': donation})
 
 def event_error_checker(request,event_form):
     """A view that checks for errors in event forms. Will be called when needed to abide by DRY"""
