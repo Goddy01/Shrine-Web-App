@@ -35,6 +35,10 @@
                     color: #caa97e;
                     font-weight: bold;
                 }
+                .menu li {
+                    /* margin-bottom: 15px; */
+                    padding: 4px;
+                }
             </style>
 	</head>
 
@@ -49,30 +53,86 @@
 					</a>
 
 					<div class="main-navigation">
-                        {% with request.resolver_match.url_name as url_name %}
 						<button class="menu-toggle"><i class="fa fa-bars"></i> 
                             <span>Menu</span>
                         </button>
-						<ul class="menu">
-							<li class="menu-item {% if url_name == 'home' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'home' %}" style="color: #caa97e;">Home<small class="font-weight-bold">Home Page</small></a></li>
-							<li class="menu-item {% if url_name == 'news' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'news:news' %}" style="color: #caa97e;">News<small class="font-weight-bold">News</small></a></li>
-							<li class="menu-item {% if url_name == 'event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'events:event' %}" style="color: #caa97e;">Events<small class="font-weight-bold">Events Page</small></a></li>
-							<li class="menu-item {% if url_name == 'sermons' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'sermons:sermons' %}" style="color: #caa97e;">Sermons<small class="font-weight-bold">Sermons Page</small></a></li>
-							<li class="menu-item {% if url_name == 'donations' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'donations:donations' %}" style="color: #caa97e;">Donations<small class="font-weight-bold">Donations Page</small></a></li>
+						<ul class="menu mt-2">
+							<li class="menu-item">
+                                <div class="dropdown" style="font-size: 14px;">
+                                <button class="btn text-light" type="button" style="background-color: #CBAA7F;">
+                                    <a type="button" class="text-light text-capitalize text-decoration-none pt-1 pb-0 px-1" href="{% url 'home' %}" style="font-size:13px;background-color: #CBAA7F;">Home</a>
+                                </button>
+                                </div>
+                            </li>
+							<li class="menu-item">
+                                <div class="dropdown" style="font-size: 14px;">
+                                    <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #CBAA7F;">
+                                      News
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <a class="text-decoration-none p-1 text-capitalize" href="{% url 'news:news' %}">News</a>
+                                        <a class="p-1 text-capitalize text-decoration-none" href="{% url 'news:add_news' %}">Add-News</a>
+                                    </div>
+                                  </div>
+                            </li>
+							<li class="menu-item">
+                                <div class="dropdown" style="font-size: 14px;">
+                                    <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #CBAA7F;">
+                                      Events
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <a class="text-decoration-none p-1 text-capitalize" href="{% url 'events:event' %}">Events</a>
+                                        <a class="text-decoration-none p-1 text-capitalize" href="{% url 'events:add_event' %}">Add-Event</a>
+                                    </div>
+                                </div>
+                            </li>
+							<li class="menu-item">
+                                <div class="dropdown" style="font-size: 14px;">
+                                    <button class="btn text-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #CBAA7F;">
+                                      Sermons
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <a class="text-decoration-none p-1 text-capitalize" href="{% url 'sermons:sermons' %}">Sermons</a>
+                                        <a class="text-decoration-none p-1 text-capitalize" href="{% url 'sermons:add_sermon' %}">Add-Sermon</a>
+                                    </div>
+                                </div>
+                            </li>
+							<li class="menu-item">
+                                <div class="dropdown" style="font-size: 14px;">
+                                    <button class="btn text-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #CBAA7F;">
+                                      Donations
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <a class="text-decoration-none p-1 text-capitalize" href="{% url 'donations:donations' %}">Donations</a>
+                                        <a class="text-decoration-none p-1 text-capitalize" href="{% url 'donations:add_donation' %}">Add-Donation</a>
+                                    </div>
+                                </div>
+                            </li>
                             {% if request.user.is_authenticated %}
-                            <li class="menu-item {% if url_name == 'logout' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'accounts:logout' %}" style="color: #caa97e;">Sign-Out<small class="font-weight-bold">Sign-Out of your account.</small></a></li>
+                            <li class="menu-item">
+                                <div class="dropdown" style="font-size: 14px;">
+                                    <button class="btn text-light" type="button" style="background-color: #CBAA7F;">
+                                    <a type="button" class="text-light text-capitalize text-decoration-none py-0 px-1" href="{% url 'accounts:logout' %}" style="font-size:13px;background-color: #CBAA7F;">Sign-out</a>
+                                    </button>
+                                </div>
+                            </li>
                             {% else %}
-                            <li class="menu-item {% if url_name == 'reg' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'accounts:reg' %}" style="color: #caa97e;">Sign-Up<small class="font-weight-bold">Sign-Up as a Worshipper</small></a></li>
-                            <li class="menu-item {% if url_name == 'login' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'accounts:login' %}" style="color: #caa97e;">Sign-In<small class="font-weight-bold">Sign-In as a Worshipper</small></a></li>
-                            {% endif %}
-                            {% if request.user.is_staff %}
-                            <li class="menu-item {% if url_name == 'add_event' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'events:add_event' %}" style="color: #caa97e;">Add-Event<small class="font-weight-bold">Add a new event.</small></a></li>
-                            <li class="menu-item {% if url_name == 'add_sermon' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'sermons:add_sermon' %}" style="color: #caa97e;">Add-Sermon<small class="font-weight-bold">Add a new sermon.</small></a></li>
-                            <li class="menu-item {% if url_name == 'add_news' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'news:add_news' %}" style="color: #caa97e;">Add-News<small class="font-weight-bold">Add news.</small></a></li>
-                            <li class="menu-item {% if url_name == 'add_donation' %}current-menu-item{% endif %}"><a class="text-decoration-none font-weight-bold" href="{% url 'donations:add_donation' %}" style="color: #caa97e;">Add-Donation<small class="font-weight-bold">Add donation.</small></a></li>
+                            <li class="menu-item">
+                                <div class="dropdown" style="font-size: 14px;">
+                                    <button class="btn text-light" type="button" style="background-color: #CBAA7F;">
+                                    <a type="button" class="text-light text-capitalize text-decoration-none py-0 px-1" href="{% url 'accounts:reg' %}" style="font-size:13px;background-color: #CBAA7F;">Sign-up</a>
+                                    </button>
+                                </div>
+                            </li>
+                            <li class="menu-item">
+                                <div class="dropdown" style="font-size: 14px;">
+                                    <button class="btn text-light" style="background-color: #CBAA7F;">
+                                    <a class="text-light text-capitalize text-decoration-none py-0 px-1" href="{% url 'accounts:login' %}" style="font-size:13px;background-color: #CBAA7F;">Sign-in</a>
+                                    </button>
+                                </div>
+                            </li>
                             {% endif %}
 						</ul>
-                        {% endwith  %}
 					</div>
 					<div class="mobile-navigation"></div>
 				</div>
