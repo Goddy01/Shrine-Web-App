@@ -4,13 +4,15 @@ from .forms import AddSermonForm, UpdateSermonForm
 from .models import Sermon
 from django.contrib import messages
 from donations.models import Donation
-import datetime, random
+import random, datetime
+from datetime import date
 # Create your views here.
 
 def sermons(request):
     """The view for rendering all the sermons on the sermon page"""
     sermons = Sermon.objects.all().order_by('sermon_date')
     latest_sermons = Sermon.objects.all().order_by('-sermon_date')
+    upcoming_sermons = Sermon.objects.filter(sermon_date__gte=date.today())
     donations = Donation.objects.filter(complete=False)
     donations = list(donations)
     donation = random.choice(donations)
