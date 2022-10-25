@@ -16,7 +16,7 @@ def sermons(request):
     donations = Donation.objects.filter(complete=False)
     donations = list(donations)
     donation = random.choice(donations)
-    return render(request, 'sermons/sermons.html', {'sermons':sermons, 'latest_sermons': latest_sermons, 'donation': donation})
+    return render(request, 'sermons/sermons.html', {'sermons':sermons, 'latest_sermons': latest_sermons, 'donation': donation, 'upcoming_sermons': upcoming_sermons})
 
 def sermon_error_checker(request,sermon_form):
     """A view that checks for errors in sermon forms. Will be called when needed to abide by DRY"""

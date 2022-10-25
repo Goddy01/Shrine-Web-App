@@ -30,6 +30,11 @@
                             </li>
                             {% endif %}
                             {% endfor %}
+                            {% if not upcoming_sermons %}
+                            <div class="ml-5 mb-5">
+                                <p class="h5">No upcoming sermons.</p>
+                            </div>
+                            {% endif %}
                         </ul>
                     </div>
                     <div class="sidebar col-md-3 col-md-offset-1">
