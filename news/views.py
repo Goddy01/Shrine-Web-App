@@ -5,17 +5,19 @@ from .forms import AddNewsForm, UpdateNewsForm
 from .models import News
 from donations.models import Donation
 import random
+from shrine.views import pagination
 # Create your views here.
 
 def news(request):
     """The view for rendering all news on the news page"""
     news = News.objects.all().order_by('-date_posted')
+    news_pag = pagination(request, news, 3, 'date_posted')
     latest_news = News.objects.all().order_by('-date_posted')
     donations = Donation.objects.filter(complete=False).values_list('donation_id', flat=True)
     donations_list = list(donations)
     random_donations_list = random.sample(donations_list, min(len(donations_list), 3))
     donations = Donation.objects.filter(donation_id__in=random_donations_list)
-    return render(request, 'news/news.html', {'news': news, 'latest_news': latest_news, 'donations': donations})
+    return render(request, 'news/news.html', {'news': news, 'latest_news': latest_news, 'donations': donations, 'news_pag': news_pag})
 
 def add_news(request):
     """The view that facilitates the adding of news"""
