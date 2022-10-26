@@ -56,7 +56,7 @@
                 <div class="card-body">
                   <h3 class="card-title text-capitalize">{{news.news_headline}}</h3>
                   <p class="card-text">{{news.news_body|safe}}</p>
-                {% if request.user.is_staff %}
+                {% if request.user.is_admin %}
                 <a href="{% url 'news:update_news_details' news.news_id %}" class="update btn" style="background-color: #cbaa80;">Update News</a>
                 <a href="{% url 'news:delete_news' news.news_id %}" class="delete btn" style="background-color: red;color: #fff;border: none;" onclick="return confirm('Are you sure you want to delete this news?')">Delete News</a>
                 {% endif %}
