@@ -16,7 +16,7 @@ def event(request):
     events = Event.objects.all().order_by('event_date')
     upcoming_events = Event.objects.filter(event_date__gte=date.today())
     past_events = Event.objects.all().order_by('-event_date')
-    events_pag = pagination(request, upcoming_events, 5, 'event_date')
+    events_pag = pagination(request, upcoming_events, 3, 'event_date')
     donations = Donation.objects.filter(complete=False)
     donations = list(donations)
     donation = random.choice(donations)
