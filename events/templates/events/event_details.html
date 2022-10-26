@@ -58,14 +58,14 @@
                 <div class="" style="display: block;">
                     <div class="">
                         <div class="justify-content-center border-secondary mt-5 mb-3">
-                            <h4 class="font-weight-bold">Questions({{ qtns_counter }})</h4>
+                            <h5 class="font-weight-bold">Questions({{ qtns_counter }})</h5>
                         </div>
                         <div class="mb-5 ml-1">
                             {% if questions.count == 0 %}
                             <p>No questions have been asked about this event.</p>
                             {% endif %}
                             {% for q in questions %}
-                            <div class="mb-5 p-2 h5" style="border: 1px solid #CBAA80;border-radius: 10px;">
+                            <div class="mb-5 p-2 h6" style="border: 1px solid #CBAA80;border-radius: 10px;">
                                 <span>
                                     <span class="font-weight-bold">Question:</span>
                                      {{q.question}}</span>
@@ -82,7 +82,7 @@
                                     {% for ans in answers %}
                                     {% if ans.answer %}
                                         {% if ans.question.question_id == q.question_id %}
-                                            <p class="h5">
+                                            <p class="h6">
                                                 <span class="font-weight-bold">Answer:</span>
                                                 {{ ans.answer }}
                                             </p>
@@ -99,7 +99,7 @@
                                     {% endif %}
                                     {% endfor %}
                                     {% if not q.answer_set.all %}
-                                    <p class="h5">
+                                    <p class="h6">
                                         <span class="font-weight-bold">Answer:</span>
                                          This question has not been answered.</p>
                                     {% endif %}
