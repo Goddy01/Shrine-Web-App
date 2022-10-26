@@ -17,11 +17,13 @@ def sermons(request):
     donations = Donation.objects.filter(complete=False)
     donations = list(donations)
     donation = random.choice(donations)
-    sermons_pag = pagination(request, upcoming_sermons, 4, 'sermon_id')
+    
+    # Using the Pagination template from shrine.views
+    sermons_pag = pagination(request, upcoming_sermons, 3, 'sermon_date')
     return render(request, 'sermons/sermons.html', {'sermons':sermons, 'latest_sermons': latest_sermons, 'donation': donation, 'upcoming_sermons': upcoming_sermons, 'sermons_pag': sermons_pag})
 
 def sermon_error_checker(request,sermon_form):
-    """A view that checks for errors in sermon forms. Will be called when needed to abide by DRY"""
+    """The view that checks for errors in sermon forms. Will be called when needed to abide by DRY"""
     if sermon_form.cleaned_data['sermon_date'] < datetime.datetime.now().date():
         messages.error(request, 'The sermon date cannot be in the past.')
     elif sermon_form.cleaned_data['sermon_date'] == datetime.datetime.now().date():
