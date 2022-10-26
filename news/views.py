@@ -21,7 +21,7 @@ def news(request):
 
 def add_news(request):
     """The view that facilitates the adding of news"""
-    if request.user.is_staff:
+    if request.user.is_admin:
         if request.method == 'POST':
             add_news_form = AddNewsForm(request.POST)
             if add_news_form.is_valid:
@@ -43,7 +43,7 @@ def news_details(request, news_id):
 def update_news(request, news_id):
     """The view that facilitates the updating of new details"""
     news = News.objects.get(news_id=news_id)
-    if request.user.is_staff:
+    if request.user.is_admin:
         if request.method == 'POST':
             update_news_form = UpdateNewsForm(request.POST, instance=news)
             if update_news_form.is_valid:
@@ -64,7 +64,7 @@ def update_news(request, news_id):
 
 def delete_news(request, news_id):
     """The view that facilitates the deletion of news"""
-    if request.user.is_staff:
+    if request.user.is_admin:
         news = News.objects.get(news_id=news_id)    
         news.delete()
         return redirect('news:news')
