@@ -3,12 +3,14 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import AddDonationForm, DonateForm, UpdateDonationForm
 from .models import Donation
+from shrine.views import pagination
 
 # Create your views here.
 def donations(request):
     donations = Donation.objects.filter(complete=False).order_by('-date_posted')
     completed_donations = Donation.objects.filter(complete=True).order_by('-date_posted')[:3]
-    return render(request, 'donations/donations.html', {'donations': donations, 'completed_donations': completed_donations})
+    donations_pag = pagination(request, donations, 3, 'amount_needed')
+    return render(request, 'donations/donations.html', {'donations': donations, 'completed_donations': completed_donations, 'donations_pag': donations_pag})
 
 def add_donation(request):
     if request.user.is_staff:
