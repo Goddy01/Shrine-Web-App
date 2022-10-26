@@ -40,10 +40,9 @@
                     </div>
                     <div class="sidebar col-md-3 col-md-offset-1 mt-5">
                         <div class="widget">
-                            <h3 class="widget-title">Latest Sermons</h3>
+                            <h3 class="widget-title">Past Sermons</h3>
                             <ul class="list-group">
-                                {% for sermon in latest_sermons %}
-                                {% if sermon.is_past_due %}
+                                {% for sermon in past_sermons %}
                                 <li class="list-group-item border mb-2">
                                     <img src="{{ sermon.sermon_image.url }}" alt="" style="width: 70px;height: 65px;">
                                     <div class="seremon-detail">
@@ -58,7 +57,6 @@
                                         </p>
                                     </div>
                                 </li>
-                                {% endif %}
                                 {% endfor %}
                             </ul>
                         </div>

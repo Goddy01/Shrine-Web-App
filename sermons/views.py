@@ -12,7 +12,7 @@ from shrine.views import pagination
 def sermons(request):
     """The view for rendering all the sermons on the sermon page"""
     sermons = Sermon.objects.all().order_by('sermon_date')
-    latest_sermons = Sermon.objects.all().order_by('-sermon_date')
+    past_sermons = Sermon.objects.filter(sermon_date__lte=date.today()).order_by('-sermon_date')[:2]
     upcoming_sermons = Sermon.objects.filter(sermon_date__gte=date.today())
     donations = Donation.objects.filter(complete=False)
     donations = list(donations)
@@ -20,7 +20,7 @@ def sermons(request):
     
     # Using the Pagination template from shrine.views
     sermons_pag = pagination(request, upcoming_sermons, 3, 'sermon_date')
-    return render(request, 'sermons/sermons.html', {'sermons':sermons, 'latest_sermons': latest_sermons, 'donation': donation, 'upcoming_sermons': upcoming_sermons, 'sermons_pag': sermons_pag})
+    return render(request, 'sermons/sermons.html', {'sermons':sermons, 'past_sermons': past_sermons, 'donation': donation, 'upcoming_sermons': upcoming_sermons, 'sermons_pag': sermons_pag})
 
 def sermon_error_checker(request,sermon_form):
     """The view that checks for errors in sermon forms. Will be called when needed to abide by DRY"""
