@@ -36,7 +36,7 @@ def event_error_checker(request,event_form):
 def add_event(request):
     """The view that facilitates the adding of events"""
     print(request.user.is_worshipper)
-    if request.user.is_staff:
+    if request.user.is_admin:
         if request.method == 'POST':
             event_form = EventForm(request.POST)
             if event_form.is_valid():
@@ -62,7 +62,7 @@ def event_detail(request, event_id):
 def update_event(request, event_id):
     """The view to modify/update previously posted events."""
     event = Event.objects.get(event_id=event_id)
-    if request.user.is_staff:
+    if request.user.is_admin:
         if request.method == 'POST':
             update_event_form = UpdateEventForm(request.POST, instance=event)
             if update_event_form.is_valid():
@@ -80,7 +80,7 @@ def update_event(request, event_id):
 
 def del_event(request, event_id):
     """The view that facilitates the deletion of events"""
-    if request.user.is_staff:
+    if request.user.is_admin:
         event = Event.objects.get(event_id=event_id)
         event.delete()
         return redirect('events:event')
@@ -117,7 +117,7 @@ def ans_question_temp(request, qtn_id):
 def ans_question(request, qtn_id):
     """The view that facilitates asking questions about events"""
     context = {}
-    if request.user.is_staff:
+    if request.user.is_admin:
         if request.method == 'POST':
             ans_form = AnswerForm(request.POST)
             if ans_form.is_valid():
