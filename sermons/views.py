@@ -35,7 +35,7 @@ def sermon_error_checker(request,sermon_form):
 
 def add_sermon(request):
     """The view for adding sermons"""
-    if request.user.is_staff:
+    if request.user.is_admin:
         if request.method == 'POST':
             add_sermon_form = AddSermonForm(request.POST or None, request.FILES or None)
             if add_sermon_form.is_valid():
@@ -57,7 +57,7 @@ def sermon_details(request, sermon_id):
 
 def update_sermon(request, sermon_id):
     sermon = Sermon.objects.get(sermon_id=sermon_id)
-    if request.user.is_staff:
+    if request.user.is_admin:
         if request.method == 'POST':
             update_sermon_form = UpdateSermonForm(request.POST or None, request.FILES or None, instance=sermon)
             if update_sermon_form.is_valid():
@@ -82,7 +82,7 @@ def update_sermon(request, sermon_id):
     return render(request, 'sermons/update_sermon.html', {'sermon': sermon, 'update_sermon_form': update_sermon_form})
 
 def delete_sermon(request, sermon_id):
-    if request.user.is_staff:
+    if request.user.is_admin:
         sermon = Sermon.objects.get(sermon_id=sermon_id)
         sermon.delete()
         return redirect('sermons:sermons')
