@@ -13,7 +13,7 @@ def donations(request):
     return render(request, 'donations/donations.html', {'donations': donations, 'completed_donations': completed_donations, 'donations_pag': donations_pag})
 
 def add_donation(request):
-    if request.user.is_staff:
+    if request.user.is_admin:
         if request.method == 'POST':
             add_donation_form = AddDonationForm(request.POST)
             if add_donation_form.is_valid():
@@ -72,7 +72,7 @@ def make_payment(request, donation_id):
 
 def update_donation(request, donation_id):
     donation = Donation.objects.get(donation_id=donation_id)
-    if request.user.is_staff:
+    if request.user.is_admin:
         if request.method == 'POST':
             update_donation_form = UpdateDonationForm(request.POST, instance=donation)
             if update_donation_form.is_valid():
@@ -92,7 +92,7 @@ def update_donation(request, donation_id):
     return render(request, 'donations/update_donation.html', {'update_donation_form': update_donation_form, 'donation': donation})
 
 def delete_donation(request, donation_id):
-    if request.user.staff:
+    if request.user.admin:
         donation = Donation.objects.get(donation_id=donation_id)
         donation.delete()
         return redirect('donations:donations')
