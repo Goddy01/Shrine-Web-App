@@ -48,38 +48,34 @@
     
     <!-- SEARCH RESULTS FOR DONATIONS -->
     {% if donations %}
-        <ul class="seremon-list large list-group p-2">
-            {% for donation in donations %}
-            <li class="list-group-item mb-3 border p-5">
-                <div class="seremon-detail">
-                    <h3 class="seremon-title text-uppercase"><a href="{% url 'donations:donation_details' donation.donation_id %}">{{ donation.donation_name }}</a></h3>
-                    <p>{{ donation.donation_desc|slice:":300" }}....</p>
-                    <p>
-                        <span class="font-weight-bold">Amount Raised: </span>
-                        <i>
-                            {% if donation.amount_raised == None %}
-                            N0
-                            {% else %}
-                            N{{ donation.amount_raised }}
-                            {% endif %}
-                        </i>
-                    </p>
-                    <p>
-                        <span class="font-weight-bold">Amount Needed: </span>
-                        <i>N{{ donation.amount_needed }}</i>
-                    </p>
-                    <div class="seremon-meta mb-2">
-                        <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on 
-                            <span class="text-uppercase">
-                            {{ donation.date_posted }}
-                            </span>
-                            </div>
-                    </div>
-                    <a href="{% url 'donations:make_donation' donation.donation_id %}" class="mt-4 button text-decoration-none text-dark">Make Donation</a>
+    <ul class="seremon-list large list-group p-2">
+        {% for donation in donations_pag %}
+        <li class="list-group-item mb-3 border p-5">
+            <div class="seremon-detail">
+                <h3 class="seremon-title text-uppercase"><a href="{% url 'donations:donation_details' donation.donation_id %}">{{ donation.donation_name }}</a></h3>
+                <p>{{ donation.donation_desc }}</p>
+                <p>
+                    <span class="font-weight-bold">Amount Raised: </span>
+                    <i>
+                        {% if donation.amount_raised == None %}
+                        N0
+                        {% else %}
+                        N{{ donation.amount_raised }}
+                        {% endif %}
+                    </i>
+                </p>
+                <p>
+                    <span class="font-weight-bold">Amount Needed: </span>
+                    <i>N{{ donation.amount_needed }}</i>
+                </p>
+                <div class="seremon-meta mb-2">
+                    <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ donation.date_posted }}</div>
                 </div>
-            </li>
-            {% endfor %}
-        </ul>
+                <a href="{% url 'donations:make_donation' donation.donation_id %}" class="mt-4 button text-decoration-none text-dark">Make Donation</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
     {% endif %}
 
 
