@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from django.shortcuts import render
 from news.models import News
 from events.models import Event
@@ -5,7 +6,7 @@ from donations.models import Donation
 from sermons.models import Sermon
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import date
-
+from itertools import chain
 
 # Create your views here.
 def home(request):
@@ -27,3 +28,27 @@ def pagination(request, items_list, num_of_pages, object_id):
     except EmptyPage:
         objects = objects_paginator.page(objects_paginator.num_pages)
     return objects
+
+def search(request):
+    """The view that performs the search functionality"""
+    context = {}
+    if request.method == 'GET':
+        query = request.GET.get(query, '')
+        if query is not None:
+            news = News.objects.filter(Q(news_headline__icontains=query)).distinct()
+            sermons = Sermon.objects.filter(Q(sermon_title__icontains=query)).distinct()
+            donations = Donation.objects.filter(Q(donation_name__icontains=query)).distinct()
+            events = Event.objects.filter(Q(event_name__icontains=query)).distinct()
+
+            if not news or not sermons or not donations or not events:
+                return HTTPResponse('Your search returned no result.')
+            
+            results = chain(news, sermons, donations, events)
+            results_pag = pagination(request, results, 4)
+            context['results'] = results_pag
+            context['query'] = str(query)
+            return render(request, 'base.html', context)
+        else:
+            return render(request, 'base.html')
+    else:
+        return render(request, 'base.html')
