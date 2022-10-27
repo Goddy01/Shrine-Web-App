@@ -48,8 +48,8 @@ def search(request):
             # results_pag = pagination(request, results, 4, )
             context['results'] = results
             context['query'] = str(query)
-            return render(request, 'base.html', context)
+            return render(request, 'home.html', context)
         else:
-            return render(request, 'base.html')
+            return render(request, 'home.html')
     else:
-        return render(request, 'base.html')
+        return render(request, 'home.html')
