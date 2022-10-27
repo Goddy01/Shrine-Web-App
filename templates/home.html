@@ -10,15 +10,13 @@
     {% if news %}
     <div class="container">
         <ul class="seremon-list large list-group p-2">
-            {% for n in news %}
+            {% for n in news_pag %}
             <li class="list-group-item mb-3 border p-5">
                 <div class="seremon-detail">
                     <h3 class="seremon-title text-uppercase"><a href="{% url 'news:news_details' n.news_id %}">{{ n.news_headline }}</a></h3>
-                    <p>{{ n.news_body|safe|slice:":300" }}....</p>
+                    <p>{{ n.news_body|safe }}</p>
                     <div class="seremon-meta mb-2">
-                        <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on 
-                            <span class="text-uppercase">{{ n.date_posted }}</span>
-                        </div>
+                        <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on {{ n.date_posted }}</div>
                     </div>
                 </div>
             </li>
