@@ -48,10 +48,10 @@ def search(request):
             # results_pag = pagination(request, results, 4, )
             context['results'] = results
             context['query'] = str(query)
-            context['news'] = news
-            context['sermons'] = sermons
-            context['donations'] = donations
-            context['events'] = events
+            context['s_news'] = news
+            context['s_sermons'] = sermons
+            context['s_donations'] = donations
+            context['s_events'] = events
 
             return render(request, 'home.html', context)
         else:

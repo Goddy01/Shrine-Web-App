@@ -7,10 +7,10 @@
     {% if request.GET.query != '' %}
 
     <!-- SEARCH RESULTS FOR NEWS -->
-    {% if news %}
+    {% if s_news %}
     <div class="container">
         <ul class="seremon-list large list-group p-2">
-            {% for n in news_pag %}
+            {% for n in s_news %}
             <li class="list-group-item mb-3 border p-5">
                 <div class="seremon-detail">
                     <h3 class="seremon-title text-uppercase"><a href="{% url 'news:news_details' n.news_id %}">{{ n.news_headline }}</a></h3>
@@ -26,9 +26,9 @@
     {% endif %}
 
     <!-- SEARCH RESULTS FOR SERMONS -->
-    {% if sermons %}
+    {% if s_sermons %}
     <ul class="seremon-list large list-group p-2">
-        {% for sermon in sermons_pag %}
+        {% for sermon in s_sermons %}
         <li class="list-group-item mb-3 border">
             <img class="ml-5" src="{{ sermon.sermon_image.url }}" alt="" style="width: 80px;height: 65px;">
             <div class="seremon-detail">
@@ -45,9 +45,9 @@
     {% endif %}
     
     <!-- SEARCH RESULTS FOR DONATIONS -->
-    {% if donations %}
+    {% if s_donations %}
     <ul class="seremon-list large list-group p-2">
-        {% for donation in donations_pag %}
+        {% for donation in s_donations %}
         <li class="list-group-item mb-3 border p-5">
             <div class="seremon-detail">
                 <h3 class="seremon-title text-uppercase"><a href="{% url 'donations:donation_details' donation.donation_id %}">{{ donation.donation_name }}</a></h3>
@@ -78,9 +78,9 @@
 
 
     <!-- SEARCH RESULTS FOR EVENTS -->
-    {% if events %}
+    {% if s_events %}
     <ul class="event-list large">
-        {% for event in events_pag %}
+        {% for event in s_events %}
         <!-- Dynamically displays upcoming event and not events in the past -->
             <li>
                 <h4 class="event-title"><a class="h4 text-primary text-decoration-none text-uppercase" href="{% url 'events:event_detail' event.event_id %}">{{event.event_name}}</a></h4>
@@ -107,8 +107,10 @@
         {% endfor %}
     </ul>
     {% endif %}
+    {% endif %}
 
-    {% elif request.GET.query == '' %}
+
+    {% if request.GET.query == '' %}
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -131,6 +133,7 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
+
 
 <main class="main-content">
     <div class="fullwidth-block">
@@ -242,5 +245,5 @@
         </div> <!-- .container -->
     </div> <!-- section -->
 </main> <!-- .main-content -->
-    {% endif %}
+{% endif %}
 {% endblock content %}
