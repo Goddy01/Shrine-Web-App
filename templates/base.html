@@ -39,6 +39,10 @@
                     /* margin-bottom: 15px; */
                     padding: 4px;
                 }
+                @media (max-width: 600px) {
+                    .search-box {
+                        width: 72vw;
+                }
             </style>
 	</head>
 
@@ -133,6 +137,19 @@
                             </li>
                             {% endif %}
 						</ul>
+                        <div class="col-lg-12 col-6 text-left">
+                            <form action="" method="get">
+                                {% csrf_token %}
+                                <div class="input-group search-box">
+                                    <input type="text" class="form-control" placeholder="Search by news headline, event name, sermon title, and donation name." name="query" id="id_query" value="{{request.GET.query}}" style="pointer-events: ;">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-transparent text-primary">
+                                            <i class="fa fa-search" name="search" style="color: #CBAA7F;"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 					</div>
 					<div class="mobile-navigation"></div>
 				</div>
