@@ -139,7 +139,7 @@
                             {% endif %}
 						</ul>
                         <div class="col-lg-12 col-6 mx-auto">
-                            <form action="" method="get">
+                            <form action="{% url 'search' %}" method="get">
                                 {% csrf_token %}
                                 <div class="input-group search-box">
                                     <input type="text" class="form-control" placeholder="Search by news headline, event name, sermon title, and donation name." name="query" id="id_query" value="{{request.GET.query}}">
