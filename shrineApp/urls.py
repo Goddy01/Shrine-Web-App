@@ -18,7 +18,7 @@ from django.urls import path, include, reverse_lazy
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-from shrine.views import home
+from shrine.views import home, search
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include('django.contrib.auth.urls')),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('news/', include('news.urls', 'news')),
     path('donations/', include('donations.urls', 'donations')),
     path('', home, name='home'),
+    path('search/', search, name='search')
 
 
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name="password/password_change_done.html"), name="password_change_done"),
