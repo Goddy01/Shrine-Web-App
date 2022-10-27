@@ -85,7 +85,33 @@
 
     <!-- SEARCH RESULTS FOR EVENTS -->
     {% if events %}
-        
+    <ul class="event-list large">
+        {% for event in events_pag %}
+        <!-- Dynamically displays upcoming event and not events in the past -->
+            <li>
+                <h4 class="event-title"><a class="h4 text-primary text-decoration-none text-uppercase" href="{% url 'events:event_detail' event.event_id %}">{{event.event_name}}</a></h4>
+                <div class="ml-2 mt-2">
+                    <p class="event-meta" style="text-transform: capitalize;">
+                        <span>
+                            <i class="fa fa-calendar" style="font-size: 16px;"></i>
+                            {{event.event_date}}
+                        </span>
+                        <span class="text-uppercase">
+                            <i class="fa" style="font-size: 16px;">&#xf017;</i>
+                            {{ event.event_time }}
+                        </span>
+                        <span>
+                            <i class="fa fa-map-marker" style="font-size: 16px;"></i>
+                            {{event.event_location}}
+                        </span>
+                    </p>
+                    <p>{{event.event_description}}</p>
+                </div>
+                <!-- <a href="#" class="button">Join to this event</a> -->
+                <a href="{% url 'events:ask_qtn_temp' event.event_id %}" class="button text-decoration-none text-dark">Ask a question</a>
+            </li>
+        {% endfor %}
+    </ul>
     {% endif %}
 
     {% elif request.GET.query == '' %}
