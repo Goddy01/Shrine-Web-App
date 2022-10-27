@@ -1,4 +1,4 @@
-from http.client import HTTPResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import AddNewsForm, UpdateNewsForm
@@ -32,7 +32,7 @@ def add_news(request):
         else:
             add_news_form = AddNewsForm()
     else:
-        return HTTPResponse('Sorry. You are not authorized to post news.')
+        return HttpResponse('Sorry. You are not authorized to post news.')
     return render(request, 'news/add_news.html', {'add_news_form': add_news_form})
 
 def news_details(request, news_id):
@@ -54,7 +54,7 @@ def update_news(request, news_id):
         else:
             update_news_form = UpdateNewsForm()
     else:
-        return HTTPResponse('Sorry. You are not authorized to post news.')
+        return HttpResponse('Sorry. You are not authorized to post news.')
     update_news_form = UpdateNewsForm(instance=request.user, initial = {
                             "news_headline": news.news_headline,
                             "news_body": news.news_body,
