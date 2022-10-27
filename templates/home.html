@@ -110,7 +110,7 @@
     {% endif %}
 
 
-    {% if request.GET.query == '' %}
+    {% if not request.GET.query %}
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -135,115 +135,115 @@
       </div>
 
 
-<main class="main-content">
-    <div class="fullwidth-block">
-        <div class="container" style="margin-top:100px;">
-            <h2 class="section-title">Latest news</h2>
+        <main class="main-content">
+        <div class="fullwidth-block">
+            <div class="container" style="margin-top:100px;">
+                <h2 class="section-title">Latest news</h2>
 
-            <ul class="seremon-list large list-group p-2">
-                {% for n in news %}
-                <li class="list-group-item mb-3 border p-5">
-                    <div class="seremon-detail">
-                        <h3 class="seremon-title text-uppercase"><a href="{% url 'news:news_details' n.news_id %}">{{ n.news_headline }}</a></h3>
-                        <p>{{ n.news_body|safe|slice:":300" }}....</p>
-                        <div class="seremon-meta mb-2">
-                            <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on 
-                                <span class="text-uppercase">{{ n.date_posted }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-            <div class="" style="margin-top: 100px;">
-                <h2 class="section-title mb-2">Donations</h2>
                 <ul class="seremon-list large list-group p-2">
-                    {% for donation in donations %}
+                    {% for n in news %}
                     <li class="list-group-item mb-3 border p-5">
                         <div class="seremon-detail">
-                            <h3 class="seremon-title text-uppercase"><a href="{% url 'donations:donation_details' donation.donation_id %}">{{ donation.donation_name }}</a></h3>
-                            <p>{{ donation.donation_desc|slice:":300" }}....</p>
-                            <p>
-                                <span class="font-weight-bold">Amount Raised: </span>
-                                <i>
-                                    {% if donation.amount_raised == None %}
-                                    N0
-                                    {% else %}
-                                    N{{ donation.amount_raised }}
-                                    {% endif %}
-                                </i>
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Amount Needed: </span>
-                                <i>N{{ donation.amount_needed }}</i>
-                            </p>
+                            <h3 class="seremon-title text-uppercase"><a href="{% url 'news:news_details' n.news_id %}">{{ n.news_headline }}</a></h3>
+                            <p>{{ n.news_body|safe|slice:":300" }}....</p>
                             <div class="seremon-meta mb-2">
                                 <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on 
-                                    <span class="text-uppercase">
-                                    {{ donation.date_posted }}
-                                    </span>
-                                    </div>
+                                    <span class="text-uppercase">{{ n.date_posted }}</span>
+                                </div>
                             </div>
-                            <a href="{% url 'donations:make_donation' donation.donation_id %}" class="mt-4 button text-decoration-none text-dark">Make Donation</a>
                         </div>
                     </li>
                     {% endfor %}
                 </ul>
-            </div>
-        </div> <!-- .container -->
-    </div> <!-- section -->
-
-    
-
-    <div class="fullwidth-block">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6" style="margin-bottom: 100px;">
-                    <h2 class="section-title">Upcoming events</h2>
-                    <ul class="event-list">
-                        {% for event in events %}
-                        
-                        <li class="py-5">
-                            <a href="{% url 'events:event_detail' event.event_id %}">
-                                <h3 class="event-title text-uppercase">{{event.event_name}}</h3>
-                                <span class="event-meta text-capitalize" style="margin-left: -180px;">
-                                    <span class="text-uppercase"><i class="fa fa-calendar"></i>{{ event.event_date }}</span>
-                                    <span class="text-uppercase"><i class="fa">&#xf017;</i>{{ event.event_time }}</span>
-                                    <span><i class="fa fa-map-marker"></i>{{ event.event_location }}</span>
-
-                                </span>
-                            </a>
-                        </li>
-                        
-                        {% endfor %}
-                    </ul>
-
-                    <div class="text-center">
-                        <a href="{% url 'events:event' %}" class="button">See all events</a>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-5">
-                    <h2 class="section-title">Upcoming seremons</h2>
-                    <ul class="seremon-list">
-                        {% for sermon in sermons %}
-                        <li>
-                            <img src="{{ sermon.sermon_image.url }}" alt="" style="width: 70px;height: 65px;">
-                                <h3 class="seremon-title"><a href="{% url 'sermons:sermon_details' sermon.sermon_id %}">{{ sermon.sermon_title }}</a></h3>
-                                <div class="seremon-meta">
-                                    <div class="pastor"><i class="fa fa-user"></i>{{ sermon.sermon_priest_name }}</div>
-                                    <div class="date text-uppercase"><i class="fa fa-calendar"></i>{{ sermon.sermon_date }}</div>
+                <div class="" style="margin-top: 100px;">
+                    <h2 class="section-title mb-2">Donations</h2>
+                    <ul class="seremon-list large list-group p-2">
+                        {% for donation in donations %}
+                        <li class="list-group-item mb-3 border p-5">
+                            <div class="seremon-detail">
+                                <h3 class="seremon-title text-uppercase"><a href="{% url 'donations:donation_details' donation.donation_id %}">{{ donation.donation_name }}</a></h3>
+                                <p>{{ donation.donation_desc|slice:":300" }}....</p>
+                                <p>
+                                    <span class="font-weight-bold">Amount Raised: </span>
+                                    <i>
+                                        {% if donation.amount_raised == None %}
+                                        N0
+                                        {% else %}
+                                        N{{ donation.amount_raised }}
+                                        {% endif %}
+                                    </i>
+                                </p>
+                                <p>
+                                    <span class="font-weight-bold">Amount Needed: </span>
+                                    <i>N{{ donation.amount_needed }}</i>
+                                </p>
+                                <div class="seremon-meta mb-2">
+                                    <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on 
+                                        <span class="text-uppercase">
+                                        {{ donation.date_posted }}
+                                        </span>
+                                        </div>
                                 </div>
+                                <a href="{% url 'donations:make_donation' donation.donation_id %}" class="mt-4 button text-decoration-none text-dark">Make Donation</a>
+                            </div>
                         </li>
                         {% endfor %}
                     </ul>
-
-                    <div class="text-center">
-                        <a href="{% url 'sermons:sermons' %}" class="button">See all sermons</a>
-                    </div>
                 </div>
-            </div> <!-- .row -->
-        </div> <!-- .container -->
-    </div> <!-- section -->
-</main> <!-- .main-content -->
+            </div> <!-- .container -->
+        </div> <!-- section -->
+
+
+
+        <div class="fullwidth-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom: 100px;">
+                        <h2 class="section-title">Upcoming events</h2>
+                        <ul class="event-list">
+                            {% for event in events %}
+                            
+                            <li class="py-5">
+                                <a href="{% url 'events:event_detail' event.event_id %}">
+                                    <h3 class="event-title text-uppercase">{{event.event_name}}</h3>
+                                    <span class="event-meta text-capitalize" style="margin-left: -180px;">
+                                        <span class="text-uppercase"><i class="fa fa-calendar"></i>{{ event.event_date }}</span>
+                                        <span class="text-uppercase"><i class="fa">&#xf017;</i>{{ event.event_time }}</span>
+                                        <span><i class="fa fa-map-marker"></i>{{ event.event_location }}</span>
+
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            {% endfor %}
+                        </ul>
+
+                        <div class="text-center">
+                            <a href="{% url 'events:event' %}" class="button">See all events</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <h2 class="section-title">Upcoming seremons</h2>
+                        <ul class="seremon-list">
+                            {% for sermon in sermons %}
+                            <li>
+                                <img src="{{ sermon.sermon_image.url }}" alt="" style="width: 70px;height: 65px;">
+                                    <h3 class="seremon-title"><a href="{% url 'sermons:sermon_details' sermon.sermon_id %}">{{ sermon.sermon_title }}</a></h3>
+                                    <div class="seremon-meta">
+                                        <div class="pastor"><i class="fa fa-user"></i>{{ sermon.sermon_priest_name }}</div>
+                                        <div class="date text-uppercase"><i class="fa fa-calendar"></i>{{ sermon.sermon_date }}</div>
+                                    </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="text-center">
+                            <a href="{% url 'sermons:sermons' %}" class="button">See all sermons</a>
+                        </div>
+                    </div>
+                </div> <!-- .row -->
+            </div> <!-- .container -->
+        </div> <!-- section -->
+        </main> <!-- .main-content -->
 {% endif %}
 {% endblock content %}
