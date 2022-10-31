@@ -24,7 +24,7 @@ def add_news(request):
     if request.user.is_admin:
         if request.method == 'POST':
             add_news_form = AddNewsForm(request.POST)
-            if add_news_form.is_valid:
+            if add_news_form.is_valid():
                 add_news_form.save()
                 return redirect('news:news')
             else:
@@ -46,7 +46,7 @@ def update_news(request, news_id):
     if request.user.is_admin:
         if request.method == 'POST':
             update_news_form = UpdateNewsForm(request.POST, instance=news)
-            if update_news_form.is_valid:
+            if update_news_form.is_valid():
                 update_news_form.save()
                 return redirect('news:news')
             else:
