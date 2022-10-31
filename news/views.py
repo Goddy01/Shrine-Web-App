@@ -11,7 +11,7 @@ from shrine.views import pagination
 def news(request):
     """The view for rendering all news on the news page"""
     news = News.objects.all().order_by('-date_posted')
-    news_pag = pagination(request, news, 1, '-date_posted')
+    news_pag = pagination(request, news, 3, '-date_posted')
     latest_news = News.objects.all().order_by('-date_posted')
     donations = Donation.objects.filter(complete=False).values_list('donation_id', flat=True)
     donations_list = list(donations)
