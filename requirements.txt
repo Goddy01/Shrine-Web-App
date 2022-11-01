@@ -20,7 +20,7 @@ blinker==1.5
 boto3==1.20.54
 botocore==1.23.54
 Brotli==1.0.9
-certifi @ file:///C:/b/abs_4f5wo627a3/croots/recipe/certifi_1663615677642/work/certifi
+certifi==2020.6.20
 cffi==1.15.1
 chardet==4.0.0
 charset-normalizer==2.1.1
