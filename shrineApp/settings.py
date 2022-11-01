@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['oduduwashrine.up.railway.app']
-CSRF_TRUSTED_ORIGINS=['oduduwashrine.up.railway.app', ]
+CSRF_TRUSTED_ORIGINS=['https://oduduwashrine.up.railway.app', ]
 
 # Application definition
 
