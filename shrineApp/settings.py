@@ -95,16 +95,21 @@ WSGI_APPLICATION = 'shrineApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Shrine Web App DB',
-        'USER': 'postgres',
-        # 'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD'),
-        'PASSWORD': 'Qwerty121@',
-        'HOST': 'localhost',
-        'PORT': '5432',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'Shrine Web App DB',
+            'USER': 'postgres',
+            # 'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD'),
+            'PASSWORD': 'Qwerty121@',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
+else:
+    DATABASES = {
+    'default': dj_database_url.config(default=f"postgresql://{os.environ.get('PGUSER')}:{os.environ.get('PGPASSWORD')}@{os.environ.get('PGHOST')}:{os.environ.get('PGPORT')}/{os.environ.get('PGDATABASE')}", conn_max_age=600)
 }
 
 
