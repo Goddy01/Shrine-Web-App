@@ -81,6 +81,7 @@ Pillow==9.2.0
 portalocker==2.5.1
 psutil==5.9.2
 psycopg2-binary==2.9.3
+psycopg2==2.9.3
 pyasn1==0.4.8
 pycparser==2.21
 PyJWT==2.5.0
