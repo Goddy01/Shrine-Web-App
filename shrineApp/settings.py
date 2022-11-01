@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, dj_database_url
 from dotenv import load_dotenv, find_dotenv
 from django.contrib import messages
 
@@ -209,7 +209,7 @@ DEFAULT_FROM_EMAIL = 'Oduduwa Shrine Team <noreply@oduduwa.com>'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 
-# AWS ONFIGURATION
+# AWS CONFIGURATION
 if not DEBUG:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
