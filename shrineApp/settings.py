@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['oduduwashrine.up.railway.app']
 CSRF_TRUSTED_ORIGINS=['https://oduduwashrine.up.railway.app', ]
 
 # Application definition
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
 INSTALLED_APPS = [
     'accounts',
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'phonenumbers',
     'ckeditor',
+    'collectfast',
     'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
