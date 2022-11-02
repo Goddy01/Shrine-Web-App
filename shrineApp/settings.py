@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'phonenumbers',
     'ckeditor',
-    'collectfast',
     'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
