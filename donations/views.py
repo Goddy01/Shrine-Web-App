@@ -27,6 +27,8 @@ def add_donation(request):
                 add_donation_form = AddDonationForm()
         else:
             return HttpResponse('Sorry. You are not authenticated to add donations.')
+    else:
+        return HttpResponse('Sorry. You are not authenticated to add donations.')
     return render(request, 'donations/add_donation.html', {'add_donation_form': add_donation_form})
 
 def donation_details(request, donation_id):
