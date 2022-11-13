@@ -42,20 +42,23 @@ def event_error_checker(request,event_form):
 
 def add_event(request):
     """The view that facilitates the adding of events"""
-    if request.user.is_admin:
-        if request.method == 'POST':
-            event_form = EventForm(request.POST)
-            if event_form.is_valid():
-                event_error_checker(request, event_form)
-                if event_form.cleaned_data['event_date'] > datetime.datetime.now().date():
-                    return redirect('events:event')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            if request.method == 'POST':
+                event_form = EventForm(request.POST)
+                if event_form.is_valid():
+                    event_error_checker(request, event_form)
+                    if event_form.cleaned_data['event_date'] > datetime.datetime.now().date():
+                        return redirect('events:event')
+                else:
+                    # event_form = EventForm()
+                    messages.error(request, 'The event could not be added.')
             else:
-                # event_form = EventForm()
-                messages.error(request, 'The event could not be added.')
+                event_form = EventForm()
         else:
-            event_form = EventForm()
+            return HttpResponse('You are not authorized to view this page.')
     else:
-        return HttpResponse('You are not authorized to view this page.')
+            return HttpResponse('You are not authorized to view this page.')
     return render(request, 'events/event_form.html', {'event_form': event_form})
 
 def event_detail(request, event_id):
@@ -68,28 +71,34 @@ def event_detail(request, event_id):
 def update_event(request, event_id):
     """The view to modify/update previously posted events."""
     event = Event.objects.get(event_id=event_id)
-    if request.user.is_admin:
-        if request.method == 'POST':
-            update_event_form = UpdateEventForm(request.POST, instance=event)
-            if update_event_form.is_valid():
-                event_error_checker(request, update_event_form)
-                if update_event_form.cleaned_data['event_date'] > datetime.datetime.now().date():
-                    return redirect('events:event')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            if request.method == 'POST':
+                update_event_form = UpdateEventForm(request.POST, instance=event)
+                if update_event_form.is_valid():
+                    event_error_checker(request, update_event_form)
+                    if update_event_form.cleaned_data['event_date'] > datetime.datetime.now().date():
+                        return redirect('events:event')
+                else:
+                    # update_event_form = UpdateEventForm()
+                    messages.error(request, 'The event could not be updated.')
             else:
-                # update_event_form = UpdateEventForm()
-                messages.error(request, 'The event could not be updated.')
+                update_event_form = UpdateEventForm()
         else:
-            update_event_form = UpdateEventForm()
+            return HttpResponse('You are not authorized to view this page.')
     else:
         return HttpResponse('You are not authorized to view this page.')
     return render(request, 'events/update_event.html', {'update_event_form': update_event_form, 'event': event,})
 
 def del_event(request, event_id):
     """The view that facilitates the deletion of events"""
-    if request.user.is_admin:
-        event = Event.objects.get(event_id=event_id)
-        event.delete()
-        return redirect('events:event')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            event = Event.objects.get(event_id=event_id)
+            event.delete()
+            return redirect('events:event')
+        else:
+            return HttpResponse('You are not authorized to perform this action.')
     return render(request, 'events/event_details.html')
 
 def ask_question_temp(request, event_id):
@@ -123,20 +132,21 @@ def ans_question_temp(request, qtn_id):
 def ans_question(request, qtn_id):
     """The view that facilitates asking questions about events"""
     context = {}
-    if request.user.is_admin:
-        if request.method == 'POST':
-            ans_form = AnswerForm(request.POST)
-            if ans_form.is_valid():
-                qtn = Question.objects.get(question_id=qtn_id)
-                ans_form = ans_form.save(commit=False)
-                ans_form.question = qtn
-                ans_form.event = ans_form.question.event
-                ans_form.user = UserProfile.objects.get(username=request.user.username)
-                ans_form.save()
-                context['qtn'] = qtn
-                return redirect('events:event_detail', qtn.event.event_id)
-        ans_form = AnswerForm()
-    else:
-        return HttpResponse('You are not authorized to answer this question.')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            if request.method == 'POST':
+                ans_form = AnswerForm(request.POST)
+                if ans_form.is_valid():
+                    qtn = Question.objects.get(question_id=qtn_id)
+                    ans_form = ans_form.save(commit=False)
+                    ans_form.question = qtn
+                    ans_form.event = ans_form.question.event
+                    ans_form.user = UserProfile.objects.get(username=request.user.username)
+                    ans_form.save()
+                    context['qtn'] = qtn
+                    return redirect('events:event_detail', qtn.event.event_id)
+            ans_form = AnswerForm()
+        else:
+            return HttpResponse('You are not authorized to answer this question.')
     context['ans_form'] = ans_form
     return render(request, 'events/ans_question.html', context)
