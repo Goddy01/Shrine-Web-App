@@ -23,6 +23,7 @@ def event(request):
     if donations:
         donation = random.choice(donations)
         context['donation'] = donation
+    context['donations'] = donations
     context['events'] = events
     context['past_events'] = past_events
     context['upcoming_events'] = upcoming_events
