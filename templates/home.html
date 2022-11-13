@@ -158,6 +158,7 @@
                 <div class="" style="margin-top: 100px;">
                     <h2 class="section-title mb-2">Donations</h2>
                     <ul class="seremon-list large list-group p-2">
+                        {% if donations %}
                         {% for donation in donations %}
                         <li class="list-group-item mb-3 border p-5">
                             <div class="seremon-detail">
@@ -188,6 +189,7 @@
                             </div>
                         </li>
                         {% endfor %}
+                        {% endif %}
                     </ul>
                 </div>
             </div> <!-- .container -->
