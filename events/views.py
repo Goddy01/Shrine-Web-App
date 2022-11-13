@@ -42,7 +42,6 @@ def event_error_checker(request,event_form):
 
 def add_event(request):
     """The view that facilitates the adding of events"""
-    print(request.user.is_worshipper)
     if request.user.is_admin:
         if request.method == 'POST':
             event_form = EventForm(request.POST)
