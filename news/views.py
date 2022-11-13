@@ -10,14 +10,20 @@ from shrine.views import pagination
 
 def news(request):
     """The view for rendering all news on the news page"""
+    context = {}
     news = News.objects.all().order_by('-date_posted')
     news_pag = pagination(request, news, 3, '-date_posted')
     latest_news = News.objects.all().order_by('-date_posted')
     donations = Donation.objects.filter(complete=False).values_list('donation_id', flat=True)
     donations_list = list(donations)
-    random_donations_list = random.sample(donations_list, min(len(donations_list), 3))
-    donations = Donation.objects.filter(donation_id__in=random_donations_list)
-    return render(request, 'news/news.html', {'news': news, 'latest_news': latest_news, 'donations': donations, 'news_pag': news_pag})
+    if donations_list:
+        random_donations_list = random.sample(donations_list, min(len(donations_list), 3))
+        donations = Donation.objects.filter(donation_id__in=random_donations_list)
+        context['donations'] = donations
+    context['news'] = news
+    context['latest_news'] = latest_news
+    context['news_pag'] = news_pag
+    return render(request, 'news/news.html', context)
 
 def add_news(request):
     """The view that facilitates the adding of news"""
