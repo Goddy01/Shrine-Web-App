@@ -55,6 +55,8 @@ def add_sermon(request):
                 add_sermon_form = AddSermonForm()
         else:
             return HttpResponse('You are not authorized to add sermons.')
+    else:
+        return HttpResponse('You are not authorized to add sermons.')
     return render(request, 'sermons/add_Sermon.html', {'add_sermon_form': add_sermon_form})
 
 def sermon_details(request, sermon_id):
