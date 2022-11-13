@@ -13,14 +13,21 @@ from shrine.views import pagination
 
 def event(request):
     """The view for rendering events on the event page"""
+    context = {}
     events = Event.objects.all().order_by('event_date')
     upcoming_events = Event.objects.filter(event_date__gte=date.today())
     past_events = Event.objects.filter(event_date__lte=date.today()).order_by('-event_date')[:2]
     events_pag = pagination(request, upcoming_events, 3, 'event_date')
     donations = Donation.objects.filter(complete=False)
     donations = list(donations)
-    donation = random.choice(donations)
-    return render(request, 'events/events.html', {'events': events, 'past_events': past_events, 'donation': donation, 'upcoming_events': upcoming_events, 'events_pag': events_pag})
+    if donations:
+        donation = random.choice(donations)
+        context['donation'] = donation
+    context['events'] = events
+    context['past_events'] = past_events
+    context['upcoming_events'] = upcoming_events
+    context['events_pag'] = events_pag
+    return render(request, 'events/events.html', context)
 
 def event_error_checker(request,event_form):
     """A view that checks for errors in event forms. Will be called when needed to abide by DRY"""
