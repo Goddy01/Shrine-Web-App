@@ -21,18 +21,19 @@ def news(request):
 
 def add_news(request):
     """The view that facilitates the adding of news"""
-    if request.user.is_admin:
-        if request.method == 'POST':
-            add_news_form = AddNewsForm(request.POST)
-            if add_news_form.is_valid():
-                add_news_form.save()
-                return redirect('news:news')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            if request.method == 'POST':
+                add_news_form = AddNewsForm(request.POST)
+                if add_news_form.is_valid():
+                    add_news_form.save()
+                    return redirect('news:news')
+                else:
+                    messages.error(request, 'Sorry the news could not be posted.')
             else:
-                messages.error(request, 'Sorry the news could not be posted.')
+                add_news_form = AddNewsForm()
         else:
-            add_news_form = AddNewsForm()
-    else:
-        return HttpResponse('Sorry. You are not authorized to post news.')
+            return HttpResponse('Sorry. You are not authorized to post news.')
     return render(request, 'news/add_news.html', {'add_news_form': add_news_form})
 
 def news_details(request, news_id):
@@ -43,29 +44,31 @@ def news_details(request, news_id):
 def update_news(request, news_id):
     """The view that facilitates the updating of new details"""
     news = News.objects.get(news_id=news_id)
-    if request.user.is_admin:
-        if request.method == 'POST':
-            update_news_form = UpdateNewsForm(request.POST, instance=news)
-            if update_news_form.is_valid():
-                update_news_form.save()
-                return redirect('news:news')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            if request.method == 'POST':
+                update_news_form = UpdateNewsForm(request.POST, instance=news)
+                if update_news_form.is_valid():
+                    update_news_form.save()
+                    return redirect('news:news')
+                else:
+                    messages.error(request, 'Sorry the news could not be updated.')
             else:
-                messages.error(request, 'Sorry the news could not be updated.')
+                update_news_form = UpdateNewsForm()
         else:
-            update_news_form = UpdateNewsForm()
-    else:
-        return HttpResponse('Sorry. You are not authorized to post news.')
-    update_news_form = UpdateNewsForm(instance=request.user, initial = {
-                            "news_headline": news.news_headline,
-                            "news_body": news.news_body,
-    }
-    )
+            return HttpResponse('Sorry. You are not authorized to post news.')
+        update_news_form = UpdateNewsForm(instance=request.user, initial = {
+                                "news_headline": news.news_headline,
+                                "news_body": news.news_body,
+        }
+        )
     return render(request, 'news/update_news.html', {'update_news_form': update_news_form, 'news': news})
 
 def delete_news(request, news_id):
     """The view that facilitates the deletion of news"""
-    if request.user.is_admin:
-        news = News.objects.get(news_id=news_id)    
-        news.delete()
-        return redirect('news:news')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            news = News.objects.get(news_id=news_id)
+            news.delete()
+            return redirect('news:news')
     return render(request, 'news/news_details.html')
