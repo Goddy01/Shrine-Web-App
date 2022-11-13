@@ -35,19 +35,20 @@ def sermon_error_checker(request,sermon_form):
 
 def add_sermon(request):
     """The view for adding sermons"""
-    if request.user.is_admin:
-        if request.method == 'POST':
-            add_sermon_form = AddSermonForm(request.POST or None, request.FILES or None)
-            if add_sermon_form.is_valid():
-                sermon_error_checker(request, add_sermon_form)
-                if add_sermon_form.cleaned_data['sermon_date'] > datetime.datetime.now().date():
-                    return redirect('sermons:sermons')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            if request.method == 'POST':
+                add_sermon_form = AddSermonForm(request.POST or None, request.FILES or None)
+                if add_sermon_form.is_valid():
+                    sermon_error_checker(request, add_sermon_form)
+                    if add_sermon_form.cleaned_data['sermon_date'] > datetime.datetime.now().date():
+                        return redirect('sermons:sermons')
+                else:
+                    messages.error(request, 'The sermon could not be added.')
             else:
-                messages.error(request, 'The sermon could not be added.')
+                add_sermon_form = AddSermonForm()
         else:
-            add_sermon_form = AddSermonForm()
-    else:
-        return HttpResponse('You are not authorized to add sermons.')
+            return HttpResponse('You are not authorized to add sermons.')
     return render(request, 'sermons/add_Sermon.html', {'add_sermon_form': add_sermon_form})
 
 def sermon_details(request, sermon_id):
@@ -57,33 +58,35 @@ def sermon_details(request, sermon_id):
 
 def update_sermon(request, sermon_id):
     sermon = Sermon.objects.get(sermon_id=sermon_id)
-    if request.user.is_admin:
-        if request.method == 'POST':
-            update_sermon_form = UpdateSermonForm(request.POST or None, request.FILES or None, instance=sermon)
-            if update_sermon_form.is_valid():
-                sermon_error_checker(request, update_sermon_form)
-                if update_sermon_form.cleaned_data['sermon_date'] > datetime.datetime.now().date():
-                    return redirect('sermons:sermons')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            if request.method == 'POST':
+                update_sermon_form = UpdateSermonForm(request.POST or None, request.FILES or None, instance=sermon)
+                if update_sermon_form.is_valid():
+                    sermon_error_checker(request, update_sermon_form)
+                    if update_sermon_form.cleaned_data['sermon_date'] > datetime.datetime.now().date():
+                        return redirect('sermons:sermons')
+                else:
+                    messages.error(request, 'The sermon could not be updated.')
             else:
-                messages.error(request, 'The sermon could not be updated.')
+                update_sermon_form = UpdateSermonForm()
         else:
-            update_sermon_form = UpdateSermonForm()
-    else:
-        return HttpResponse('Sorry. You are not authenticated to update the sermon.')
-    update_sermon_form = UpdateSermonForm(instance=request.user, initial = {
-                "sermon_title": sermon.sermon_title,
-                "sermon_priest_name": sermon.sermon_priest_name,
-                "sermon_date": sermon.sermon_date,
-                "sermon_image": sermon.sermon_image,
-                "sermon_desc": sermon.sermon_desc,
-                "sermon_body": sermon.sermon_body,
+            return HttpResponse('Sorry. You are not authenticated to update the sermon.')
+        update_sermon_form = UpdateSermonForm(instance=request.user, initial = {
+                    "sermon_title": sermon.sermon_title,
+                    "sermon_priest_name": sermon.sermon_priest_name,
+                    "sermon_date": sermon.sermon_date,
+                    "sermon_image": sermon.sermon_image,
+                    "sermon_desc": sermon.sermon_desc,
+                    "sermon_body": sermon.sermon_body,
 
-        })
+            })
     return render(request, 'sermons/update_sermon.html', {'sermon': sermon, 'update_sermon_form': update_sermon_form})
 
 def delete_sermon(request, sermon_id):
-    if request.user.is_admin:
-        sermon = Sermon.objects.get(sermon_id=sermon_id)
-        sermon.delete()
-        return redirect('sermons:sermons')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            sermon = Sermon.objects.get(sermon_id=sermon_id)
+            sermon.delete()
+            return redirect('sermons:sermons')
     return render(request, 'sermons/sermon_details.html')
