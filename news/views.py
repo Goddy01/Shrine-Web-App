@@ -40,6 +40,8 @@ def add_news(request):
                 add_news_form = AddNewsForm()
         else:
             return HttpResponse('Sorry. You are not authorized to post news.')
+    else:
+        return HttpResponse('Sorry. You are not authorized to post news.')
     return render(request, 'news/add_news.html', {'add_news_form': add_news_form})
 
 def news_details(request, news_id):
