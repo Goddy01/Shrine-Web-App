@@ -13,19 +13,20 @@ def donations(request):
     return render(request, 'donations/donations.html', {'donations': donations, 'completed_donations': completed_donations, 'donations_pag': donations_pag})
 
 def add_donation(request):
-    if request.user.is_admin:
-        if request.method == 'POST':
-            add_donation_form = AddDonationForm(request.POST)
-            if add_donation_form.is_valid():
-                add_donation_form.save()
-                return redirect('donations:donations')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            if request.method == 'POST':
+                add_donation_form = AddDonationForm(request.POST)
+                if add_donation_form.is_valid():
+                    add_donation_form.save()
+                    return redirect('donations:donations')
+                else:
+                    # add_donation_form = AddDonationForm()
+                    messages.error(request, 'The donation could not be added.')
             else:
-                # add_donation_form = AddDonationForm()
-                messages.error(request, 'The donation could not be added.')
+                add_donation_form = AddDonationForm()
         else:
-            add_donation_form = AddDonationForm()
-    else:
-        return HttpResponse('Sorry. You are not authenticated to add donations.')
+            return HttpResponse('Sorry. You are not authenticated to add donations.')
     return render(request, 'donations/add_donation.html', {'add_donation_form': add_donation_form})
 
 def donation_details(request, donation_id):
@@ -58,7 +59,7 @@ def make_payment(request, donation_id):
                     donation.save()
                     messages.success(request, 'Thank you for your donation. (Arigato!)')
                     # return render(request, 'donations/donation_details.html')
-                    return redirect('/donations/donations/')
+                    return redirect('donations:donations')
             else:
                 # donate_form = DonateForm()
                 messages.error(request, 'Sorry. Your donation was not successful.')
@@ -72,28 +73,30 @@ def make_payment(request, donation_id):
 
 def update_donation(request, donation_id):
     donation = Donation.objects.get(donation_id=donation_id)
-    if request.user.is_admin:
-        if request.method == 'POST':
-            update_donation_form = UpdateDonationForm(request.POST, instance=donation)
-            if update_donation_form.is_valid():
-                update_donation_form.save()
-                return redirect('donations:donations')
+    if request.user.is_authenticated:
+        if request.user.is_admin:
+            if request.method == 'POST':
+                update_donation_form = UpdateDonationForm(request.POST, instance=donation)
+                if update_donation_form.is_valid():
+                    update_donation_form.save()
+                    return redirect('donations:donations')
+                else:
+                    messages.error(request, 'The donation could not be updated.')
             else:
-                messages.error(request, 'The donation could not be updated.')
+                update_donation_form = UpdateDonationForm()
         else:
-            update_donation_form = UpdateDonationForm()
-    else:
-        return HttpResponse('You are not authenticated to update donations.')
-    # update_donation_form = UpdateDonationForm(instance=request.user, initial = {
-    #     "donation_name": donation.donation_name,
-    #     "donation_desc": donation.donation_desc,
-    #     "amount_needed": donation.amount_needed,
-    # })
+            return HttpResponse('You are not authenticated to update donations.')
+        # update_donation_form = UpdateDonationForm(instance=request.user, initial = {
+        #     "donation_name": donation.donation_name,
+        #     "donation_desc": donation.donation_desc,
+        #     "amount_needed": donation.amount_needed,
+        # })
     return render(request, 'donations/update_donation.html', {'update_donation_form': update_donation_form, 'donation': donation})
 
 def delete_donation(request, donation_id):
-    if request.user.admin:
-        donation = Donation.objects.get(donation_id=donation_id)
-        donation.delete()
-        return redirect('donations:donations')
+    if request.user.is_autheticated:
+        if request.user.admin:
+            donation = Donation.objects.get(donation_id=donation_id)
+            donation.delete()
+            return redirect('donations:donations')
     return render(request, 'donations/donation_details.html')
