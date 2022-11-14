@@ -205,7 +205,7 @@
                         <ul class="event-list">
                             {% for event in events %}
                             
-                            <li class="py-5">
+                            <li style="padding-top: 3rem;padding-bottom: 3rem;">
                                 <a href="{% url 'events:event_detail' event.event_id %}">
                                     <h3 class="event-title text-uppercase">{{event.event_name}}</h3>
                                     <span class="event-meta text-capitalize" style="margin-left: -180px;">
