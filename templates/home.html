@@ -145,7 +145,7 @@
                     <li class="list-group-item mb-3 border p-5">
                         <div class="seremon-detail">
                             <h3 class="seremon-title text-uppercase"><a href="{% url 'news:news_details' n.news_id %}">{{ n.news_headline }}</a></h3>
-                            <p>{{ n.news_body|safe|slice:":300" }}....</p>
+                            <p>{{ n.news_body|safe|slice:":300" }}</p>
                             <div class="seremon-meta mb-2">
                                 <div class="date text-capitalize d-block"><i class="fa fa-calendar"></i>Posted by the Admin on 
                                     <span class="text-capitalize">{{ n.date_posted }}</span>
