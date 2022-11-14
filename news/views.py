@@ -17,7 +17,7 @@ def news(request):
     donations = Donation.objects.filter(complete=False).values_list('donation_id', flat=True)
     donations_list = list(donations)
     if donations_list:
-        random_donations_list = random.sample(donations_list, min(len(donations_list), 3))
+        random_donations_list = random.sample(donations_list, min(len(donations_list), 2))
         donations = Donation.objects.filter(donation_id__in=random_donations_list)
         context['donations'] = donations
     context['news'] = news
