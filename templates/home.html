@@ -205,13 +205,13 @@
                         <ul class="event-list">
                             {% for event in events %}
                             
-                            <li style="padding-top: 2rem;padding-bottom: 6rem;">
+                            <li style="padding-top: 2rem;padding-bottom: 7rem;">
                                 <a href="{% url 'events:event_detail' event.event_id %}">
                                     <h3 class="event-title text-uppercase">{{event.event_name}}</h3>
                                     <span class="event-meta text-capitalize" style="margin-left: -180px;">
                                         <span class="text-uppercase"><i class="fa fa-calendar"></i>{{ event.event_date }}</span>
                                         <span class="text-uppercase"><i class="fa">&#xf017;</i>{{ event.event_time }}</span>
-                                        <span class="mt-3"><i class="fa fa-map-marker"></i>{{ event.event_location }}</span>
+                                        <span class="mt-2"><i class="fa fa-map-marker"></i>{{ event.event_location }}</span>
 
                                     </span>
                                 </a>
